@@ -5,7 +5,6 @@
 #define MAP_COLS    10
 #define MAP_ROWS    10
 
-
 void draw_map(int* map) {
     SDL_Rect cell = { 0, 0, GAME_WIDTH / MAP_COLS, GAME_HEIGHT / MAP_ROWS };
     int mapSize = MAP_COLS * MAP_ROWS;
@@ -85,7 +84,6 @@ int main(int argc, char** argv) {
     int closedList[100] = {0};
     int openListIndex = 0;
 
-
     int bonePosition = xyToInt(bone.x, bone.y);
 
     int map[MAP_COLS * MAP_ROWS] = {
@@ -108,7 +106,6 @@ int main(int argc, char** argv) {
     while(is_running()) {
         handle_input();
 
-
         openListIndex = 0;
         if ( catPosition != bonePosition ) {
             closedList[ closedListIndex++ ] = catPosition;
@@ -126,7 +123,7 @@ int main(int argc, char** argv) {
                 openListIndex++;
             }
 
-            if ( !hasInArray(closedList, rightBlock) && map[ rightBlock ] != 3 ) {
+            if ( !hasInArray(closedList,rightBlock) && map[ rightBlock ] != 3 ){
                 openList[ openListIndex ].H     = SDL_abs( bonePosition - rightBlock );
                 openList[ openListIndex ].G     = 1;
                 openList[ openListIndex ].F     = openList[ openListIndex ].H + openList[ openListIndex ].G;
@@ -156,20 +153,15 @@ int main(int argc, char** argv) {
                     lesser = openList[i];
             }
 
-
             cat.x = lesser.block % 10;
             cat.y = lesser.block / 10;
 
             catPosition = lesser.block;
-
         }
 
         map[ catPosition ]  = 1;
         map[ bonePosition ] = 2;
         printf("Cat position before render: %d\n", catPosition);
-
-
-
 
         SDL_SetRenderDrawColor(renderer, 230, 230, 230, 255);
         SDL_RenderClear(renderer);

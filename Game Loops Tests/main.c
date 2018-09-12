@@ -19,7 +19,6 @@ int main(int argc, char** argv) {
 
         handle_input();
 
-
         while(lag >= DT) {
             rect.x += velocity * DT;
             if (rect.x + rect.w >= 500 || rect.x <= 0) velocity = -velocity;

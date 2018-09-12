@@ -23,15 +23,14 @@ int main(int argc, char** argv) {
     while(is_running()) {
         handle_input();
 
-
-
         if ( SDL_GetKeyboardState(NULL)[SDL_SCANCODE_A] ) {
             shipRect.x += -shipSpeed;
         } else if ( SDL_GetKeyboardState(NULL)[SDL_SCANCODE_D] ) {
             shipRect.x += shipSpeed;
         } else if ( SDL_GetKeyboardState(NULL)[SDL_SCANCODE_W] ) {
             shipRect.y += -shipSpeed;
-        } else if ( SDL_GetKeyboardState(NULL)[SDL_SCANCODE_S] ) {            shipRect.y += shipSpeed;
+        } else if ( SDL_GetKeyboardState(NULL)[SDL_SCANCODE_S] ) {
+            shipRect.y += shipSpeed;
         }
 
         int mouseX, mouseY;
@@ -40,8 +39,6 @@ int main(int argc, char** argv) {
         int delta_y = (shipRect.y + shipRect.h / 2) - mouseY;
         double rad  = SDL_atan2(delta_x, delta_y);
         angle = -rad * 180.0 / M_PI;
-
-
 
         if (ready) {
         bulletAngle = angle;
@@ -58,9 +55,6 @@ int main(int argc, char** argv) {
             velocityX  = velocityY  = 0;
             ready = SDL_TRUE;
         }
-
-
-
 
         render_clear();
         SDL_RenderCopyEx(renderer, ship, NULL, &shipRect, angle, NULL, SDL_FLIP_NONE);

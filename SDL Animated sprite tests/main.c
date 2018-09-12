@@ -36,8 +36,6 @@ typedef struct AnimatedSprite {
     Animation* animations;
 } AnimatedSprite;
 
-
-
 SDL_Texture* createTexture(const char* file) {
     SDL_Surface* surface = SDL_LoadBMP(file);
 
@@ -153,7 +151,6 @@ int main(int argc, char** argv) {
     addAnimation(sprite, 0, 10, 0.2, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19);
     addAnimation(sprite, 1, 10, 0.2, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39);
     addAnimation(sprite, 2, 1, 1, 0);
-
 
     while ( !SDL_QuitRequested() ) {
         SDL_PumpEvents();

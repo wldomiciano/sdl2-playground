@@ -76,7 +76,7 @@ void movePlayer(Texture *texture)
 
 	frame = (frame / 4 > 4) ? 0 : ++frame;
 
-	SDL_RenderCopy(renderer, player.texture, &parts[(int) frame / 5], &position);
+	SDL_RenderCopy(renderer, player.texture, &parts[(int)frame / 5], &position);
 }
 
 int main(int argc, char *argv[])

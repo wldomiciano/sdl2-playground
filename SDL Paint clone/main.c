@@ -1,7 +1,6 @@
 #include "utils.h"
 #include "game.h"
 
-
 void draw(int radius, int x, int y) {
     int sections    = 360;
     float secAngles = 2 * M_PI / sections;
@@ -18,7 +17,6 @@ void draw(int radius, int x, int y) {
         }
     }
 }
-
 
 int main(int argc, char** argv) {
     create_game(800, 800);

@@ -55,7 +55,6 @@ int main(int argc, char** argv) {
             else if (event.type == SDL_MOUSEBUTTONDOWN) vertSpeed = JUMP_SPEED;
         }
 
-
         for(int i = 0; i < PIPES_COUNT; i++) {
             pipes[i].top.x -= PIPES_VELOCITY;
             pipes[i].bot.x -= PIPES_VELOCITY;
@@ -73,14 +72,8 @@ int main(int argc, char** argv) {
             }
         }
 
-
-
         bird.y += vertSpeed;
         vertSpeed -= FALLING_CONSTANT;
-
-
-
-
 
         SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
         SDL_RenderClear(renderer);
@@ -92,7 +85,6 @@ int main(int argc, char** argv) {
         }
         SDL_SetRenderDrawColor(renderer, 255, 255, 0, 255);
         SDL_RenderFillRect(renderer, &bird);
-
 
         SDL_RenderPresent(renderer);
     }

@@ -12,7 +12,6 @@ SDL_Texture* load_texture_from_file(const char* file) {
     return tex;
 }
 
-
 float getTicks() {
     return SDL_GetTicks() / 1000.0;
 }

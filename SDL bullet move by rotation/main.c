@@ -19,7 +19,6 @@ int main(int argc, char** argv) {
     while(is_running()) {
         handle_input();
 
-
         if( SDL_GetKeyboardState(NULL)[SDL_SCANCODE_RIGHT] && SDL_GetTicks() > time + 200) {
             angle += angleSpeed;
             //if (angle >= 360) angle = 0;
