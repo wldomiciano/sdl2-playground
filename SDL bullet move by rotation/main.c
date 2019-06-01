@@ -36,9 +36,9 @@ int main(int argc, char** argv) {
 
     if (fire) {
       // if (!fire && SDL_GetKeyboardState(NULL)[SDL_SCANCODE_UP]) {
-      float rad = angle * (PI / 180);
-      float directionX = SDL_sin(rad);
-      float directionY = -SDL_cos(rad);
+      double rad = angle * (PI / 180);
+      double directionX = SDL_sin(rad);
+      double directionY = -SDL_cos(rad);
       // directionX = (directionX > 0) ? SDL_ceil(directionX) :
       // SDL_floor(directionX); directionY = (directionY > 0) ?
       // SDL_ceil(directionY) : SDL_floor(directionY);
@@ -66,8 +66,8 @@ int main(int argc, char** argv) {
       velocityX = velocityY = 0;
     }
 
-    bulletRect.x += velocityX;
-    bulletRect.y += velocityY;
+    bulletRect.x += (int)velocityX;
+    bulletRect.y += (int)velocityY;
 
     render_clear();
 
