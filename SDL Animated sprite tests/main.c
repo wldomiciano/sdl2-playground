@@ -19,6 +19,7 @@ typedef struct Drawable {
 typedef struct SpriteSheet {
   SDL_Texture* texture;
   SDL_Rect* sprites;
+  Uint32 count;
 } SpriteSheet;
 
 typedef struct Sprite {
@@ -68,6 +69,7 @@ SpriteSheet* createSpriteSheet(const char* file, int cols, int rows,
     if (sheet) {
       sheet->texture = texture;
       sheet->sprites = SDL_malloc(sizeof(*sheet->sprites) * count);
+      sheet->count = count;
 
       for (int i = 0, x = 0, y = 0; i < count; i++) {
         sheet->sprites[i].w = spriteWidth;
