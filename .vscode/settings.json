@@ -1,6 +1,7 @@
 {
   "files.associations": {
     "utils.h": "c",
-    "math.h": "c"
+    "math.h": "c",
+    "sdl.h": "c"
   }
 }
