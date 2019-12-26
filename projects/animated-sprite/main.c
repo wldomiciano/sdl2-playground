@@ -145,12 +145,12 @@ void playAnimation(AnimatedSprite* sprite, int index) {
   int c = sprite->animations[index].count;
   sprite->sprite->frame =
       sprite->sprite->sheet->sprites[sprite->animations[index].frames[(
-          int)(sprite->animations[index].current *
-               sprite->animations[index].speed)]];
+          int ) (sprite->animations[index].current *
+                 sprite->animations[index].speed)]];
   sprite->animations[index].current++;
 
-  if ((int)(sprite->animations[index].current *
-            sprite->animations[index].speed) == c)
+  if (( int ) (sprite->animations[index].current *
+               sprite->animations[index].speed) == c)
     sprite->animations[index].current = 0;
 }
 
@@ -159,8 +159,7 @@ int main(int argc, char** argv) {
   window = SDL_CreateWindow("Teste", SDL_WINDOWPOS_CENTERED,
                             SDL_WINDOWPOS_CENTERED, 640, 480, 0);
   renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_PRESENTVSYNC);
-  SpriteSheet* sheet =
-      createSpriteSheet("../assets/images/link.bmp", 10, 4, 40);
+  SpriteSheet* sheet = createSpriteSheet("./assets/images/link.bmp", 10, 4, 40);
   AnimatedSprite* sprite = createAnimatedSprite(sheet, 0, 5);
   addAnimation(sprite, 0, 1, 1, 0);
   addAnimation(sprite, 1, 10, 0.5, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19);

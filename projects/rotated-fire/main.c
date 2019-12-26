@@ -5,8 +5,8 @@
 int main(int argc, char** argv) {
   create_game(400, 400);
   SDL_Rect screen = {-10, -10, 420, 420};
-  SDL_Texture* ship = load_texture_from_file("../assets/images/image.bmp");
-  SDL_Texture* bullet = load_texture_from_file("../assets/images/bullet.bmp");
+  SDL_Texture* ship = load_texture_from_file("./assets/images/image.bmp");
+  SDL_Texture* bullet = load_texture_from_file("./assets/images/bullet.bmp");
 
   SDL_Rect shipRect = {175, 175, 50, 50};
   SDL_Rect bulletRect = {shipRect.x + shipRect.w / 2 - 5, shipRect.y - 25, 10,
@@ -66,8 +66,8 @@ int main(int argc, char** argv) {
       velocityX = velocityY = 0;
     }
 
-    bulletRect.x += (int)velocityX;
-    bulletRect.y += (int)velocityY;
+    bulletRect.x += ( int ) velocityX;
+    bulletRect.y += ( int ) velocityY;
 
     render_clear();
 

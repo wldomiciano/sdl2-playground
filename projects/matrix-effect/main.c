@@ -44,7 +44,7 @@ void init() {
         renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_PRESENTVSYNC);
 
         if (renderer) {
-          font = TTF_OpenFont("../assets/VT323.ttf", FONT_SIZE);
+          font = TTF_OpenFont("./assets/fonts/VT323.ttf", FONT_SIZE);
 
           if (font) {
             isRunning = SDL_TRUE;

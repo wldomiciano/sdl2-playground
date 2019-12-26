@@ -44,7 +44,7 @@ Texture createTexture(char *path, float vel) {
 }
 
 void drawTexture(Texture *texture) {
-  SDL_Rect rect = {(int)texture->x, texture->y, texture->w, texture->h};
+  SDL_Rect rect = {( int ) texture->x, texture->y, texture->w, texture->h};
 
   SDL_RenderCopy(renderer, texture->texture, NULL, &rect);
 
@@ -70,7 +70,8 @@ void movePlayer(Texture *texture) {
 
   frame = (frame / 4 > 4) ? 0 : ++frame;
 
-  SDL_RenderCopy(renderer, player.texture, &parts[(int)frame / 5], &position);
+  SDL_RenderCopy(renderer, player.texture, &parts[( int ) frame / 5],
+                 &position);
 }
 
 int main(int argc, char *argv[]) {
@@ -78,12 +79,12 @@ int main(int argc, char *argv[]) {
   window = SDL_CreateWindow("Test", 50, 50, 640, 480, 0);
   renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_PRESENTVSYNC);
 
-  chao = createTexture("../assets/images/chao.bmp", 15);
-  montanhas = createTexture("../assets/images/montanhas.bmp", 8);
-  montanhas2 = createTexture("../assets/images/montanhas2.bmp", 5);
-  nuvens = createTexture("../assets/images/nuvens.bmp", 1);
-  sol = createTexture("../assets/images/sol.bmp", 0.5f);
-  player = createTexture("../assets/images/player.bmp", 0);
+  chao = createTexture("./assets/images/chao.bmp", 15);
+  montanhas = createTexture("./assets/images/montanhas.bmp", 8);
+  montanhas2 = createTexture("./assets/images/montanhas2.bmp", 5);
+  nuvens = createTexture("./assets/images/nuvens.bmp", 1);
+  sol = createTexture("./assets/images/sol.bmp", 0.5f);
+  player = createTexture("./assets/images/player.bmp", 0);
 
   while (running) {
     while (SDL_PollEvent(&event))

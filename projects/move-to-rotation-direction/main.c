@@ -4,7 +4,7 @@ const double PI = 3.14159265358979323846264338327950288;
 
 int main(int argc, char** argv) {
   create_game(400, 400);
-  SDL_Texture* ship = load_texture_from_file("../assets/images/image.bmp");
+  SDL_Texture* ship = load_texture_from_file("./assets/images/image.bmp");
   SDL_Rect shipRect = {175, 175, 50, 50};
   double angle = 0;
 
