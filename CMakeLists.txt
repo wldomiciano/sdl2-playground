@@ -12,8 +12,8 @@ find_package(SDL2_image REQUIRED)
 
 include_directories(${SDL2_INCLUDE_DIR} ${SDL2_TTF_INCLUDE_DIR} ${SDL2_IMAGE_INCLUDE_DIR})
 
-file(GLOB xxx projects/*)
-foreach(dir IN LISTS xxx)
+file(GLOB dirs projects/*)
+foreach(dir IN LISTS dirs)
   add_subdirectory(${dir})
 endforeach()
 
