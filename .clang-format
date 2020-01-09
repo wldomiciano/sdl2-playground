@@ -2,3 +2,4 @@ BasedOnStyle: Google
 SpaceAfterCStyleCast: true
 SpacesInCStyleCastParentheses: true
 AllowShortFunctionsOnASingleLine: false
+AccessModifierOffset: -2
