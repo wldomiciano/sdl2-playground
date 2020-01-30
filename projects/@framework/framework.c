@@ -18,7 +18,7 @@ struct Texture {
 
 const double PI = 3.14159265358979323846264338327950288;
 static SDL_Window* window;
-static SDL_Renderer* renderer;
+SDL_Renderer* renderer;
 static SDL_bool isRunning;
 static const char* windowTitle = "";
 static Uint32 windowWidth = 640;
@@ -100,6 +100,24 @@ void add_mouse_button_listener(void (*fn)(const SDL_MouseButtonEvent* event)) {
 
 void add_mouse_wheel_listener(void (*fn)(const SDL_MouseWheelEvent* event)) {
   mouse_wheel_listener = fn;
+}
+
+SDL_Texture* create_texture_from_file(const char* file) {
+  SDL_Surface* surface = SDL_LoadBMP(file);
+
+  if (surface) {
+    SDL_Texture* texture = SDL_CreateTextureFromSurface(renderer, surface);
+
+    if (texture) {
+      return texture;
+    } else {
+      LOG("Failed to create texture from surface");
+    }
+  } else {
+    LOG("Failed to load file");
+  }
+
+  return NULL;
 }
 
 SDL_bool was_key_pressed(SDL_Scancode code) {

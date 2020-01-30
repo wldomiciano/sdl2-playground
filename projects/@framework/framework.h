@@ -30,6 +30,8 @@ extern const float TIMESTEP;
 
 typedef struct Texture Texture;
 
+extern SDL_Renderer* renderer;
+
 // Getters
 SDL_bool is_running();
 
@@ -65,6 +67,8 @@ void draw_lines(const SDL_FPoint* p, const Uint32 count, const Uint32 color);
 void draw_point(const SDL_FPoint* p, const Uint32 color);
 void draw_points(const SDL_FPoint* p, const Uint32 count, const Uint32 color);
 void draw_texture(const SDL_Texture* texture);
+
+SDL_Texture* create_texture_from_file(const char* file);
 
 // Text functions
 Texture* create_texture_from_text(const char* text, const Uint32 size,
