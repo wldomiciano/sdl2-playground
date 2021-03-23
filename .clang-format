@@ -1,5 +1,6 @@
 BasedOnStyle: Google
 SpaceAfterCStyleCast: true
-SpacesInCStyleCastParentheses: true
 AllowShortFunctionsOnASingleLine: false
 AccessModifierOffset: -2
+ColumnLimit: 0
+ContinuationIndentWidth: 2

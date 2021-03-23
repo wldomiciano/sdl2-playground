@@ -40,5 +40,6 @@
     "render.h": "c",
     "loop.h": "c",
     "input.h": "c"
-  }
+  },
+  "editor.rulers": []
 }
