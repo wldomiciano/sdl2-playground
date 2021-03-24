@@ -14,5 +14,6 @@ SDL_bool is_running();
 float getTicks();
 void set_viewport_fit(Uint32 width, Uint32 height);
 void draw_rect(const SDL_Rect* rect);
+SDL_Texture* load_texture_from_file(const char* file);
 
 #endif  // UTILS_H_INCLUDED
