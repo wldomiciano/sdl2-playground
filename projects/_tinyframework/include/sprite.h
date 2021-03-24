@@ -34,6 +34,8 @@ void setSpriteOrigin(Sprite* const sprite, const vec2 v);
 
 // GETTERS
 
+float getSpriteAngle(Sprite* const sprite);
+
 vec2 getSpritePivot(Sprite* const sprite);
 
 vec2 getSpritePosition(Sprite* const sprite);

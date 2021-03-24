@@ -41,8 +41,8 @@ float rotation(const vec2 v) {
   return rad2deg(atan2f(v.x, v.y));
 }
 
-vec2 rotated(const vec2 v, const float angle) {
-  const float rad = deg2rad(angle);
+vec2 rotated(const vec2 v, const float deg) {
+  const float rad = deg2rad(deg);
   const float cos = cosf(rad);
   const float sin = sinf(rad);
   return (vec2){

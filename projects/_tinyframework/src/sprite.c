@@ -104,6 +104,10 @@ void setSpriteGlogalPivot(Sprite* const sprite, const vec2 v) {
 
 // GETTERS
 
+float getSpriteAngle(Sprite* const sprite) {
+  return sprite->angle;
+}
+
 vec2 getSpritePivot(Sprite* const sprite) {
   return VEC2(sprite->pivot.x, sprite->pivot.y);
 }

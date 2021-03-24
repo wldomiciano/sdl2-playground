@@ -29,6 +29,6 @@ vec2 normal(const vec2 v);
 
 float rotation(const vec2 v);
 
-vec2 rotated(const vec2 v, const float angle);
+vec2 rotated(const vec2 v, const float deg);
 
 #endif  // VECTOR_H
