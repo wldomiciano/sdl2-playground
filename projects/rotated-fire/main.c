@@ -1,8 +1,9 @@
 #include <SDL.h>
+
 #include "utils.h"
 #define PI 3.14159265358979323846264338327950288 /**< pi */
 
-int main(int argc, char** argv) {
+int main() {
   create_game(400, 400);
   SDL_Rect screen = {-10, -10, 420, 420};
   SDL_Texture* ship = load_texture_from_file("./assets/images/image.bmp");
@@ -49,9 +50,9 @@ int main(int argc, char** argv) {
       velocityX = directionX * speed;
       velocityY = directionY * speed;
       SDL_Log(
-          "Deg: %f   |   Rad: %f\n      Dir: %f   |   %f\n      Vel: %f   |   "
-          "%f",
-          angle, rad, directionX, directionY, velocityX, velocityY);
+        "Deg: %f   |   Rad: %f\n      Dir: %f   |   %f\n      Vel: %f   |   "
+        "%f",
+        angle, rad, directionX, directionY, velocityX, velocityY);
     }
 
     if (SDL_GetKeyboardState(NULL)[SDL_SCANCODE_DOWN]) {
@@ -66,8 +67,8 @@ int main(int argc, char** argv) {
       velocityX = velocityY = 0;
     }
 
-    bulletRect.x += ( int ) velocityX;
-    bulletRect.y += ( int ) velocityY;
+    bulletRect.x += (int) velocityX;
+    bulletRect.y += (int) velocityY;
 
     render_clear();
 

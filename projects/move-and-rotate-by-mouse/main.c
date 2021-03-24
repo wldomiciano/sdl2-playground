@@ -2,15 +2,12 @@
 
 const double PI = 3.14159265358979323846264338327950288;
 
-int main(int argc, char** argv) {
+int main() {
   create_game(400, 400);
 
   SDL_Surface* image = SDL_LoadBMP("./assets/images/image.bmp");
   SDL_Texture* quad = SDL_CreateTextureFromSurface(renderer, image);
   SDL_Rect quadRect = {175, 175, 50, 50};
-  SDL_Point velocity = {0, 0};
-  int speed = 2;
-  int limit = 5;
 
   double angleDeg = 0;
   double angleRad = 0;

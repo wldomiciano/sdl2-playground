@@ -1,5 +1,7 @@
 #include "bullet.h"
+
 #include <SDL.h>
+
 #include "enimy.h"
 #include "framework.h"
 
@@ -13,12 +15,10 @@ typedef struct {
 #define MAX_BULLETS 100
 static SDL_FRect rect = {0, 0, 2, 20};
 static Bullet bullets[MAX_BULLETS];
-static float rotation;
 static Uint32 lastTimeCreated = 0;
 static Uint32 timeout = 0;
 static SDL_Texture* texture;
 static Game* game;
-static int count = 0;
 
 void bullet_init() {
   game = game_instance();

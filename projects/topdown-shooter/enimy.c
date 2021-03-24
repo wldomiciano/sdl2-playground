@@ -1,5 +1,7 @@
 #include "enimy.h"
+
 #include <SDL.h>
+
 #include "framework.h"
 
 Enimy enimies[MAX_ENIMIES];
@@ -9,6 +11,8 @@ static SDL_FRect* playerFrame;
 
 Uint32 spawn(Uint32 interval, void* param) {
   SDL_Log("spawn");
+
+  (void) param;
 
   int active = -1;
   for (int i = 0; i < MAX_ENIMIES; i++) {
@@ -49,14 +53,15 @@ void enimy_init(SDL_FRect* player) {
   SDL_AddTimer(3000, spawn, NULL);
 }
 
-void enimy_create() {}
+void enimy_create() {
+}
 
 void enimy_update() {
   for (int i = 0; i < MAX_ENIMIES; i++) {
     if (enimies[i].active) {
       const SDL_FPoint delta = {
-          (enimies[i].frame.x + enimies[i].frame.w * 0.5) - playerFrame->x,
-          (enimies[i].frame.y + enimies[i].frame.h * 0.5) - playerFrame->y};
+        (enimies[i].frame.x + enimies[i].frame.w * 0.5) - playerFrame->x,
+        (enimies[i].frame.y + enimies[i].frame.h * 0.5) - playerFrame->y};
 
       const float rad = SDL_atan2f(delta.x, delta.y);
       const float deg = -(rad * 180) / PI;

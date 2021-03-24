@@ -1,11 +1,11 @@
 #include "player.h"
+
 #include <SDL.h>
+
 #include "bullet.h"
 #include "enimy.h"
 #include "framework.h"
 
-static SDL_FPoint position;
-static double rotation;
 static SDL_Texture* mainTexture;
 static SDL_Texture* armtexture;
 static Game* game;
@@ -77,4 +77,5 @@ void player_update() {
   enimy_update();
 }
 
-void player_destroy() {}
+void player_destroy() {
+}

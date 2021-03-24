@@ -43,15 +43,7 @@ void present() {
 Rect* create_rect(float x, float y, float w, float h, Uint32 fill,
                   Uint32 border) {
   SDL_FRect rect = {x, y, w, h};
-  SDL_Texture* texture =
-      SDL_CreateTexture(renderer, SDL_PIXELFORMAT_RGB888,
-                        SDL_TEXTUREACCESS_TARGET, rect.w, rect.h);
-
-  const int r = (fill >> 24) & 0xFF;
-  const int g = (fill >> 16) & 0xFF;
-  const int b = (fill >> 8) & 0xFF;
-  const int a = fill & 0xFF;
-  // SDL_Log("%d %d %d %d", r, g, b, a);
+  SDL_Texture* texture = SDL_CreateTexture(renderer, SDL_PIXELFORMAT_RGB888, SDL_TEXTUREACCESS_TARGET, rect.w, rect.h);
 
   SDL_SetRenderTarget(renderer, texture);
   SDL_SetTextureBlendMode(texture, SDL_BLENDMODE_ADD);
@@ -101,7 +93,7 @@ typedef struct {
   SDL_FPoint points[5];
 } Vertices;
 
-const Vertices rect_get_vertices(const SDL_FRect* rect, double angle) {
+Vertices rect_get_vertices(const SDL_FRect* rect, double angle) {
   const float startX = rect->x;
   const float startY = rect->y;
   const float rad = (angle * PI) / 180;
@@ -114,7 +106,7 @@ const Vertices rect_get_vertices(const SDL_FRect* rect, double angle) {
   const SDL_FPoint UR = {rect->x + w, rect->y};
   const SDL_FPoint LL = {rect->x, rect->y + h};
   const SDL_FPoint LR = {rect->x + w, rect->y + h};
-  Vertices vertices = {UL, UR, LR, LL, UL};
+  Vertices vertices = {{UL, UR, LR, LL, UL}};
 
   for (int i = 0; i < 5; i++) {
     const float cx = (startX + w * 0.5);
@@ -122,14 +114,13 @@ const Vertices rect_get_vertices(const SDL_FRect* rect, double angle) {
     const float x = vertices.points[i].x - cx;
     const float y = vertices.points[i].y - cy;
 
-    vertices.points[i] =
-        (SDL_FPoint){(x * cos - y * sin) + cx, (x * sin + y * cos) + cy};
+    vertices.points[i] = (SDL_FPoint){(x * cos - y * sin) + cx, (x * sin + y * cos) + cy};
   }
 
   return vertices;
 }
 
-const Vertices rect_get_normals(const Vertices* vert) {
+Vertices rect_get_normals(const Vertices* vert) {
   Vertices normals = {0};
 
   for (int i = 0; i < 5; i++) {

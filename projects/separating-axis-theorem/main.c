@@ -12,25 +12,17 @@ int main() {
 
   Rect* a = create_rect(200, 200, 50, 50, 0x0000FFFF, 0xFF00FFFF);
   Rect* b = create_rect(120, 120, 50, 50, 0x0000FFFF, 0xFF00FFFF);
-  // a->angle = 40;
-
-  SDL_FPoint UL = {a->dest.x, a->dest.y};
-  SDL_FPoint UR = {a->dest.x + a->dest.w, a->dest.y};
-  SDL_FPoint LL = {a->dest.x, a->dest.y + a->dest.h};
-  SDL_FPoint LR = {a->dest.x + a->dest.w, a->dest.y + a->dest.h};
-
-  SDL_FPoint points[5] = {UL, UR, LR, LL, UL};
 
   const float w = 100;
   const float c = 60;
   const float d = 60;
   SDL_FPoint points2[5] = {
-      {c, d}, {c + w, d}, {c + w, d + w}, {c, d + w}, {c, d}};
-
-  const float e = 150;
-  const float f = 150;
-  SDL_FPoint points3[5] = {
-      {e, f}, {e + w, f}, {e + w, f + w}, {e, f + w}, {e, f}};
+    {c, d},
+    {c + w, d},
+    {c + w, d + w},
+    {c, d + w},
+    {c, d},
+  };
 
   print(points2);
 
@@ -44,7 +36,7 @@ int main() {
     const float y = points2[i].y - cy;
 
     points2[i] =
-        (SDL_FPoint){(x * cos - y * sin) + cx, (x * sin + y * cos) + cy};
+      (SDL_FPoint){(x * cos - y * sin) + cx, (x * sin + y * cos) + cy};
   }
 
   print(points2);

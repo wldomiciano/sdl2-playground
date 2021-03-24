@@ -23,8 +23,7 @@ void drawText(int x, int y, const char* fmt, ...) {
   SDL_vsnprintf(buffer, MAX_LENGTH, fmt, ap);
   va_end(ap);
 
-  SDL_Surface* text = TTF_RenderText_Solid(
-      font, buffer, (SDL_Color){0, 255, 0, SDL_ALPHA_OPAQUE});
+  SDL_Surface* text = TTF_RenderText_Solid(font, buffer, (SDL_Color){0, 255, 0, SDL_ALPHA_OPAQUE});
   SDL_Texture* textureText = SDL_CreateTextureFromSurface(renderer, text);
   SDL_Rect dest = {x, y, 0, 0};
 
@@ -37,8 +36,7 @@ void drawText(int x, int y, const char* fmt, ...) {
 void init() {
   if (SDL_Init(SDL_INIT_VIDEO) == 0) {
     if (TTF_Init() == 0) {
-      window = SDL_CreateWindow("Matrix", SDL_WINDOWPOS_CENTERED,
-                                SDL_WINDOWPOS_CENTERED, width, height, 0);
+      window = SDL_CreateWindow("Matrix", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, width, height, 0);
 
       if (window) {
         renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_PRESENTVSYNC);
@@ -115,5 +113,6 @@ int main() {
   }
 
   quit();
+
   return 0;
 }

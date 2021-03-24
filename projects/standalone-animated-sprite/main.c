@@ -146,10 +146,12 @@ void playAnimation(AnimatedSprite* sprite, int index) {
 
 int main() {
   SDL_Init(SDL_INIT_VIDEO);
+
   SDL_Window* const window = SDL_CreateWindow("Teste", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 640, 480, 0);
   SDL_Renderer* const renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_PRESENTVSYNC);
   SpriteSheet* const sheet = createSpriteSheet(renderer, "./assets/images/link.bmp", 10, 4, 40);
   AnimatedSprite* const sprite = createAnimatedSprite(sheet, 0, 5);
+
   addAnimation(sprite, 0, 1, 1, 0);
   addAnimation(sprite, 1, 10, 0.5, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19);
   addAnimation(sprite, 2, 10, 0.2, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39);
