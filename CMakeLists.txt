@@ -2,6 +2,14 @@ cmake_minimum_required(VERSION 3.16)
 
 project(sdl2-playground)
 
+
+add_compile_options(
+  -Wall
+  -Wextra
+  -pedantic
+  # -Werror
+)
+
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
 
 list(APPEND CMAKE_MODULE_PATH "${PROJECT_SOURCE_DIR}/cmake")
