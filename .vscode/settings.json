@@ -39,7 +39,8 @@
     "stdbool.h": "c",
     "render.h": "c",
     "loop.h": "c",
-    "input.h": "c"
+    "input.h": "c",
+    "vector.h": "c"
   },
   "editor.rulers": []
 }
