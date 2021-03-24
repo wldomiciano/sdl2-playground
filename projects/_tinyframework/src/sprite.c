@@ -88,7 +88,6 @@ void setSpriteRotation(Sprite* const sprite, const float deg) {
 
 void setSpritePosition(Sprite* const sprite, const vec2 v) {
   sprite->pos = sub(v, sprite->origin);
-  setSpriteGlogalPivot(sprite, sprite->pivot);
 }
 
 void setSpriteOrigin(Sprite* const sprite, const vec2 v) {
