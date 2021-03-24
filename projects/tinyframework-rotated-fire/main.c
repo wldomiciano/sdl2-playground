@@ -59,7 +59,7 @@ int main() {
 
     moveSprite(bullet, velocity);
 
-    clearRender(NULL, (SDL_Color){0, 0, 0, 255});
+    clearRender(NULL, 0, 0, 0, 255);
 
     SDL_SetRenderDrawColor(ctx->renderer, 0, 255, 255, SDL_ALPHA_OPAQUE);
     SDL_RenderDrawLine(ctx->renderer, 0, 200, 400, 200);

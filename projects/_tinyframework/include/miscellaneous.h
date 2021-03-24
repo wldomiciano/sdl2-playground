@@ -10,7 +10,7 @@ float getTicks();
 
 void presentRender(Context* ctx);
 
-void clearRender(Context* ctx, const SDL_Color color);
+void clearRender(Context* ctx, const Uint8 r, const Uint8 g, const Uint8 b, const Uint8 a);
 
 char* makePath(const char* path);
 

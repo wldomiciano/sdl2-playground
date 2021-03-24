@@ -61,7 +61,7 @@ int main() {
       ready = SDL_TRUE;
     }
 
-    clearRender(NULL, (SDL_Color){0, 0, 0, 255});
+    clearRender(NULL, 0, 0, 0, 255);
     drawSprite(bullet);
     drawSprite(ship);
     presentRender(NULL);

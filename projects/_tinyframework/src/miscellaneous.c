@@ -11,9 +11,9 @@ float getTicks() {
   return SDL_GetTicks() / 1000.0;
 }
 
-void clearRender(Context* ctx, const SDL_Color color) {
+void clearRender(Context* ctx, const Uint8 r, const Uint8 g, const Uint8 b, const Uint8 a) {
   ctx = ctx ? ctx : getDefaultContext();
-  SDL_SetRenderDrawColor(ctx->renderer, color.r, color.g, color.b, color.a);
+  SDL_SetRenderDrawColor(ctx->renderer, r, g, b, a);
   SDL_RenderClear(ctx->renderer);
 }
 

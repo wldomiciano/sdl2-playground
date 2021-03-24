@@ -41,7 +41,7 @@ int main() {
 
     moveSprite(ship, velocity);
 
-    clearRender(NULL, (SDL_Color){0, 0, 0, 255});
+    clearRender(NULL, 0, 0, 0, 255);
     drawSprite(ship);
     presentRender(NULL);
   }
