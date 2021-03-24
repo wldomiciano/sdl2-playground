@@ -2,7 +2,7 @@
 
 const double PI = 3.14159265358979323846264338327950288;
 
-int main(int argc, char** argv) {
+int main() {
   create_game(400, 400);
   SDL_Rect screen = {-10, -10, 420, 420};
   SDL_Texture* ship = load_texture_from_file("./assets/images/image.bmp");
@@ -17,10 +17,8 @@ int main(int argc, char** argv) {
 
   double velocityX = 0;
   double velocityY = 0;
-  int angleSpeed = 15;
   int shipSpeed = 3;
   int bulletSpeed = 6;
-  Uint32 time = SDL_GetTicks();
   SDL_bool ready = SDL_TRUE;
   float directionX = 0, directionY = 0;
   while (is_running()) {

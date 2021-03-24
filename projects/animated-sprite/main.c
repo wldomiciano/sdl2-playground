@@ -1,8 +1,5 @@
 #include <SDL2/SDL.h>
 
-SDL_Window* window;
-SDL_Renderer* renderer;
-
 typedef struct Drawable {
   SDL_Texture* texture;
   SDL_Rect src;
@@ -40,7 +37,7 @@ typedef struct AnimatedSprite {
   Animation* animations;
 } AnimatedSprite;
 
-SDL_Texture* createTexture(const char* file) {
+SDL_Texture* createTexture(SDL_Renderer* const renderer, const char* file) {
   SDL_Surface* surface = SDL_LoadBMP(file);
 
   if (surface) {
@@ -54,9 +51,8 @@ SDL_Texture* createTexture(const char* file) {
   return NULL;
 }
 
-SpriteSheet* createSpriteSheet(const char* file, int cols, int rows,
-                               int count) {
-  SDL_Texture* texture = createTexture(file);
+SpriteSheet* createSpriteSheet(SDL_Renderer* const renderer, const char* file, int cols, int rows, int count) {
+  SDL_Texture* texture = createTexture(renderer, file);
 
   if (texture) {
     int width, height, spriteWidth, spriteHeight;
@@ -118,13 +114,11 @@ AnimatedSprite* createAnimatedSprite(SpriteSheet* sheet, int frame, int count) {
   return NULL;
 }
 
-void addAnimation(AnimatedSprite* sprite, int index, int frames, float speed,
-                  ...) {
+void addAnimation(AnimatedSprite* sprite, int index, int frames, float speed, ...) {
   sprite->animations[index].count = frames;
   sprite->animations[index].speed = speed;
   sprite->animations[index].current = 0;
-  sprite->animations[index].frames =
-      SDL_malloc(sizeof(*sprite->animations[index].frames) * frames);
+  sprite->animations[index].frames = SDL_malloc(sizeof(*sprite->animations[index].frames) * frames);
 
   va_list args;
   va_start(args, speed);
@@ -143,24 +137,19 @@ void playAnimation(AnimatedSprite* sprite, int index) {
   }
 
   int c = sprite->animations[index].count;
-  sprite->sprite->frame =
-      sprite->sprite->sheet->sprites[sprite->animations[index].frames[(
-          int ) (sprite->animations[index].current *
-                 sprite->animations[index].speed)]];
+  sprite->sprite->frame = sprite->sprite->sheet->sprites[sprite->animations[index].frames[(int) (sprite->animations[index].current * sprite->animations[index].speed)]];
   sprite->animations[index].current++;
 
-  if (( int ) (sprite->animations[index].current *
-               sprite->animations[index].speed) == c)
+  if ((int) (sprite->animations[index].current * sprite->animations[index].speed) == c)
     sprite->animations[index].current = 0;
 }
 
-int main(int argc, char** argv) {
+int main() {
   SDL_Init(SDL_INIT_VIDEO);
-  window = SDL_CreateWindow("Teste", SDL_WINDOWPOS_CENTERED,
-                            SDL_WINDOWPOS_CENTERED, 640, 480, 0);
-  renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_PRESENTVSYNC);
-  SpriteSheet* sheet = createSpriteSheet("./assets/images/link.bmp", 10, 4, 40);
-  AnimatedSprite* sprite = createAnimatedSprite(sheet, 0, 5);
+  SDL_Window* const window = SDL_CreateWindow("Teste", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 640, 480, 0);
+  SDL_Renderer* const renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_PRESENTVSYNC);
+  SpriteSheet* const sheet = createSpriteSheet(renderer, "./assets/images/link.bmp", 10, 4, 40);
+  AnimatedSprite* const sprite = createAnimatedSprite(sheet, 0, 5);
   addAnimation(sprite, 0, 1, 1, 0);
   addAnimation(sprite, 1, 10, 0.5, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19);
   addAnimation(sprite, 2, 10, 0.2, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39);
@@ -183,8 +172,7 @@ int main(int argc, char** argv) {
     else
       playAnimation(sprite, 0);
 
-    SDL_RenderCopy(renderer, sprite->sprite->sheet->texture,
-                   &sprite->sprite->frame, NULL);
+    SDL_RenderCopy(renderer, sprite->sprite->sheet->texture, &sprite->sprite->frame, NULL);
 
     SDL_RenderPresent(renderer);
   }
@@ -192,5 +180,6 @@ int main(int argc, char** argv) {
   SDL_DestroyRenderer(renderer);
   SDL_DestroyWindow(window);
   SDL_Quit();
+
   return 0;
 }
