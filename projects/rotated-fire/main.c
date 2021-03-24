@@ -23,13 +23,11 @@ int main() {
   while (is_running()) {
     handle_input();
 
-    if (SDL_GetKeyboardState(NULL)[SDL_SCANCODE_RIGHT] &&
-        SDL_GetTicks() > time + 200) {
+    if (SDL_GetKeyboardState(NULL)[SDL_SCANCODE_RIGHT] && SDL_GetTicks() > time + 200) {
       angle += angleSpeed;
       if (angle == 360) angle = 0;
       time = SDL_GetTicks();
-    } else if (SDL_GetKeyboardState(NULL)[SDL_SCANCODE_LEFT] &&
-               SDL_GetTicks() > time + 200) {
+    } else if (SDL_GetKeyboardState(NULL)[SDL_SCANCODE_LEFT] && SDL_GetTicks() > time + 200) {
       angle -= angleSpeed;
       if (angle < 0) angle = 360 + angle;
       time = SDL_GetTicks();

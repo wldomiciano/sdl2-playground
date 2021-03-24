@@ -14,7 +14,9 @@ SDL_Texture* load_texture_from_file(const char* file) {
   return tex;
 }
 
-float getTicks() { return SDL_GetTicks() / 1000.0; }
+float getTicks() {
+  return SDL_GetTicks() / 1000.0;
+}
 
 void draw_rect(const SDL_Rect* rect) {
   SDL_SetRenderDrawColor(renderer, 255, 0, 0, 255);
@@ -28,7 +30,7 @@ void set_viewport_fit(Uint32 width, Uint32 height) {
 
   SDL_GetWindowSize(window, &windowWidth, &windowHeight);
 
-  float scale = (float)windowWidth / width;
+  float scale = (float) windowWidth / width;
 
   SDL_RenderSetScale(renderer, scale, scale);
   SDL_RenderSetViewport(renderer, &rect);
@@ -47,14 +49,18 @@ void destroy_game() {
   SDL_Quit();
 }
 
-SDL_bool is_running() { return isRunning; }
+SDL_bool is_running() {
+  return isRunning;
+}
 
 void render_clear() {
   SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
   SDL_RenderClear(renderer);
 }
 
-void render_present() { SDL_RenderPresent(renderer); }
+void render_present() {
+  SDL_RenderPresent(renderer);
+}
 
 void handle_input() {
   fire = 0;

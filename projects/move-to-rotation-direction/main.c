@@ -32,9 +32,6 @@ int main() {
       float rad = angle * PI / 180;
       float directionX = -SDL_sinf(rad);
       float directionY = SDL_cosf(rad);
-      // directionX = (directionX > 0) ? SDL_ceil(directionX) :
-      // SDL_floor(directionX); directionY = (directionY > 0) ?
-      // SDL_ceil(directionY) : SDL_floor(directionY);
 
       velocityX = directionX * speed;
       velocityY = directionY * speed;
