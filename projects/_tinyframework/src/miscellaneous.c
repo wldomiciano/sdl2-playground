@@ -7,6 +7,10 @@
 #include "context.h"
 #include "initialization.h"
 
+float getTicks() {
+  return SDL_GetTicks() / 1000.0;
+}
+
 void clearRender(Context* ctx, const SDL_Color color) {
   ctx = ctx ? ctx : getDefaultContext();
   SDL_SetRenderDrawColor(ctx->renderer, color.r, color.g, color.b, color.a);

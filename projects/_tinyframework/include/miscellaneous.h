@@ -6,6 +6,8 @@
 
 #include "context.h"
 
+float getTicks();
+
 void presentRender(Context* ctx);
 
 void clearRender(Context* ctx, const SDL_Color color);

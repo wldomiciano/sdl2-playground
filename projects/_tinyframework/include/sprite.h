@@ -18,7 +18,7 @@ void drawSprite(Sprite* const sprite);
 
 void rotateSprite(Sprite* const sprite, const float deg);
 
-void moveSprite(Sprite* const sprite, const vec2 v);
+vec2 moveSprite(Sprite* const sprite, const vec2 v);
 
 // SETTERS
 

@@ -72,8 +72,8 @@ void drawSprite(Sprite* const sprite) {
   );
 }
 
-void moveSprite(Sprite* const sprite, const vec2 v) {
-  sprite->pos = add(sprite->pos, v);
+vec2 moveSprite(Sprite* const sprite, const vec2 v) {
+  return sprite->pos = add(sprite->pos, v);
 }
 
 void rotateSprite(Sprite* const sprite, const float deg) {
