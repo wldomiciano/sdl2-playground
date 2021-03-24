@@ -1,10 +1,4 @@
-#include "context.h"
-#include "events.h"
-#include "initialization.h"
-#include "math.h"
-#include "miscellaneous.h"
-#include "sprite.h"
-#include "vector.h"
+#include "tinyframework.h"
 
 int main() {
   initializeAllWithContext(0, 0, "Hello", 400, 400, SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 0, SDL_RENDERER_PRESENTVSYNC);
