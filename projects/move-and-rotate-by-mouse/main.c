@@ -1,43 +1,36 @@
-#include "utils.h"
-
-const double PI = 3.14159265358979323846264338327950288;
+#include "tinyframework.h"
 
 int main() {
-  create_game(400, 400);
+  initializeAllWithContext(0, 0, "Hello", 400, 400, SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 0, SDL_RENDERER_PRESENTVSYNC);
 
-  SDL_Surface* image = SDL_LoadBMP("./assets/images/image.bmp");
-  SDL_Texture* quad = SDL_CreateTextureFromSurface(renderer, image);
-  SDL_Rect quadRect = {175, 175, 50, 50};
+  Sprite* const ship = createSprite(NULL, "/assets/images/image.bmp", NULL);
 
-  double angleDeg = 0;
-  double angleRad = 0;
+  setSpriteOrigin(ship, VEC2(25, 25));
+  setSpritePosition(ship, VEC2(200, 200));
 
-  while (is_running()) {
-    handle_input();
+  const float easingAmount = 0.03;
 
-    int x, y;
-    SDL_GetMouseState(&x, &y);
-    int delta_x = (quadRect.x + quadRect.w / 2) - x;
-    int delta_y = (quadRect.y + quadRect.h / 2) - y;
-    angleRad = SDL_atan2(delta_x, delta_y);
-    angleDeg = angleRad * 180.0 / PI;
+  while (wasQuitNotRequested()) {
+    handleEvents();
 
-    double easingAmount = 0.03;
-    double distance = SDL_sqrt(delta_x * delta_x + delta_y * delta_y);
-    if (distance > 1) {
-      double tempX = delta_x * easingAmount;
-      double tempY = delta_y * easingAmount;
+    const vec2 delta = sub(getSpritePosition(ship), getMousePosition());
+    setSpriteRotation(ship, -rotation(delta));
 
-      quadRect.x -= (tempX < 0) ? SDL_floor(tempX) : tempX;
-      quadRect.y -= (tempY < 0) ? SDL_floor(tempY) : tempY;
+    if (len(delta) > 1) {
+      const vec2 temp = mul(delta, easingAmount);
+
+      const vec2 pos = {
+        .x = -(temp.x < 0 ? SDL_floorf(temp.x) : temp.x),
+        .y = -(temp.y < 0 ? SDL_floorf(temp.y) : temp.y),
+      };
+
+      moveSprite(ship, pos);
     }
 
-    render_clear();
-    SDL_RenderCopyEx(renderer, quad, NULL, &quadRect, -angleDeg, NULL,
-                     SDL_FLIP_NONE);
-    render_present();
+    clearRender(NULL, (SDL_Color){0, 0, 0, 255});
+    drawSprite(ship);
+    presentRender(NULL);
   }
 
-  destroy_game();
   return 0;
 }

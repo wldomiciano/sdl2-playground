@@ -40,7 +40,8 @@
     "render.h": "c",
     "loop.h": "c",
     "input.h": "c",
-    "vector.h": "c"
+    "vector.h": "c",
+    "tinyframework.h": "c"
   },
   "editor.rulers": []
 }
