@@ -18,7 +18,6 @@ int main() {
   setSpritePosition(ship, VEC2(200, 200));
   setSpriteGlogalPivot(ship, VEC2(200, 200));
 
-  float bulletRot = 0;
   vec2 bulletVel = {0, 0};
 
   while (wasQuitNotRequested()) {
@@ -40,14 +39,13 @@ int main() {
       if (ready) moveSprite(bullet, VEC2(0, shipSpeed));
     }
 
-    const vec2 delta = sub(getSpritePosition(ship), getMousePosition());
-    const double rot = rotation(delta);
-    setSpriteRotation(ship, -rot);
+    const vec2 delta = sub(getMousePosition(), getSpritePosition(ship));
+    const double rot = rotation(delta) + /* fix sprite rotation */ 90;
+    setSpriteRotation(ship, rot);
 
     if (ready) {
-      bulletRot = rot;
-      bulletVel = mul(normal(VEC2(-delta.x, -delta.y)), bulletSpeed);
-      setSpriteRotation(bullet, -bulletRot);
+      bulletVel = mul(normal(delta), bulletSpeed);
+      setSpriteRotation(bullet, rot);
       ready = SDL_FALSE;
     }
 

@@ -6,6 +6,7 @@ int main() {
   Sprite* const ship = createSprite(NULL, "/assets/images/image.bmp", NULL);
 
   setSpriteOrigin(ship, VEC2(25, 25));
+  setSpriteGlogalPivot(ship, VEC2(25, 25));
   setSpritePosition(ship, VEC2(200, 200));
 
   const float easingAmount = 0.03;
@@ -13,15 +14,15 @@ int main() {
   while (wasQuitNotRequested()) {
     handleEvents();
 
-    const vec2 delta = sub(getSpritePosition(ship), getMousePosition());
-    setSpriteRotation(ship, -rotation(delta));
+    const vec2 delta = sub(getMousePosition(), getSpritePosition(ship));
+    setSpriteRotation(ship, rotation(delta) + 90);
 
     if (len(delta) > 1) {
       const vec2 temp = mul(delta, easingAmount);
 
       const vec2 pos = {
-        .x = -(temp.x < 0 ? SDL_floorf(temp.x) : temp.x),
-        .y = -(temp.y < 0 ? SDL_floorf(temp.y) : temp.y),
+        (temp.x < 0 ? SDL_floorf(temp.x) : temp.x),
+        (temp.y < 0 ? SDL_floorf(temp.y) : temp.y),
       };
 
       moveSprite(ship, pos);

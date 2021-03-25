@@ -12,6 +12,10 @@ float deg2rad(const float deg) {
   return deg / (180 / PI);
 }
 
+vec2 rad2vec(const float rad) {
+  return (vec2){sinf(rad), -cosf(rad)};
+}
+
 vec2 add(const vec2 a, const vec2 b) {
   return (vec2){a.x + b.x, a.y + b.y};
 }
@@ -38,7 +42,7 @@ vec2 normal(const vec2 v) {
 }
 
 float rotation(const vec2 v) {
-  return rad2deg(atan2f(v.x, v.y));
+  return rad2deg(atan2f(v.y, v.x));
 }
 
 vec2 rotated(const vec2 v, const float deg) {

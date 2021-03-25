@@ -29,10 +29,8 @@ int main() {
     }
 
     if (isKeyPressed(SDL_SCANCODE_UP)) {
-      float rad = deg2rad(getSpriteAngle(ship));
-
-      const vec2 direction = {SDL_sinf(rad), -SDL_cosf(rad)};
-
+      const float rad = deg2rad(getSpriteAngle(ship));
+      const vec2 direction = rad2vec(rad);
       velocity = mul(direction, speed);
     } else if (isKeyPressed(SDL_SCANCODE_DOWN)) {
       setSpritePosition(ship, VEC2(200, 200));

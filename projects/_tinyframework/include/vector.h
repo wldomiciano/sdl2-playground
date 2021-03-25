@@ -15,6 +15,8 @@ float rad2deg(const float rad);
 
 float deg2rad(const float deg);
 
+vec2 rad2vec(const float rad);
+
 vec2 add(const vec2 a, const vec2 b);
 
 vec2 sub(const vec2 a, const vec2 b);
