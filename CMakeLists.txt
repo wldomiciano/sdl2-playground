@@ -8,6 +8,7 @@ add_compile_options(
   -Wextra
   -pedantic
   # -Werror
+  -Wno-unused-parameter
 )
 
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)

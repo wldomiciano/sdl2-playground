@@ -36,10 +36,10 @@ bool isKeyReleased(const SDL_Scancode scancode) {
 void handleEvents() {
   SDL_Event event;
 
-  // SDL_memset(keys, 0, SDL_NUM_SCANCODES);
+  SDL_memset(keys, 0, SDL_NUM_SCANCODES);
 
-  for (int i = 0; i < SDL_NUM_SCANCODES; i++)
-    if (keys[i] == 1) keys[i] = 0;
+  // for (int i = 0; i < SDL_NUM_SCANCODES; i++)
+  // if (keys[i] == 1) keys[i] = 0;
 
   while (SDL_PollEvent(&event)) {
     if (event.type == SDL_QUIT) {

@@ -41,7 +41,8 @@
     "loop.h": "c",
     "input.h": "c",
     "vector.h": "c",
-    "tinyframework.h": "c"
+    "tinyframework.h": "c",
+    "scenemanager.h": "c"
   },
   "editor.rulers": []
 }
