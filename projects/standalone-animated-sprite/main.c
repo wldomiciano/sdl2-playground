@@ -1,39 +1,39 @@
-#include <SDL2/SDL.h>
+#include <SDL.h>
 
 typedef struct Drawable {
   SDL_Texture* texture;
-  SDL_Rect src;
-  SDL_Rect dst;
-  double angle;
+  SDL_Rect     src;
+  SDL_Rect     dst;
+  double       angle;
   struct {
     float x;
     float y;
   } scale;
-  SDL_Point center;
+  SDL_Point        center;
   SDL_RendererFlip flip;
 } Drawable;
 
 typedef struct SpriteSheet {
   SDL_Texture* texture;
-  SDL_Rect* sprites;
-  Uint32 count;
+  SDL_Rect*    sprites;
+  Uint32       count;
 } SpriteSheet;
 
 typedef struct Sprite {
   SpriteSheet* sheet;
-  SDL_Rect frame;
+  SDL_Rect     frame;
 } Sprite;
 
 typedef struct Animation {
   float speed;
-  int current;
-  int count;
-  int* frames;
+  int   current;
+  int   count;
+  int*  frames;
 } Animation;
 
 typedef struct AnimatedSprite {
-  Sprite* sprite;
-  int lastAnimation;
+  Sprite*    sprite;
+  int        lastAnimation;
   Animation* animations;
 } AnimatedSprite;
 
@@ -57,7 +57,7 @@ SpriteSheet* createSpriteSheet(SDL_Renderer* const renderer, const char* file, i
   if (texture) {
     int width, height, spriteWidth, spriteHeight;
     SDL_QueryTexture(texture, NULL, NULL, &width, &height);
-    spriteWidth = width / cols;
+    spriteWidth  = width / cols;
     spriteHeight = height / rows;
 
     SpriteSheet* sheet = SDL_malloc(sizeof(*sheet));
@@ -65,7 +65,7 @@ SpriteSheet* createSpriteSheet(SDL_Renderer* const renderer, const char* file, i
     if (sheet) {
       sheet->texture = texture;
       sheet->sprites = SDL_malloc(sizeof(*sheet->sprites) * count);
-      sheet->count = count;
+      sheet->count   = count;
 
       for (int i = 0, x = 0, y = 0; i < count; i++) {
         sheet->sprites[i].w = spriteWidth;
@@ -105,8 +105,8 @@ AnimatedSprite* createAnimatedSprite(SpriteSheet* sheet, int frame, int count) {
   AnimatedSprite* sprite = SDL_malloc(sizeof(*sprite));
 
   if (sprite) {
-    sprite->sprite = createSprite(sheet, frame);
-    sprite->animations = SDL_malloc(sizeof(*sprite->animations) * count);
+    sprite->sprite        = createSprite(sheet, frame);
+    sprite->animations    = SDL_malloc(sizeof(*sprite->animations) * count);
     sprite->lastAnimation = -1;
     return sprite;
   }
@@ -115,10 +115,10 @@ AnimatedSprite* createAnimatedSprite(SpriteSheet* sheet, int frame, int count) {
 }
 
 void addAnimation(AnimatedSprite* sprite, int index, int frames, float speed, ...) {
-  sprite->animations[index].count = frames;
-  sprite->animations[index].speed = speed;
+  sprite->animations[index].count   = frames;
+  sprite->animations[index].speed   = speed;
   sprite->animations[index].current = 0;
-  sprite->animations[index].frames = SDL_malloc(sizeof(*sprite->animations[index].frames) * frames);
+  sprite->animations[index].frames  = SDL_malloc(sizeof(*sprite->animations[index].frames) * frames);
 
   va_list args;
   va_start(args, speed);
@@ -132,11 +132,11 @@ void addAnimation(AnimatedSprite* sprite, int index, int frames, float speed, ..
 
 void playAnimation(AnimatedSprite* sprite, int index) {
   if (sprite->lastAnimation != index) {
-    sprite->lastAnimation = index;
+    sprite->lastAnimation             = index;
     sprite->animations[index].current = 0;
   }
 
-  int c = sprite->animations[index].count;
+  int c                 = sprite->animations[index].count;
   sprite->sprite->frame = sprite->sprite->sheet->sprites[sprite->animations[index].frames[(int) (sprite->animations[index].current * sprite->animations[index].speed)]];
   sprite->animations[index].current++;
 
@@ -147,10 +147,10 @@ void playAnimation(AnimatedSprite* sprite, int index) {
 int main() {
   SDL_Init(SDL_INIT_VIDEO);
 
-  SDL_Window* const window = SDL_CreateWindow("Teste", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 640, 480, 0);
-  SDL_Renderer* const renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_PRESENTVSYNC);
-  SpriteSheet* const sheet = createSpriteSheet(renderer, "./assets/images/link.bmp", 10, 4, 40);
-  AnimatedSprite* const sprite = createAnimatedSprite(sheet, 0, 5);
+  SDL_Window* const     window   = SDL_CreateWindow("Teste", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 640, 480, 0);
+  SDL_Renderer* const   renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_PRESENTVSYNC);
+  SpriteSheet* const    sheet    = createSpriteSheet(renderer, "./assets/images/link.bmp", 10, 4, 40);
+  AnimatedSprite* const sprite   = createAnimatedSprite(sheet, 0, 5);
 
   addAnimation(sprite, 0, 1, 1, 0);
   addAnimation(sprite, 1, 10, 0.5, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19);

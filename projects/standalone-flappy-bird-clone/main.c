@@ -1,8 +1,8 @@
-#include <SDL2/SDL.h>
+#include <SDL.h>
 
-static const int WINDOW_WIDTH = 600;
+static const int WINDOW_WIDTH  = 600;
 static const int WINDOW_HEIGHT = 700;
-static const int PIPES_COUNT = 3;
+static const int PIPES_COUNT   = 3;
 
 struct Pipes {
   SDL_Rect top;
@@ -15,21 +15,21 @@ int getRandom(int max) {
 }
 
 int main() {
-  SDL_Window* const window = SDL_CreateWindow("Test", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, WINDOW_WIDTH, WINDOW_HEIGHT, 0);
-  SDL_Renderer* const renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_PRESENTVSYNC);
-  SDL_bool isRunning = SDL_TRUE;
-  SDL_Rect bird = {WINDOW_WIDTH / 3, WINDOW_HEIGHT / 2, 40, 30};
+  SDL_Window* const   window    = SDL_CreateWindow("Test", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, WINDOW_WIDTH, WINDOW_HEIGHT, 0);
+  SDL_Renderer* const renderer  = SDL_CreateRenderer(window, -1, SDL_RENDERER_PRESENTVSYNC);
+  SDL_bool            isRunning = SDL_TRUE;
+  SDL_Rect            bird      = {WINDOW_WIDTH / 3, WINDOW_HEIGHT / 2, 40, 30};
 
-  const int JUMP_SPEED = -10;
+  const int JUMP_SPEED       = -10;
   const int FALLING_CONSTANT = -1;
-  int vertSpeed = 0;
+  int       vertSpeed        = 0;
 
-  const int PIPE_WIDTH = WINDOW_WIDTH / 6;
-  const int PIPES_GAP = PIPE_WIDTH * 2;
-  const int PIPE_HEIGHT = PIPE_WIDTH * 7 - PIPES_GAP;
-  const int PIPES_VELOCITY = 5;
-  const int PIPES_INTERVAL = PIPE_WIDTH * 2.5;
-  const int PIPES_SPAWN = (PIPE_WIDTH + PIPES_INTERVAL) * 3;
+  const int    PIPE_WIDTH     = WINDOW_WIDTH / 6;
+  const int    PIPES_GAP      = PIPE_WIDTH * 2;
+  const int    PIPE_HEIGHT    = PIPE_WIDTH * 7 - PIPES_GAP;
+  const int    PIPES_VELOCITY = 5;
+  const int    PIPES_INTERVAL = PIPE_WIDTH * 2.5;
+  const int    PIPES_SPAWN    = (PIPE_WIDTH + PIPES_INTERVAL) * 3;
   struct Pipes pipes[PIPES_COUNT];
 
   int POS_X = WINDOW_WIDTH;

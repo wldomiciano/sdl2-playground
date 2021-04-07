@@ -1,7 +1,7 @@
 #ifndef GAME_H_INCLUDED
 #define GAME_H_INCLUDED
 
-#include <SDL2/SDL.h>
+#include <SDL.h>
 
 typedef struct Pipes {
   SDL_Rect top;
@@ -9,8 +9,8 @@ typedef struct Pipes {
 } Pipes;
 
 Pipes* create_pipes(Uint16 pipesCount);
-void draw_pipes(SDL_Renderer* renderer, SDL_Texture* texture, Pipes* pipes);
-void destroy_pipes(Pipes* pipes);
-void move_pipes(Pipes* pipes);
+void   draw_pipes(SDL_Renderer* renderer, SDL_Texture* texture, Pipes* pipes);
+void   destroy_pipes(Pipes* pipes);
+void   move_pipes(Pipes* pipes);
 
 #endif  // GAME_H_INCLUDED
