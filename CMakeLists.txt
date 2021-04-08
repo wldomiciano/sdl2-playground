@@ -4,6 +4,8 @@ set(CMAKE_TOOLCHAIN_FILE ${CMAKE_CURRENT_SOURCE_DIR}/vcpkg/scripts/buildsystems/
 
 project(sdl2-playground)
 
+set(CMAKE_C_STANDARD 11)
+
 find_package(SDL2 CONFIG REQUIRED)
 find_package(sdl2-image CONFIG REQUIRED)
 find_package(sdl2-ttf CONFIG REQUIRED)
@@ -11,6 +13,7 @@ find_package(sdl2-ttf CONFIG REQUIRED)
 add_compile_options(
   $<$<C_COMPILER_ID:GNU>:-Wall>
   $<$<C_COMPILER_ID:GNU>:-Wextra>
+  # $<$<C_COMPILER_ID:GNU>:-Wconversion>
   # $<$<C_COMPILER_ID:GNU>:-Werror>
   $<$<C_COMPILER_ID:GNU>:-pedantic>
   $<$<C_COMPILER_ID:GNU>:-Wno-unused-parameter>
