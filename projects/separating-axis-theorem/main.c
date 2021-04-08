@@ -26,7 +26,7 @@ int main(int argc, char** argv) {
 
   print(points2);
 
-  float       rad = (45 * PI) / 180;
+  float       rad = (45 * M_PI) / 180;
   const float cos = SDL_cosf(rad);
   const float sin = SDL_sinf(rad);
   for (int i = 0; i < 5; i++) {

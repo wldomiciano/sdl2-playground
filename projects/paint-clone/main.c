@@ -1,20 +1,18 @@
 #include "game.h"
 #include "utils.h"
 
-const double PI = 3.14159265358979323846264338327950288;
-
 void draw(int radius, int x, int y) {
-  int sections = 360;
-  float secAngles = 2 * PI / sections;
-  int radiusTemp = radius;
-  int a, b;
+  int   sections   = 360;
+  float secAngles  = 2 * M_PI / sections;
+  int   radiusTemp = radius;
+  int   a, b;
 
   while (radiusTemp--) {
     for (int i = 0; i < sections; i++) {
       float cos = SDL_cos(i * secAngles);
       float sin = SDL_sin(i * secAngles);
-      a = radiusTemp * cos + x;
-      b = radiusTemp * sin + y;
+      a         = radiusTemp * cos + x;
+      b         = radiusTemp * sin + y;
       SDL_RenderDrawPoint(renderer, a, b);
     }
   }
@@ -22,10 +20,10 @@ void draw(int radius, int x, int y) {
 
 int main(int argc, char** argv) {
   create_game(800, 800);
-  int red = 255;
-  float radius = 10;
-  int x = 0;
-  int y = 0;
+  int      red    = 255;
+  float    radius = 10;
+  int      x      = 0;
+  int      y      = 0;
   SDL_bool grab;
   while (is_running()) {
     handle_input();

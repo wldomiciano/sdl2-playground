@@ -1,8 +1,8 @@
 #include "framework.h"
 #include "sprite.h"
 
-SDL_FRect rect = {0, 0, 50, 50};
-float velocity = 1;
+SDL_FRect rect     = {0, 0, 50, 50};
+float     velocity = 1;
 
 SDL_FPoint p1[5] = {{270, 0}, {370, 0}, {370, 100}, {270, 100}, {270, 0}};
 SDL_FPoint p2[5] = {{270, 100}, {370, 100}, {370, 200}, {270, 200}, {270, 100}};
@@ -10,7 +10,7 @@ SDL_FPoint p2[5] = {{270, 100}, {370, 100}, {370, 200}, {270, 200}, {270, 100}};
 Sprite* link;
 
 void rotate(SDL_FPoint* p, float deg, float centerX, float centerY) {
-  const float rad = (deg * PI) / 180;
+  const float rad = (deg * M_PI) / 180;
   const float cos = SDL_cosf(rad);
   const float sin = SDL_sinf(rad);
 

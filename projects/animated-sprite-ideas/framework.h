@@ -7,8 +7,6 @@
 
 extern SDL_Renderer* renderer;
 
-extern const double PI;
-
 // Lifecycle functions
 void create();
 void update();

@@ -27,8 +27,6 @@ endif()
 #   $<$<C_COMPILER_ID:GNU>:-Wno-unused-parameter>
 # )
 
-message(">>>${MSVC}---${CMAKE_COMPILER_IS_GNUCC}---${CMAKE_C_COMPILER_ID}---${CMAKE_CXX_COMPILER_ID}<<<")
-
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
 
 file(GLOB dirs projects/*)

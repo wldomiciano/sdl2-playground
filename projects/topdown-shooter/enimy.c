@@ -4,10 +4,10 @@
 
 #include "framework.h"
 
-Enimy enimies[MAX_ENIMIES];
-static Game* game;
+Enimy               enimies[MAX_ENIMIES];
+static Game*        game;
 static SDL_Texture* texture;
-static SDL_FRect* playerFrame;
+static SDL_FRect*   playerFrame;
 
 Uint32 spawn(Uint32 interval, void* param) {
   SDL_Log("spawn");
@@ -23,7 +23,7 @@ Uint32 spawn(Uint32 interval, void* param) {
   }
 
   if (active > -1) {
-    enimies[active].active = SDL_TRUE;
+    enimies[active].active  = SDL_TRUE;
     enimies[active].frame.x = 0;
     enimies[active].frame.y = 0;
   }
@@ -45,7 +45,7 @@ void enimy_init(SDL_FRect* player) {
   SDL_SetRenderTarget(game->renderer, NULL);
 
   for (int i = 0; i < MAX_ENIMIES; i++) {
-    enimies[i].active = SDL_FALSE;
+    enimies[i].active  = SDL_FALSE;
     enimies[i].frame.w = 30;
     enimies[i].frame.h = 30;
   }
@@ -64,7 +64,7 @@ void enimy_update() {
         (enimies[i].frame.y + enimies[i].frame.h * 0.5) - playerFrame->y};
 
       const float rad = SDL_atan2f(delta.x, delta.y);
-      const float deg = -(rad * 180) / PI;
+      const float deg = -(rad * 180) / M_PI;
 
       enimies[i].rotationRad = rad;
       enimies[i].rotationDeg = deg;

@@ -1,22 +1,20 @@
+#include "framework.h"
+
 #include <SDL.h>
 #include <SDL_ttf.h>
 
-#include "framework.h"
-
 #define MAX_LENGTH 1024
 
-const double PI = 3.14159265358979323846264338327950288;
-
-SDL_Window* window;
+SDL_Window*   window;
 SDL_Renderer* renderer;
 
 static SDL_Joystick* controller;
-static TTF_Font* font;
-static SDL_bool isRunning = SDL_FALSE;
-static Uint32 sdlInitFlags = SDL_INIT_EVERYTHING;
-static Uint32 windowWidth = 640;
-static Uint32 windowHeight = 480;
-static Uint32 windowFlags = 0;
+static TTF_Font*     font;
+static SDL_bool      isRunning    = SDL_FALSE;
+static Uint32        sdlInitFlags = SDL_INIT_EVERYTHING;
+static Uint32        windowWidth  = 640;
+static Uint32        windowHeight = 480;
+static Uint32        windowFlags  = 0;
 // static Uint32 rendererFlags = SDL_RENDERER_PRESENTVSYNC;
 static Uint8 customKeyStates[SDL_NUM_SCANCODES] = {0};
 
@@ -83,7 +81,7 @@ static void sdl_quit() {
   SDL_DestroyWindow(window);
   SDL_Quit();
 
-  font = NULL;
+  font      = NULL;
   isRunning = SDL_FALSE;
 }
 
@@ -128,9 +126,9 @@ int main(int argc, char** argv) {
     }
   }
 
-  const float TIMESTEP = 1000.0 / 60;
-  float delta = 0;
-  Uint32 previeousTicks = SDL_GetTicks();
+  const float TIMESTEP       = 1000.0 / 60;
+  float       delta          = 0;
+  Uint32      previeousTicks = SDL_GetTicks();
 
   while (isRunning) {
     Uint32 currentTicks = SDL_GetTicks();

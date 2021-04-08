@@ -8,11 +8,11 @@
 
 static SDL_Texture* mainTexture;
 static SDL_Texture* armtexture;
-static Game* game;
-static SDL_FRect frame = {100, 100, 30, 30};
-static SDL_FRect arm = {0, 0, 4, 20};
+static Game*        game;
+static SDL_FRect    frame = {100, 100, 30, 30};
+static SDL_FRect    arm   = {0, 0, 4, 20};
 static const Uint8* keys;
-static const float VELOCITY = 4;
+static const float  VELOCITY = 4;
 
 void player_create() {
   game = game_instance();
@@ -44,10 +44,10 @@ void player_update() {
 
   Uint32 fire = SDL_GetMouseState(&x, &y) & SDL_BUTTON(SDL_BUTTON_LEFT);
 
-  SDL_FPoint delta = {(frame.x + frame.w * 0.5) - x,
+  SDL_FPoint  delta = {(frame.x + frame.w * 0.5) - x,
                       (frame.y + frame.h * 0.5) - y};
-  const float rad = SDL_atan2f(delta.x, delta.y);
-  const float deg = -(rad * 180) / PI;
+  const float rad   = SDL_atan2f(delta.x, delta.y);
+  const float deg   = -(rad * 180) / M_PI;
 
   if (keys[SDL_SCANCODE_W]) {
     frame.y += -VELOCITY;

@@ -4,8 +4,6 @@
 
 static Game* game;
 
-const double PI = 3.14159265358979323846264338327950288;
-
 SDL_Rect game_window_frame() {
   return game->windowFrame;
 }
@@ -17,16 +15,16 @@ static void game_init(
 ) {
   game = SDL_calloc(1, sizeof(*game));
 
-  game->create = create;
-  game->update = update;
-  game->destroy = destroy;
+  game->create        = create;
+  game->update        = update;
+  game->destroy       = destroy;
   game->windowFrame.w = width;
   game->windowFrame.h = height;
   game->windowFrame.x = SDL_WINDOWPOS_CENTERED;
   game->windowFrame.y = SDL_WINDOWPOS_CENTERED;
-  game->window = SDL_CreateWindow(title, game->windowFrame.x, game->windowFrame.y, game->windowFrame.w, game->windowFrame.h, 0);
-  game->renderer = SDL_CreateRenderer(game->window, -1, SDL_RENDERER_PRESENTVSYNC);
-  game->isRunning = SDL_TRUE;
+  game->window        = SDL_CreateWindow(title, game->windowFrame.x, game->windowFrame.y, game->windowFrame.w, game->windowFrame.h, 0);
+  game->renderer      = SDL_CreateRenderer(game->window, -1, SDL_RENDERER_PRESENTVSYNC);
+  game->isRunning     = SDL_TRUE;
 }
 
 static void game_quit() {

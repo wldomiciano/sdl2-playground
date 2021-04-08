@@ -1,13 +1,12 @@
 #include "framework.h"
 
-SDL_Window* window;
+SDL_Window*   window;
 SDL_Renderer* renderer;
-SDL_bool isRunning;
-const double PI = 3.14159265358979323846264338327950288;
+SDL_bool      isRunning;
 
 void init() {
   SDL_Init(SDL_INIT_VIDEO);
-  window = SDL_CreateWindow("", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED,
+  window   = SDL_CreateWindow("", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED,
                             400, 400, 0);
   renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_PRESENTVSYNC);
   SDL_SetRenderDrawBlendMode(renderer, SDL_BLENDMODE_BLEND);
@@ -42,7 +41,7 @@ void present() {
 
 Rect* create_rect(float x, float y, float w, float h, Uint32 fill,
                   Uint32 border) {
-  SDL_FRect rect = {x, y, w, h};
+  SDL_FRect    rect    = {x, y, w, h};
   SDL_Texture* texture = SDL_CreateTexture(renderer, SDL_PIXELFORMAT_RGB888, SDL_TEXTUREACCESS_TARGET, rect.w, rect.h);
 
   SDL_SetRenderTarget(renderer, texture);
@@ -75,11 +74,11 @@ Rect* create_rect(float x, float y, float w, float h, Uint32 fill,
 
   SDL_SetRenderTarget(renderer, NULL);
 
-  Rect* myRect = SDL_malloc(sizeof(*myRect));
-  myRect->angle = 0;
-  myRect->center = (SDL_FPoint){rect.w * 0.5, rect.h * 0.5};
-  myRect->dest = rect;
-  myRect->flip = SDL_FLIP_NONE;
+  Rect* myRect    = SDL_malloc(sizeof(*myRect));
+  myRect->angle   = 0;
+  myRect->center  = (SDL_FPoint){rect.w * 0.5, rect.h * 0.5};
+  myRect->dest    = rect;
+  myRect->flip    = SDL_FLIP_NONE;
   myRect->texture = texture;
   return myRect;
 }
@@ -96,23 +95,23 @@ typedef struct {
 Vertices rect_get_vertices(const SDL_FRect* rect, double angle) {
   const float startX = rect->x;
   const float startY = rect->y;
-  const float rad = (angle * PI) / 180;
-  const float cos = SDL_cosf(rad);
-  const float sin = SDL_sinf(rad);
-  const float w = rect->w - 1;
-  const float h = rect->h - 1;
+  const float rad    = (angle * M_PI) / 180;
+  const float cos    = SDL_cosf(rad);
+  const float sin    = SDL_sinf(rad);
+  const float w      = rect->w - 1;
+  const float h      = rect->h - 1;
 
-  const SDL_FPoint UL = {rect->x, rect->y};
-  const SDL_FPoint UR = {rect->x + w, rect->y};
-  const SDL_FPoint LL = {rect->x, rect->y + h};
-  const SDL_FPoint LR = {rect->x + w, rect->y + h};
-  Vertices vertices = {{UL, UR, LR, LL, UL}};
+  const SDL_FPoint UL       = {rect->x, rect->y};
+  const SDL_FPoint UR       = {rect->x + w, rect->y};
+  const SDL_FPoint LL       = {rect->x, rect->y + h};
+  const SDL_FPoint LR       = {rect->x + w, rect->y + h};
+  Vertices         vertices = {{UL, UR, LR, LL, UL}};
 
   for (int i = 0; i < 5; i++) {
     const float cx = (startX + w * 0.5);
     const float cy = (startY + w * 0.5);
-    const float x = vertices.points[i].x - cx;
-    const float y = vertices.points[i].y - cy;
+    const float x  = vertices.points[i].x - cx;
+    const float y  = vertices.points[i].y - cy;
 
     vertices.points[i] = (SDL_FPoint){(x * cos - y * sin) + cx, (x * sin + y * cos) + cy};
   }
@@ -128,9 +127,9 @@ Vertices rect_get_normals(const Vertices* vert) {
     SDL_FPoint b = vert->points[i + 1 == 5 ? 0 : i + 1];
     SDL_FPoint c = {a.x - b.x, a.y - b.y};
 
-    float const x = c.x;
-    float const y = c.y;
-    float const length = SDL_sqrtf(x * x + y * y);
+    float const x       = c.x;
+    float const y       = c.y;
+    float const length  = SDL_sqrtf(x * x + y * y);
     normals.points[i].x = (y / length);
     normals.points[i].y = -(x / length);
   }
@@ -162,14 +161,14 @@ SDL_bool checkOverlap(const SDL_FPoint* a, const SDL_FPoint* b) {
 SDL_bool checkCollision(SDL_FRect* a, double angleA, const SDL_FRect* b,
                         double angleB) {
   //   const axisAll = [... a.normalizedAxis, ... b.normalizedAxis ];
-  const Vertices va = rect_get_vertices(a, angleA);
-  const Vertices vb = rect_get_vertices(b, angleB);
+  const Vertices va    = rect_get_vertices(a, angleA);
+  const Vertices vb    = rect_get_vertices(b, angleB);
   const Vertices axisA = rect_get_normals(&va);
   const Vertices axisB = rect_get_normals(&vb);
 
   //   let overlap : number = Infinity;
   //   let smallest : Vector2;
-  float overlap = 9999999999999;
+  float      overlap  = 9999999999999;
   SDL_FPoint smallest = {0, 0};
 
   for (int i = 0; i < 4; i++) {
@@ -185,7 +184,7 @@ SDL_bool checkCollision(SDL_FRect* a, double angleA, const SDL_FRect* b,
       }
 
       if (o < overlap) {
-        overlap = o;
+        overlap  = o;
         smallest = axisA.points[i];
       }
     }
@@ -204,7 +203,7 @@ SDL_bool checkCollision(SDL_FRect* a, double angleA, const SDL_FRect* b,
       }
 
       if (o < overlap) {
-        overlap = o;
+        overlap  = o;
         smallest = axisB.points[i];
       }
     }
