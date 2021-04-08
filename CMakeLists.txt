@@ -21,13 +21,6 @@ add_compile_options(
 
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
 
-if(MINGW)
-  set(IS_MINGW TRUE)
-else()
-  set(IS_MINGW FALSE)
-endif(MINGW)
-
-
 file(GLOB dirs projects/*)
 foreach(dir IN LISTS dirs)
   add_subdirectory(${dir})
