@@ -19,7 +19,7 @@ git submodule add https://github.com/microsoft/vcpkg
 # Run with MinGW in MSYS2
 
 ```sh
-cmake -G "MinGW Makefiles" -S . -B build -DVCPKG_TARGET_TRIPLET=x64-mingw-static
+cmake -G "MinGW Makefiles" -S . -B build -DVCPKG_TARGET_TRIPLET=x64-mingw-static -DVCPKG_APPLOCAL_DEPS=OFF
 ```
 
 # Testar com Clang
