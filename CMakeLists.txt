@@ -10,14 +10,22 @@ find_package(SDL2 CONFIG REQUIRED)
 find_package(sdl2-image CONFIG REQUIRED)
 find_package(sdl2-ttf CONFIG REQUIRED)
 
-add_compile_options(
-  $<$<C_COMPILER_ID:GNU>:-Wall>
-  $<$<C_COMPILER_ID:GNU>:-Wextra>
-  # $<$<C_COMPILER_ID:GNU>:-Wconversion>
-  # $<$<C_COMPILER_ID:GNU>:-Werror>
-  $<$<C_COMPILER_ID:GNU>:-pedantic>
-  $<$<C_COMPILER_ID:GNU>:-Wno-unused-parameter>
-)
+if (MSVC)
+    add_compile_options(/W4 /WX)
+elseif(CMAKE_COMPILER_IS_GNUCC)
+    add_compile_options(-Wall -Wextra -pedantic -Wno-unused-parameter)
+endif()
+
+# add_compile_options(
+#   $<$<C_COMPILER_ID:GNU>:-Wall>
+#   $<$<C_COMPILER_ID:GNU>:-Wextra>
+#   $<$<C_COMPILER_ID:GNU>:-Wconversion>
+#   $<$<C_COMPILER_ID:GNU>:-Werror>
+#   $<$<C_COMPILER_ID:GNU>:-pedantic>
+#   $<$<C_COMPILER_ID:GNU>:-Wno-unused-parameter>
+# )
+
+message(">>>${MSVC}---${CMAKE_COMPILER_IS_GNUCC}<<<")
 
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
 
