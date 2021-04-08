@@ -22,4 +22,20 @@ git submodule add https://github.com/microsoft/vcpkg
 cmake -G "MinGW Makefiles" -S . -B build -DVCPKG_TARGET_TRIPLET=x64-mingw-static -DVCPKG_APPLOCAL_DEPS=OFF
 ```
 
-# Testar com Clang
+# Run with Clang in Ubuntu
+
+```sh
+cmake -S . -B build -DCMAKE_CXX_COMPILER=clang -DCMAKE_C_COMPILER=clang
+```
+
+# TODO
+
+- Testar no terminal do macOS
+- Testar com Clang
+- Testar no Visual Studio
+- Testar no CLion
+- Testar no Code::Blocks
+- Testar no Eclipse
+- Testar no Netbeans
+- Testar no XCode
+- Testar no DevC++???

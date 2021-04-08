@@ -2,7 +2,7 @@ cmake_minimum_required(VERSION 3.16)
 
 set(CMAKE_TOOLCHAIN_FILE ${CMAKE_CURRENT_SOURCE_DIR}/vcpkg/scripts/buildsystems/vcpkg.cmake CACHE STRING "Vcpkg toolchain file")
 
-project(sdl2-playground)
+project(sdl2-playground LANGUAGES C CXX)
 
 set(CMAKE_C_STANDARD 11)
 
@@ -13,7 +13,9 @@ find_package(sdl2-ttf CONFIG REQUIRED)
 if (MSVC)
     add_compile_options(/W4 /WX)
 elseif(CMAKE_COMPILER_IS_GNUCC)
-    add_compile_options(-Wall -Wextra -pedantic -Wno-unused-parameter)
+  add_compile_options(-Wall -Wextra -pedantic -Wno-unused-parameter)
+elseif(CMAKE_CXX_COMPILER_ID MATCHES "Clang")
+  # add_compile_options(-stdlib=lstdc++)
 endif()
 
 # add_compile_options(
@@ -25,7 +27,7 @@ endif()
 #   $<$<C_COMPILER_ID:GNU>:-Wno-unused-parameter>
 # )
 
-message(">>>${MSVC}---${CMAKE_COMPILER_IS_GNUCC}<<<")
+message(">>>${MSVC}---${CMAKE_COMPILER_IS_GNUCC}---${CMAKE_C_COMPILER_ID}---${CMAKE_CXX_COMPILER_ID}<<<")
 
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
 
