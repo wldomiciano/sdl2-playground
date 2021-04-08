@@ -8,5 +8,5 @@ add_executable(
 
 target_include_directories(${directory_name} PRIVATE include)
 
-target_link_libraries(${directory_name} PRIVATE tinyframework)
+target_link_libraries(${directory_name} PRIVATE $<$<BOOL:MINGW>:mingw32> tinyframework)
 

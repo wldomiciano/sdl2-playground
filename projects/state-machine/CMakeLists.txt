@@ -10,5 +10,5 @@ add_executable(
     window.c
 )
 
-target_link_libraries(${directory_name} PRIVATE tinyframework)
+target_link_libraries(${directory_name} PRIVATE $<$<BOOL:MINGW>:mingw32> tinyframework)
 
