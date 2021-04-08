@@ -1,8 +1,9 @@
 #include <SDL.h>
 
+#define PIPES_COUNT 3
+
 static const int WINDOW_WIDTH  = 600;
 static const int WINDOW_HEIGHT = 700;
-static const int PIPES_COUNT   = 3;
 
 struct Pipes {
   SDL_Rect top;
