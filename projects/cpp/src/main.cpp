@@ -91,7 +91,7 @@ public:
 
 Game* Game::game = nullptr;
 
-int main() {
+int main(int argc, char** argv) {
   Window a;
 
   Stage1 s1;
