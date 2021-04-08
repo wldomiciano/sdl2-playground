@@ -114,7 +114,7 @@ static void input_handle() {
   }
 }
 
-int main() {
+int main(int argc, char** argv) {
   // SDL_SetHint(SDL_HINT_RENDER_VSYNC, "1");
   isRunning = sdl_init() && window_create() && ttf_init();
 

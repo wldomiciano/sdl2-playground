@@ -53,7 +53,7 @@ void fillCircleBres(SDL_Renderer* const renderer, int xc, int yc, int r) {
   }
 }
 
-int main() {
+int main(int argc, char** argv) {
   SDL_Window* window = SDL_CreateWindow("test", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 300, 300, 0);
   SDL_Renderer* renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_PRESENTVSYNC);
 

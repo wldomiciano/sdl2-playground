@@ -31,7 +31,7 @@ static void destroy() {
 
 #include "window.h"
 
-int main() {
+int main(int argc, char** argv) {
   SDL_LogSetAllPriority(SDL_LOG_PRIORITY_DEBUG);
 
   Window* const window = WindowCreate();

@@ -20,7 +20,7 @@ void draw(int radius, int x, int y) {
   }
 }
 
-int main() {
+int main(int argc, char** argv) {
   create_game(800, 800);
   int red = 255;
   float radius = 10;

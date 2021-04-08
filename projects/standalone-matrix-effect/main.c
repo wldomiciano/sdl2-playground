@@ -91,7 +91,7 @@ void matrix() {
   }
 }
 
-int main() {
+int main(int argc, char** argv) {
   init();
 
   SDL_SetRenderDrawBlendMode(renderer, SDL_BLENDMODE_BLEND);

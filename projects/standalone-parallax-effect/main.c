@@ -65,7 +65,7 @@ void movePlayer(SDL_Renderer *const renderer, Texture *const texture) {
   SDL_RenderCopy(renderer, texture->texture, &parts[(int) frame / 5], &position);
 }
 
-int main() {
+int main(int argc, char** argv) {
   SDL_Init(SDL_INIT_VIDEO);
 
   SDL_Window *const window = SDL_CreateWindow("Test", 50, 50, 640, 480, 0);

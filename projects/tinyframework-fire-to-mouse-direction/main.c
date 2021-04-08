@@ -67,7 +67,7 @@ static void update() {
   }
 }
 
-int main() {
+int main(int argc, char** argv) {
   initializeAllWithContext(0, 0, "Hello", 400, 400, SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 0, SDL_RENDERER_PRESENTVSYNC);
 
   create();
