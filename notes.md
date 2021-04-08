@@ -30,8 +30,10 @@ cmake -S . -B build -DCMAKE_CXX_COMPILER=clang -DCMAKE_C_COMPILER=clang
 
 # TODO
 
-- Testar no terminal do macOS
-- Testar com Clang
+- Testar no terminal do macOS com GCC
+- Testar no terminal do macOS com Clang
+- Testar no MinGW com GCC
+- Testar no MinGW com Clang
 - Testar no Visual Studio
 - Testar no CLion
 - Testar no Code::Blocks
