@@ -2,15 +2,5 @@
   "$schema": "https://raw.githubusercontent.com/microsoft/vcpkg/master/scripts/vcpkg.schema.json",
   "name": "sdl2-playground",
   "version": "0.0.1",
-  "dependencies": [
-    {
-      "name": "sdl2"
-    },
-    {
-      "name": "sdl2-image"
-    },
-    {
-      "name": "sdl2-ttf"
-    }
-  ]
+  "dependencies": ["sdl2", "sdl2-image", "sdl2-ttf"]
 }
