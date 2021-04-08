@@ -13,10 +13,10 @@ int main() {
   Rect* a = create_rect(200, 200, 50, 50, 0x0000FFFF, 0xFF00FFFF);
   Rect* b = create_rect(120, 120, 50, 50, 0x0000FFFF, 0xFF00FFFF);
 
-  const float w = 100;
-  const float c = 60;
-  const float d = 60;
-  SDL_FPoint points2[5] = {
+  const float w          = 100;
+  const float c          = 60;
+  const float d          = 60;
+  SDL_FPoint  points2[5] = {
     {c, d},
     {c + w, d},
     {c + w, d + w},
@@ -26,14 +26,14 @@ int main() {
 
   print(points2);
 
-  float rad = (45 * PI) / 180;
+  float       rad = (45 * PI) / 180;
   const float cos = SDL_cosf(rad);
   const float sin = SDL_sinf(rad);
   for (int i = 0; i < 5; i++) {
     const float cx = (c + w * 0.5);
     const float cy = (d + w * 0.5);
-    const float x = points2[i].x - cx;
-    const float y = points2[i].y - cy;
+    const float x  = points2[i].x - cx;
+    const float y  = points2[i].y - cy;
 
     points2[i] =
       (SDL_FPoint){(x * cos - y * sin) + cx, (x * sin + y * cos) + cy};
@@ -84,4 +84,6 @@ int main() {
   destroy_rect(b);
 
   quit();
+
+  return 0;
 }
