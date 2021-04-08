@@ -8,14 +8,12 @@ find_package(SDL2 CONFIG REQUIRED)
 find_package(sdl2-image CONFIG REQUIRED)
 find_package(sdl2-ttf CONFIG REQUIRED)
 
-# add_link_options(SDL2::SDL2main SDL2::SDL2-static SDL2::SDL2_ttf SDL2::SDL2_image)
-
 add_compile_options(
-  -Wall
-  -Wextra
-  -pedantic
-  # -Werror
-  -Wno-unused-parameter
+  $<$<C_COMPILER_ID:GNU>:-Wall>
+  $<$<C_COMPILER_ID:GNU>:-Wextra>
+  # $<$<C_COMPILER_ID:GNU>:-Werror>
+  $<$<C_COMPILER_ID:GNU>:-pedantic>
+  $<$<C_COMPILER_ID:GNU>:-Wno-unused-parameter>
 )
 
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
