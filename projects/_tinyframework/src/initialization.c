@@ -17,10 +17,10 @@
 #define ANSI_COLOR_CYAN    "\x1b[36m"
 #define ANSI_COLOR_RESET   "\x1b[0m"
 
-static char* appBasePath = NULL;
-static size_t appBasePathLength = 0;
-static TTF_Font* font = NULL;
-static Context* context = NULL;
+static char*     appBasePath       = NULL;
+static size_t    appBasePathLength = 0;
+static TTF_Font* font              = NULL;
+static Context*  context           = NULL;
 
 Context* getDefaultContext() {
   return context;
@@ -38,7 +38,7 @@ TTF_Font* getDefaultFont() {
   return font;
 }
 
-static void deinitializeAllOnExit() {
+static void deinitializeAllOnExit(void) {
   SDL_LogDebug(SDL_LOG_CATEGORY_UTILS, ANSI_COLOR_BLUE "All systems was deinitializeds." ANSI_COLOR_RESET);
 
   destroyContext(context);
@@ -132,13 +132,13 @@ bool initializeAll(const uint32_t sdlFlags, const uint32_t imgFlags) {
 bool initializeAllWithContext(
   const uint32_t sdlFlags,
   const uint32_t imgFlags,
-  const char* title,
-  const Uint16 width,
-  const Uint16 height,
-  const int x,
-  const int y,
-  const Uint32 windowFlags,
-  const Uint32 rendererFlags  //
+  const char*    title,
+  const Uint16   width,
+  const Uint16   height,
+  const int      x,
+  const int      y,
+  const Uint32   windowFlags,
+  const Uint32   rendererFlags  //
 ) {
   const bool isInitialized = initializeSdl(sdlFlags);
 
