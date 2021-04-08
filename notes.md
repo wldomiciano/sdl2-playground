@@ -15,3 +15,9 @@ git submodule add https://github.com/microsoft/vcpkg
 ```sh
 ./vcpkg/vcpkg install  sdl2 sdl2-image sdl2-ttf
 ```
+
+# Run with MinGW in MSYS2
+
+```sh
+cmake -G "MinGW Makefiles" -S . -B build -DVCPKG_TARGET_TRIPLET=x64-mingw-static
+```
