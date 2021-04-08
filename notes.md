@@ -21,3 +21,5 @@ git submodule add https://github.com/microsoft/vcpkg
 ```sh
 cmake -G "MinGW Makefiles" -S . -B build -DVCPKG_TARGET_TRIPLET=x64-mingw-static
 ```
+
+# Testar com Clang
