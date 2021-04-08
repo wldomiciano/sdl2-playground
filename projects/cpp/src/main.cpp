@@ -91,7 +91,7 @@ public:
 
 Game* Game::game = nullptr;
 
-int main(int argc, char** argv) {
+int main(__attribute__((unused)) int argc, __attribute__((unused)) char** argv) {
   Window a;
 
   Stage1 s1;
