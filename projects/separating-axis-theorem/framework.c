@@ -1,13 +1,14 @@
 #include "framework.h"
 
+#include <float.h>
+
 SDL_Window*   window;
 SDL_Renderer* renderer;
 SDL_bool      isRunning;
 
 void init() {
   SDL_Init(SDL_INIT_VIDEO);
-  window   = SDL_CreateWindow("", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED,
-                            400, 400, 0);
+  window   = SDL_CreateWindow("", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 400, 400, 0);
   renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_PRESENTVSYNC);
   SDL_SetRenderDrawBlendMode(renderer, SDL_BLENDMODE_BLEND);
   isRunning = SDL_TRUE;
@@ -168,7 +169,8 @@ SDL_bool checkCollision(SDL_FRect* a, double angleA, const SDL_FRect* b,
 
   //   let overlap : number = Infinity;
   //   let smallest : Vector2;
-  float      overlap  = 9999999999999;
+
+  float      overlap  = FLT_MAX;
   SDL_FPoint smallest = {0, 0};
 
   for (int i = 0; i < 4; i++) {
