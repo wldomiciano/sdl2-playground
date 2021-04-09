@@ -36,25 +36,23 @@ void bullet_init() {
 }
 
 static SDL_bool SDL_HasIntersectionF(const SDL_FRect* A, const SDL_FRect* B) {
-  float Amin, Amax, Bmin, Bmax;
-
   /* Horizontal intersection */
-  Amin = A->x;
-  Amax = Amin + A->w;
-  Bmin = B->x;
-  Bmax = Bmin + B->w;
-  if (Bmin > Amin) Amin = Bmin;
-  if (Bmax < Amax) Amax = Bmax;
-  if (Amax <= Amin) return SDL_FALSE;
+  const float hAmin = A->x;
+  const float hAmax = hAmin + A->w;
+  const float hBmin = B->x;
+  const float hBmax = hBmin + B->w;
+  const float hMin  = hBmin > hAmin ? hBmin : hAmin;
+  const float hMax  = hBmax < hAmax ? hBmax : hAmax;
+  if (hMax <= hMin) return SDL_FALSE;
 
   /* Vertical intersection */
-  Amin = A->y;
-  Amax = Amin + A->h;
-  Bmin = B->y;
-  Bmax = Bmin + B->h;
-  if (Bmin > Amin) Amin = Bmin;
-  if (Bmax < Amax) Amax = Bmax;
-  if (Amax <= Amin) return SDL_FALSE;
+  const float vAmin = A->y;
+  const float vAmax = vAmin + A->h;
+  const float vBmin = B->y;
+  const float vBmax = vBmin + B->h;
+  const float vMin  = vBmin > vAmin ? vBmin : vAmin;
+  const float vMax  = vBmax < vAmax ? vBmax : vAmax;
+  if (vMax <= vMin) return SDL_FALSE;
 
   return SDL_TRUE;
 }
