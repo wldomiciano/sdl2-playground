@@ -219,8 +219,7 @@ SDL_bool checkCollision(SDL_FRect* a, double angleA, const SDL_FRect* b,
 }
 
 void draw_rect(Rect* rect) {
-  SDL_RenderCopyExF(renderer, rect->texture, NULL, &rect->dest, rect->angle,
-                    &rect->center, rect->flip);
+  SDL_RenderCopyExF(renderer, rect->texture, NULL, &rect->dest, rect->angle, &rect->center, rect->flip);
 
   // Vertices v = rect_get_vertices(&rect->dest, rect->angle);
   // SDL_SetRenderDrawColor(renderer, 255, 255, 0, 255);
