@@ -11,7 +11,6 @@ target_include_directories(${directory_name} PRIVATE include)
 target_link_libraries(
   ${directory_name}
     PRIVATE 
-      $<$<C_COMPILER_ID:Clang>:stdc++>
       $<$<BOOL:${MINGW}>:mingw32>
       SDL2::SDL2main SDL2::SDL2-static SDL2::SDL2_ttf SDL2::SDL2_image
 )
