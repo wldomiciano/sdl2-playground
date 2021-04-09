@@ -3,8 +3,7 @@
 
 #include <SDL.h>
 
-void bullet_create(SDL_FRect player, float playerRotationRad,
-                   float playerRotationDeg);
+void bullet_create(const SDL_FRect player, const float playerRotationRad, const float playerRotationDeg);
 void bullet_init();
 void bullet_update();
 

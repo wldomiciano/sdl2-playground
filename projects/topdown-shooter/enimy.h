@@ -6,10 +6,10 @@
 #define MAX_ENIMIES 10
 
 typedef struct {
-  SDL_bool active;
+  SDL_bool  active;
   SDL_FRect frame;
-  float rotationRad;
-  float rotationDeg;
+  float     rotationRad;
+  float     rotationDeg;
 } Enimy;
 
 extern Enimy enimies[MAX_ENIMIES];

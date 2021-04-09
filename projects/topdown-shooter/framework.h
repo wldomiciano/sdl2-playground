@@ -16,8 +16,7 @@ typedef struct Game {
   stateFn       destroy;
 } Game;
 
-int game_run(const char* const title, const Uint16 width, const Uint16 height,
-             stateFn create, stateFn update, stateFn destroy);
+int game_run(const char* const title, const Uint16 width, const Uint16 height, stateFn create, stateFn update, stateFn destroy);
 
 Game* game_instance();
 

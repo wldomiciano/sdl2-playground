@@ -1,5 +1,7 @@
 #include "game.h"
+
 #include <SDL.h>
+
 #include "framework.h"
 #include "player.h"
 
@@ -14,8 +16,6 @@ void create() {
 
 void update() {
   player_update();
-
-    // SDL_Log("update");
 }
 
 void destroy() {
