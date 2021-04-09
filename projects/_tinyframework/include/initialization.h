@@ -22,22 +22,22 @@ Context* getDefaultContext(void);
 
 bool initializeSdl(const uint32_t flags);
 
-bool initializeImg(const uint32_t flags);
+bool initializeImg(const int flags);
 
 bool initializeTtf(void);
 
-bool initializeAll(const uint32_t sdlFlags, const uint32_t imgFlags);
+bool initializeAll(const uint32_t sdlFlags, const int imgFlags);
 
 bool initializeAllWithContext(
   const uint32_t sdlFlags,
-  const uint32_t imgFlags,
-  const char* title,
-  const Uint16 width,
-  const Uint16 height,
-  const int x,
-  const int y,
-  const Uint32 windowFlags,
-  const Uint32 rendererFlags  //
+  const int      imgFlags,
+  const char*    title,
+  const Uint16   width,
+  const Uint16   height,
+  const int      x,
+  const int      y,
+  const Uint32   windowFlags,
+  const Uint32   rendererFlags  //
 );
 
 #endif  // INITIALIZATION_H

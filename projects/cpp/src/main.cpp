@@ -6,6 +6,7 @@ public:
   virtual void update()             = 0;
   virtual void draw(Window& window) = 0;
   virtual void destroy()            = 0;
+  virtual ~Scene()                  = default;
 };
 
 class Stage1 : public Scene {

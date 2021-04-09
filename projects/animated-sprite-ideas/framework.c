@@ -5,8 +5,8 @@
 
 #define MAX_LENGTH 1024
 
-SDL_Window*   window;
-SDL_Renderer* renderer;
+static SDL_Window* window;
+SDL_Renderer*      renderer;
 
 static SDL_Joystick* controller;
 static TTF_Font*     font;

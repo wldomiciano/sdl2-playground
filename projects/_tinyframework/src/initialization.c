@@ -83,7 +83,7 @@ bool initializeSdl(const uint32_t flags) {
   return false;
 }
 
-bool initializeImg(const uint32_t flags) {
+bool initializeImg(const int flags) {
   SDL_LogDebug(SDL_LOG_CATEGORY_UTILS, ANSI_COLOR_YELLOW "Initializing SDL_image..." ANSI_COLOR_RESET);
 
   if (SDL_WasInit(SDL_INIT_EVERYTHING) == 0) {
@@ -125,13 +125,13 @@ bool initializeTtf(void) {
   return false;
 }
 
-bool initializeAll(const uint32_t sdlFlags, const uint32_t imgFlags) {
+bool initializeAll(const uint32_t sdlFlags, const int imgFlags) {
   return initializeSdl(sdlFlags) && initializeImg(imgFlags) && initializeTtf();
 }
 
 bool initializeAllWithContext(
   const uint32_t sdlFlags,
-  const uint32_t imgFlags,
+  const int      imgFlags,
   const char*    title,
   const Uint16   width,
   const Uint16   height,
