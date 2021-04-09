@@ -1,13 +1,13 @@
-#include "game.h"
 #include "utils.h"
-#define GAME_WIDTH 800
+
+#define GAME_WIDTH  800
 #define GAME_HEIGHT 800
-#define MAP_COLS 10
-#define MAP_ROWS 10
+#define MAP_COLS    10
+#define MAP_ROWS    10
 
 void draw_map(int* map) {
-  SDL_Rect cell = {0, 0, GAME_WIDTH / MAP_COLS, GAME_HEIGHT / MAP_ROWS};
-  int mapSize = MAP_COLS * MAP_ROWS;
+  SDL_Rect cell    = {0, 0, GAME_WIDTH / MAP_COLS, GAME_HEIGHT / MAP_ROWS};
+  int      mapSize = MAP_COLS * MAP_ROWS;
 
   for (int i = 0; i < mapSize; i++) {
     if (map[i] != 0) {
@@ -36,7 +36,7 @@ void draw_map(int* map) {
 }
 
 void draw_grid(int cols, int rows) {
-  int colWidth = GAME_WIDTH / cols;
+  int colWidth  = GAME_WIDTH / cols;
   int rowHeight = GAME_HEIGHT / rows;
 
   SDL_SetRenderDrawColor(renderer, 100, 100, 100, 255);
@@ -65,7 +65,7 @@ int xyToInt(int x, int y) {
   return y * MAP_COLS + x;
 }
 
-int closedListIndex = 0;
+int      closedListIndex = 0;
 SDL_bool hasInArray(int* array, int position) {
   for (int i = 0; i < closedListIndex; i++) {
     if (array[i] == position) return SDL_TRUE;
@@ -77,11 +77,11 @@ SDL_bool hasInArray(int* array, int position) {
 int main(int argc, char** argv) {
   create_game(GAME_WIDTH, GAME_HEIGHT);
 
-  SDL_Rect cat = {0, 1, 80, 80};
-  SDL_Rect bone = {8, 8, 80, 80};
-  Node openList[4] = {0};
-  int closedList[100] = {0};
-  int openListIndex = 0;
+  SDL_Rect cat             = {0, 1, 80, 80};
+  SDL_Rect bone            = {8, 8, 80, 80};
+  Node     openList[4]     = {0};
+  int      closedList[100] = {0};
+  int      openListIndex   = 0;
 
   int bonePosition = xyToInt(bone.x, bone.y);
 
@@ -108,39 +108,39 @@ int main(int argc, char** argv) {
     if (catPosition != bonePosition) {
       closedList[closedListIndex++] = catPosition;
 
-      int leftBlock = catPosition - 1;
+      int leftBlock  = catPosition - 1;
       int rightBlock = catPosition + 1;
-      int topBlock = catPosition - 10;
-      int botBlock = catPosition + 10;
+      int topBlock   = catPosition - 10;
+      int botBlock   = catPosition + 10;
 
       if (!hasInArray(closedList, leftBlock) && map[leftBlock] != 3) {
-        openList[openListIndex].H = SDL_abs(bonePosition - leftBlock);
-        openList[openListIndex].G = 1;
-        openList[openListIndex].F = openList[openListIndex].H + openList[openListIndex].G;
+        openList[openListIndex].H     = SDL_abs(bonePosition - leftBlock);
+        openList[openListIndex].G     = 1;
+        openList[openListIndex].F     = openList[openListIndex].H + openList[openListIndex].G;
         openList[openListIndex].block = leftBlock;
         openListIndex++;
       }
 
       if (!hasInArray(closedList, rightBlock) && map[rightBlock] != 3) {
-        openList[openListIndex].H = SDL_abs(bonePosition - rightBlock);
-        openList[openListIndex].G = 1;
-        openList[openListIndex].F = openList[openListIndex].H + openList[openListIndex].G;
+        openList[openListIndex].H     = SDL_abs(bonePosition - rightBlock);
+        openList[openListIndex].G     = 1;
+        openList[openListIndex].F     = openList[openListIndex].H + openList[openListIndex].G;
         openList[openListIndex].block = rightBlock;
         openListIndex++;
       }
 
       if (!hasInArray(closedList, topBlock) && map[topBlock] != 3) {
-        openList[openListIndex].H = SDL_abs(bonePosition - topBlock);
-        openList[openListIndex].G = 1;
-        openList[openListIndex].F = openList[openListIndex].H + openList[openListIndex].G;
+        openList[openListIndex].H     = SDL_abs(bonePosition - topBlock);
+        openList[openListIndex].G     = 1;
+        openList[openListIndex].F     = openList[openListIndex].H + openList[openListIndex].G;
         openList[openListIndex].block = topBlock;
         openListIndex++;
       }
 
       if (!hasInArray(closedList, botBlock) && map[botBlock] != 3) {
-        openList[openListIndex].H = SDL_abs(bonePosition - botBlock);
-        openList[openListIndex].G = 1;
-        openList[openListIndex].F = openList[openListIndex].H + openList[openListIndex].G;
+        openList[openListIndex].H     = SDL_abs(bonePosition - botBlock);
+        openList[openListIndex].G     = 1;
+        openList[openListIndex].F     = openList[openListIndex].H + openList[openListIndex].G;
         openList[openListIndex].block = botBlock;
         openListIndex++;
       }
@@ -157,7 +157,7 @@ int main(int argc, char** argv) {
       catPosition = lesser.block;
     }
 
-    map[catPosition] = 1;
+    map[catPosition]  = 1;
     map[bonePosition] = 2;
     printf("Cat position before render: %d\n", catPosition);
 
