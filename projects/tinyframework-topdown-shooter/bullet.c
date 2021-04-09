@@ -1,9 +1,7 @@
 #include "bullet.h"
 
-#include <SDL.h>
-
 #include "enimy.h"
-#include "framework.h"
+#include "tinyframework.h"
 
 typedef struct {
   SDL_bool  active;
@@ -18,17 +16,17 @@ static Bullet       bullets[MAX_BULLETS];
 static Uint32       lastTimeCreated = 0;
 static Uint32       timeout         = 0;
 static SDL_Texture* texture;
-static Game*        game;
+static Context*     context;
 
 void bullet_init() {
-  game = game_instance();
+  context = getDefaultContext();
 
-  texture = SDL_CreateTexture(game->renderer, SDL_PIXELFORMAT_RGBA8888, SDL_TEXTUREACCESS_TARGET, rect.w, rect.w);
+  texture = SDL_CreateTexture(context->renderer, SDL_PIXELFORMAT_RGBA8888, SDL_TEXTUREACCESS_TARGET, rect.w, rect.w);
 
-  SDL_SetRenderTarget(game->renderer, texture);
-  SDL_SetRenderDrawColor(game->renderer, 255, 0, 0, SDL_ALPHA_OPAQUE);
-  SDL_RenderClear(game->renderer);
-  SDL_SetRenderTarget(game->renderer, NULL);
+  SDL_SetRenderTarget(context->renderer, texture);
+  SDL_SetRenderDrawColor(context->renderer, 255, 0, 0, SDL_ALPHA_OPAQUE);
+  SDL_RenderClear(context->renderer);
+  SDL_SetRenderTarget(context->renderer, NULL);
 
   for (int i = 0; i < MAX_BULLETS; i++) {
     bullets[i].active  = SDL_FALSE;
@@ -64,9 +62,7 @@ static SDL_bool SDL_HasIntersectionF(const SDL_FRect* A, const SDL_FRect* B) {
 void bullet_create(SDL_FRect player, float playerRotationRad, float playerRotationDeg) {
   const Uint32 ticks = SDL_GetTicks();
 
-  // SDL_Log("ok %d", count);
   if (SDL_TICKS_PASSED(ticks, timeout)) {
-    // if (1) {
     timeout         = ticks + 200;
     lastTimeCreated = ticks;
 
@@ -109,13 +105,11 @@ void bullet_update() {
         }
       }
 
-      if (bullets[i].frame.x < 0 || bullets[i].frame.y < 0 ||
-          bullets[i].frame.x > 400 || bullets[i].frame.y > 400) {
+      if (!SDL_HasIntersectionF(&bullets[i].frame, &(SDL_FRect){0, 0, 400, 400})) {
         bullets[i].active = SDL_FALSE;
       }
 
-      SDL_RenderCopyExF(game->renderer, texture, NULL, &bullets[i].frame,
-                        /* bullets[i].rotationDeg */ 0, NULL, SDL_FLIP_NONE);
+      SDL_RenderCopyExF(context->renderer, texture, NULL, &bullets[i].frame, /* bullets[i].rotationDeg */ 0, NULL, SDL_FLIP_NONE);
     }
   }
 }

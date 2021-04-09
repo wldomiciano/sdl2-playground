@@ -4,39 +4,36 @@
 
 #include "bullet.h"
 #include "enimy.h"
-#include "framework.h"
+#include "tinyframework.h"
 
+static Context*     context;
 static SDL_Texture* mainTexture;
 static SDL_Texture* armtexture;
-static Game*        game;
 static SDL_FRect    frame = {100, 100, 30, 30};
 static SDL_FRect    arm   = {0, 0, 4, 20};
 static const Uint8* keys;
 static const float  VELOCITY = 4;
 
 void player_create() {
-  game = game_instance();
-
-  keys = SDL_GetKeyboardState(NULL);
+  context = getDefaultContext();
+  keys    = SDL_GetKeyboardState(NULL);
 
   enimy_init(&frame);
   bullet_init();
 
-  mainTexture = SDL_CreateTexture(game->renderer, SDL_PIXELFORMAT_RGBA8888,
-                                  SDL_TEXTUREACCESS_TARGET, frame.w, frame.h);
+  mainTexture = SDL_CreateTexture(context->renderer, SDL_PIXELFORMAT_RGBA8888, SDL_TEXTUREACCESS_TARGET, frame.w, frame.h);
 
-  armtexture = SDL_CreateTexture(game->renderer, SDL_PIXELFORMAT_RGBA8888,
-                                 SDL_TEXTUREACCESS_TARGET, arm.w, arm.h);
+  armtexture = SDL_CreateTexture(context->renderer, SDL_PIXELFORMAT_RGBA8888, SDL_TEXTUREACCESS_TARGET, arm.w, arm.h);
 
-  SDL_SetRenderTarget(game->renderer, mainTexture);
-  SDL_SetRenderDrawColor(game->renderer, 0, 255, 0, 255);
-  SDL_RenderClear(game->renderer);
+  SDL_SetRenderTarget(context->renderer, mainTexture);
+  SDL_SetRenderDrawColor(context->renderer, 0, 255, 0, 255);
+  SDL_RenderClear(context->renderer);
 
-  SDL_SetRenderTarget(game->renderer, armtexture);
-  SDL_SetRenderDrawColor(game->renderer, 255, 0, 0, 255);
-  SDL_RenderClear(game->renderer);
+  SDL_SetRenderTarget(context->renderer, armtexture);
+  SDL_SetRenderDrawColor(context->renderer, 255, 0, 0, 255);
+  SDL_RenderClear(context->renderer);
 
-  SDL_SetRenderTarget(game->renderer, NULL);
+  SDL_SetRenderTarget(context->renderer, NULL);
 }
 
 void player_update() {
@@ -68,9 +65,9 @@ void player_update() {
     bullet_create(frame, rad, deg);
   }
 
-  SDL_RenderCopyF(game->renderer, mainTexture, NULL, &frame);
+  SDL_RenderCopyF(context->renderer, mainTexture, NULL, &frame);
 
-  SDL_RenderCopyExF(game->renderer, armtexture, NULL, &arm, deg,
+  SDL_RenderCopyExF(context->renderer, armtexture, NULL, &arm, deg,
                     &(SDL_FPoint){arm.w * 0.5, arm.h}, SDL_FLIP_NONE);
 
   bullet_update();
