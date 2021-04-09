@@ -16,13 +16,13 @@ void destroySprite(Sprite* const sprite);
 
 void drawSprite(Sprite* const sprite);
 
-void rotateSprite(Sprite* const sprite, const float deg);
+void rotateSprite(Sprite* const sprite, const double deg);
 
 vec2 moveSprite(Sprite* const sprite, const vec2 v);
 
 // SETTERS
 
-void setSpriteRotation(Sprite* const sprite, const float deg);
+void setSpriteRotation(Sprite* const sprite, const double deg);
 
 void setSpritePivot(Sprite* const sprite, const vec2 v);
 

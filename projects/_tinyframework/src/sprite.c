@@ -8,16 +8,16 @@
 
 struct Sprite {
   SDL_Renderer* renderer;
-  SDL_Texture* texture;
-  SDL_Rect srcrect;
+  SDL_Texture*  texture;
+  SDL_Rect      srcrect;
 
   float w, h;
-  vec2 pos;
-  vec2 pivot;
-  vec2 origin;
+  vec2  pos;
+  vec2  pivot;
+  vec2  origin;
 
-  double angle;
-  SDL_FPoint scale;
+  double           angle;
+  SDL_FPoint       scale;
   SDL_RendererFlip flip;
 };
 
@@ -43,16 +43,16 @@ Sprite* createSprite(Context* ctx, const char* const filename, const SDL_Rect* c
 
   const Sprite temp = {
     .renderer = ctx->renderer,
-    .texture = texture,
-    .flip = SDL_FLIP_NONE,
-    .scale = {0, 0},
-    .angle = 0.0,
-    .pivot = {0, 0},
-    .origin = {0, 0},
-    .srcrect = rect ? *rect : (SDL_Rect){0, 0, w, h},
-    .pos = {0, 0},
-    .w = w,
-    .h = h,
+    .texture  = texture,
+    .flip     = SDL_FLIP_NONE,
+    .scale    = {0, 0},
+    .angle    = 0.0,
+    .pivot    = {0, 0},
+    .origin   = {0, 0},
+    .srcrect  = rect ? *rect : (SDL_Rect){0, 0, w, h},
+    .pos      = {0, 0},
+    .w        = w,
+    .h        = h,
   };
 
   const size_t size = sizeof(temp);
@@ -76,13 +76,13 @@ vec2 moveSprite(Sprite* const sprite, const vec2 v) {
   return sprite->pos = add(sprite->pos, v);
 }
 
-void rotateSprite(Sprite* const sprite, const float deg) {
+void rotateSprite(Sprite* const sprite, const double deg) {
   sprite->angle += deg;
 }
 
 // SETTERS
 
-void setSpriteRotation(Sprite* const sprite, const float deg) {
+void setSpriteRotation(Sprite* const sprite, const double deg) {
   sprite->angle = deg;
 }
 
