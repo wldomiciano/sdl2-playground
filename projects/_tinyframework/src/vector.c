@@ -3,12 +3,14 @@
 #include <SDL.h>
 #include <math.h>
 
+static const float PI = M_PI;
+
 float rad2deg(const float rad) {
-  return rad * (180 / M_PI);
+  return rad * (180 / PI);
 }
 
 float deg2rad(const float deg) {
-  return deg / (180 / M_PI);
+  return deg / (180 / PI);
 }
 
 vec2 rad2vec(const float rad) {
