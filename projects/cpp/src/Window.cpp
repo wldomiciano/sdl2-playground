@@ -12,7 +12,7 @@ static int closeEventWatch(void* const userdata, SDL_Event* const event) {
   return 0;
 }
 
-static SDL_Window* createWindow() {
+static SDL_Window* createWindow(void) {
   if (SDL_WasInit(SDL_INIT_VIDEO) == 0) {
     if (SDL_Init(SDL_INIT_VIDEO) != 0) {
       throw "Falhou em criar Window devido à uma falha na inicialização da SDL";
@@ -46,11 +46,11 @@ Window::Window()
   SDL_AddEventWatch(closeEventWatch, this);
 }
 
-Window::~Window() {
+Window::~Window(void) {
   close();
 }
 
-void Window::close() {
+void Window::close(void) {
   isOpen = false;
   SDL_DelEventWatch(closeEventWatch, this);
   SDL_DestroyRenderer(renderer);
@@ -62,15 +62,15 @@ void Window::draw(const SDL_Rect& rect) {
   SDL_RenderFillRect(renderer, &rect);
 }
 
-void Window::clear() {
+void Window::clear(void) {
   SDL_SetRenderDrawColor(renderer, 0, 0, 0, SDL_ALPHA_OPAQUE);
   SDL_RenderClear(renderer);
 }
 
-void Window::present() {
+void Window::present(void) {
   SDL_RenderPresent(renderer);
 }
 
-bool Window::isOpened() {
+bool Window::isOpened(void) {
   return isOpen;
 }

@@ -12,21 +12,21 @@ class Window {
 public:
   const Uint32 id;
 
-  Window();
+  Window(void);
 
   Window(const Window& window) = delete;
 
   Window(Window&& window) = delete;
 
-  ~Window();
+  ~Window(void);
 
   void draw(const SDL_Rect& rect);
 
-  void clear();
+  void clear(void);
 
-  void present();
+  void present(void);
 
-  bool isOpened();
+  bool isOpened(void);
 
-  void close();
+  void close(void);
 };

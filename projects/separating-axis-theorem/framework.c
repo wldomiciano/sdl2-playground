@@ -6,7 +6,7 @@ SDL_Window*   window;
 SDL_Renderer* renderer;
 SDL_bool      isRunning;
 
-void init() {
+void init(void) {
   SDL_Init(SDL_INIT_VIDEO);
   window   = SDL_CreateWindow("", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 400, 400, 0);
   renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_PRESENTVSYNC);
@@ -14,13 +14,13 @@ void init() {
   isRunning = SDL_TRUE;
 }
 
-void quit() {
+void quit(void) {
   SDL_DestroyRenderer(renderer);
   SDL_DestroyWindow(window);
   SDL_Quit();
 }
 
-void input() {
+void input(void) {
   SDL_Event event;
   while (SDL_PollEvent(&event)) {
     if (event.type == SDL_QUIT) {
@@ -36,7 +36,7 @@ void input() {
   SDL_RenderClear(renderer);
 }
 
-void present() {
+void present(void) {
   SDL_RenderPresent(renderer);
 }
 

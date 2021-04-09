@@ -23,7 +23,7 @@ void rotate(SDL_FPoint* p, float deg, float centerX, float centerY) {
   }
 }
 
-void create() {
+void create(void) {
   // link = sprite_create("assets/images/link.bmp", 1, 0, 0, 102, 108);
   link = sprite_create("assets/images/link.bmp", 5);
 
@@ -84,7 +84,7 @@ void create() {
   sprite_set_scale(link, 0.5, 0.5);
 }
 
-void update() {
+void update(void) {
   rotate(p1, 1, 320, 240);
   rotate(p2, 1, 320, 240);
 
@@ -164,6 +164,6 @@ void update() {
   // SDL_RenderFillRectF(renderer, &rect);
 }
 
-void destroy() {
+void destroy(void) {
   sprite_destroy(link);
 }

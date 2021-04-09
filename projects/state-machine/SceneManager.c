@@ -31,11 +31,11 @@ void SceneManagerPushScene(Scene* const scene) {
   }
 }
 
-Scene* SceneManagerGetScene() {
+Scene* SceneManagerGetScene(void) {
   return length > 0 ? scenes[length - 1] : NULL;
 }
 
-void SceneManagerPopScene() {
+void SceneManagerPopScene(void) {
   if (length > 0) {
     Scene* const scene = scenes[--length];
     scene->destroy(scene);
@@ -51,7 +51,7 @@ void SceneManagerChangeScene(Scene* const scene) {
   SceneManagerPushScene(scene);
 }
 
-void SceneManagerDraw() {
+void SceneManagerDraw(void) {
   for (size_t i = 0; i < length; i++) {
     if (scenes[i]->status & DRAWING) {
       scenes[i]->draw(scenes[i]);
@@ -59,7 +59,7 @@ void SceneManagerDraw() {
   }
 }
 
-void SceneManagerUpdate() {
+void SceneManagerUpdate(void) {
   for (size_t i = 0; i < length; i++) {
     if (scenes[i]->status & UPDATING) {
       scenes[i]->update(scenes[i]);
@@ -67,7 +67,7 @@ void SceneManagerUpdate() {
   }
 }
 
-void SceneManagerDestroy() {
+void SceneManagerDestroy(void) {
   while (length) {
     SceneManagerPopScene();
   }

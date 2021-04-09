@@ -11,10 +11,10 @@ typedef struct {
   SDL_RendererFlip flip;
 } Rect;
 
-void  init();
-void  quit();
-void  input();
-void  present();
+void  init(void);
+void  quit(void);
+void  input(void);
+void  present(void);
 void  draw_rect(Rect* rect);
 Rect* create_rect(float x, float y, float w, float h, Uint32 color,
                   Uint32 backColor);

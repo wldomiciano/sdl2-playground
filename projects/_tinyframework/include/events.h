@@ -6,7 +6,7 @@
 
 #include "vector.h"
 
-void handleEvents();
+void handleEvents(void);
 
 bool wasKeyJustPressed(const SDL_Scancode scancode);
 
@@ -14,10 +14,10 @@ bool isKeyPressed(const SDL_Scancode scancode);
 
 bool isKeyReleased(const SDL_Scancode scancode);
 
-bool wasQuitNotRequested();
+bool wasQuitNotRequested(void);
 
-void requestQuit();
+void requestQuit(void);
 
-vec2 getMousePosition();
+vec2 getMousePosition(void);
 
 #endif  // EVENTS_H

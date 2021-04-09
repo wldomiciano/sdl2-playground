@@ -7,17 +7,17 @@ static Sint8 keys[SDL_NUM_SCANCODES] = {0};
 
 static bool shouldQuit = false;
 
-vec2 getMousePosition() {
+vec2 getMousePosition(void) {
   int x, y;
   SDL_GetMouseState(&x, &y);
   return VEC2(x, y);
 }
 
-bool wasQuitNotRequested() {
+bool wasQuitNotRequested(void) {
   return shouldQuit == false;
 }
 
-void requestQuit() {
+void requestQuit(void) {
   shouldQuit = true;
 }
 
@@ -33,7 +33,7 @@ bool isKeyReleased(const SDL_Scancode scancode) {
   return keys[scancode] == 1;
 }
 
-void handleEvents() {
+void handleEvents(void) {
   SDL_Event event;
 
   SDL_memset(keys, 0, SDL_NUM_SCANCODES);

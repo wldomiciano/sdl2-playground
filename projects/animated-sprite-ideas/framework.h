@@ -8,9 +8,9 @@
 extern SDL_Renderer* renderer;
 
 // Lifecycle functions
-void create();
-void update();
-void destroy();
+void create(void);
+void update(void);
+void destroy(void);
 
 SDL_bool button_is_pressed(int button);
 

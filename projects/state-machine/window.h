@@ -7,7 +7,7 @@ typedef struct Window Window;
 
 typedef struct Size Size;
 
-Window* WindowCreate();
+Window* WindowCreate(void);
 
 void WindowPresent(Window* const window);
 

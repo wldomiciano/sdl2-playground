@@ -71,7 +71,7 @@ public:
 class Game {
   static Game* game;
 
-  static Game& instance() {
+  static Game& instance(void) {
     if (game == nullptr) {
       game = new Game();
     }
@@ -79,12 +79,12 @@ class Game {
     return *game;
   }
 
-  void handleEventsInternal() {
+  void handleEventsInternal(void) {
     SDL_Log("eee lasquera");
   }
 
 public:
-  static void handleEvents() {
+  static void handleEvents(void) {
     instance().handleEventsInternal();
   }
 };

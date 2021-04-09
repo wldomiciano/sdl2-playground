@@ -19,7 +19,7 @@ static int closeEventWatch(void* const userdata, SDL_Event* const event) {
   return 0;
 }
 
-Window* WindowCreate() {
+Window* WindowCreate(void) {
   if (SDL_WasInit(SDL_INIT_VIDEO) == 0) {
     if (SDL_Init(SDL_INIT_VIDEO) != 0) {
       return NULL;

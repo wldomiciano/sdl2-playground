@@ -14,7 +14,7 @@ static SDL_FRect    arm   = {0, 0, 4, 20};
 static const Uint8* keys;
 static const float  VELOCITY = 4;
 
-void player_create() {
+void player_create(void) {
   context = getDefaultContext();
   keys    = SDL_GetKeyboardState(NULL);
 
@@ -36,7 +36,7 @@ void player_create() {
   SDL_SetRenderTarget(context->renderer, NULL);
 }
 
-void player_update() {
+void player_update(void) {
   int x, y;
 
   Uint32 fire = SDL_GetMouseState(&x, &y) & SDL_BUTTON(SDL_BUTTON_LEFT);
@@ -74,5 +74,5 @@ void player_update() {
   enimy_update();
 }
 
-void player_destroy() {
+void player_destroy(void) {
 }

@@ -1,15 +1,15 @@
 #include "SceneManager.h"
 #include "tinyframework.h"
 
-Scene* constructScene1();
-Scene* constructScene2();
-Scene* constructScene3();
+Scene* constructScene1(void);
+Scene* constructScene2(void);
+Scene* constructScene3(void);
 
-static void create() {
+static void create(void) {
   SceneManagerPushScene(constructScene1());
 }
 
-static void update() {
+static void update(void) {
   // if (wasKeyJustPressed(SDL_SCANCODE_A)) {
   //   SceneManagerPushScene(constructScene1());
   // } else if (wasKeyJustPressed(SDL_SCANCODE_S)) {
@@ -21,11 +21,11 @@ static void update() {
   SceneManagerUpdate();
 }
 
-static void draw() {
+static void draw(void) {
   SceneManagerDraw();
 }
 
-static void destroy() {
+static void destroy(void) {
   SceneManagerDestroy();
 }
 

@@ -7,7 +7,7 @@ static const int shipSpeed   = 3;
 static const int bulletSpeed = 6;
 static vec2      bulletVel   = {0, 0};
 
-static void create() {
+static void create(void) {
   bullet = createSprite(NULL, "/assets/images/bullet.bmp", NULL);
   setSpriteOrigin(bullet, VEC2(5, 20));
   setSpritePosition(bullet, VEC2(200, 120));
@@ -19,17 +19,17 @@ static void create() {
   setSpriteGlogalPivot(ship, VEC2(200, 200));
 }
 
-static void draw() {
+static void draw(void) {
   drawSprite(bullet);
   drawSprite(ship);
 }
 
-static void destroy() {
+static void destroy(void) {
   destroySprite(bullet);
   destroySprite(ship);
 }
 
-static void update() {
+static void update(void) {
   if (isKeyPressed(SDL_SCANCODE_A)) {
     moveSprite(ship, VEC2(-shipSpeed, 0));
     if (ready) moveSprite(bullet, VEC2(-shipSpeed, 0));

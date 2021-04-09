@@ -22,19 +22,19 @@ static size_t    appBasePathLength = 0;
 static TTF_Font* font              = NULL;
 static Context*  context           = NULL;
 
-Context* getDefaultContext() {
+Context* getDefaultContext(void) {
   return context;
 }
 
-const char* getAppBasePath() {
+const char* getAppBasePath(void) {
   return appBasePath;
 }
 
-size_t getAppBasePathLength() {
+size_t getAppBasePathLength(void) {
   return appBasePathLength;
 }
 
-TTF_Font* getDefaultFont() {
+TTF_Font* getDefaultFont(void) {
   return font;
 }
 
@@ -103,7 +103,7 @@ bool initializeImg(const uint32_t flags) {
   return false;
 }
 
-bool initializeTtf() {
+bool initializeTtf(void) {
   SDL_LogDebug(SDL_LOG_CATEGORY_UTILS, ANSI_COLOR_YELLOW "Initializing SDL_ttf..." ANSI_COLOR_RESET);
 
   if (SDL_WasInit(SDL_INIT_EVERYTHING) == 0) {

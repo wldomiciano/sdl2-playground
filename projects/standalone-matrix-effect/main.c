@@ -33,7 +33,7 @@ void drawText(int x, int y, const char* fmt, ...) {
   SDL_DestroyTexture(textureText);
 }
 
-void init() {
+void init(void) {
   if (SDL_Init(SDL_INIT_VIDEO) == 0) {
     if (TTF_Init() == 0) {
       window = SDL_CreateWindow("Matrix", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, width, height, 0);
@@ -58,7 +58,7 @@ void init() {
     SDL_Log("SDL init error: %s\n", SDL_GetError());
 }
 
-void quit() {
+void quit(void) {
   SDL_free(ypos);
   TTF_CloseFont(font);
   SDL_DestroyRenderer(renderer);
@@ -67,7 +67,7 @@ void quit() {
   SDL_Quit();
 }
 
-void events() {
+void events(void) {
   SDL_Event event;
 
   while (SDL_PollEvent(&event)) {
@@ -77,7 +77,7 @@ void events() {
   }
 }
 
-void matrix() {
+void matrix(void) {
   for (int i = 0; i < cols; i++) {
     const char text = rand() % 128;
     const int x = i * colWidth;

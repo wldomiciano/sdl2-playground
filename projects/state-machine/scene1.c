@@ -1,9 +1,9 @@
 #include "SceneManager.h"
 #include "tinyframework.h"
 
-Scene* constructScene1();
-Scene* constructScene2();
-Scene* constructScene3();
+Scene* constructScene1(void);
+Scene* constructScene2(void);
+Scene* constructScene3(void);
 
 typedef struct {
   Scene base;
@@ -41,7 +41,7 @@ static void destroy(Scene* const scene) {
   SDL_Log("destroying Scene 1");
 }
 
-Scene* constructScene1() {
+Scene* constructScene1(void) {
   Scene1* const scene = SDL_malloc(sizeof(*scene));
 
   scene->base = (Scene){ALL, create, update, draw, destroy};

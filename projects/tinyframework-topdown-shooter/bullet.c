@@ -18,7 +18,7 @@ static Uint32       timeout         = 0;
 static SDL_Texture* texture;
 static Context*     context;
 
-void bullet_init() {
+void bullet_init(void) {
   context = getDefaultContext();
 
   texture = SDL_CreateTexture(context->renderer, SDL_PIXELFORMAT_RGBA8888, SDL_TEXTUREACCESS_TARGET, rect.w, rect.w);
@@ -88,7 +88,7 @@ void bullet_create(SDL_FRect player, float playerRotationRad, float playerRotati
   }
 }
 
-void bullet_update() {
+void bullet_update(void) {
   for (int i = 0; i < MAX_BULLETS; i++) {
     if (bullets[i].active) {
       bullets[i].frame.x -= SDL_sinf(bullets[i].rotationRad) * 3;

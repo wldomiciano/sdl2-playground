@@ -12,19 +12,19 @@ enum {
   SDL_LOG_CATEGORY_UTILS = SDL_LOG_CATEGORY_CUSTOM
 };
 
-const char* getAppBasePath();
+const char* getAppBasePath(void);
 
-size_t getAppBasePathLength();
+size_t getAppBasePathLength(void);
 
-TTF_Font* getDefaultFont();
+TTF_Font* getDefaultFont(void);
 
-Context* getDefaultContext();
+Context* getDefaultContext(void);
 
 bool initializeSdl(const uint32_t flags);
 
 bool initializeImg(const uint32_t flags);
 
-bool initializeTtf();
+bool initializeTtf(void);
 
 bool initializeAll(const uint32_t sdlFlags, const uint32_t imgFlags);
 

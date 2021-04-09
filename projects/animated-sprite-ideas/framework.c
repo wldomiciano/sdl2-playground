@@ -48,7 +48,7 @@ SDL_Texture* texture_create_from_file(const char* filename) {
   return texture;
 }
 
-static SDL_bool sdl_init() {
+static SDL_bool sdl_init(void) {
   if (SDL_Init(sdlInitFlags) != 0) {
     LOG("SDL init failure");
     return SDL_FALSE;
@@ -57,7 +57,7 @@ static SDL_bool sdl_init() {
   return SDL_TRUE;
 }
 
-static SDL_bool ttf_init() {
+static SDL_bool ttf_init(void) {
   if (TTF_Init() != 0) {
     SDL_Log("TTF init failure (%s)", TTF_GetError());
     return SDL_FALSE;
@@ -73,7 +73,7 @@ static SDL_bool ttf_init() {
   return SDL_TRUE;
 }
 
-static void sdl_quit() {
+static void sdl_quit(void) {
   SDL_JoystickClose(controller);
   TTF_CloseFont(font);
   TTF_Quit();
@@ -85,7 +85,7 @@ static void sdl_quit() {
   isRunning = SDL_FALSE;
 }
 
-static SDL_bool window_create() {
+static SDL_bool window_create(void) {
   if (SDL_CreateWindowAndRenderer(windowWidth, windowHeight, windowFlags,
                                   &window, &renderer) != 0) {
     LOG("Window and renderer creation failure");
@@ -95,7 +95,7 @@ static SDL_bool window_create() {
   return SDL_TRUE;
 }
 
-static void input_handle() {
+static void input_handle(void) {
   SDL_memset(customKeyStates, 0, SDL_NUM_SCANCODES);
 
   SDL_Event event;

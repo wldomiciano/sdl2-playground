@@ -29,18 +29,18 @@ void SceneResume(Scene* const scene);
 
 void SceneShow(Scene* const scene);
 
-Scene* SceneManagerGetScene();
+Scene* SceneManagerGetScene(void);
 
 void SceneManagerPushScene(Scene* const scene);
 
-void SceneManagerPopScene();
+void SceneManagerPopScene(void);
 
 void SceneManagerChangeScene(Scene* const scene);
 
-void SceneManagerDraw();
+void SceneManagerDraw(void);
 
-void SceneManagerUpdate();
+void SceneManagerUpdate(void);
 
-void SceneManagerDestroy();
+void SceneManagerDestroy(void);
 
 #endif  // SCENEMANAGER_H

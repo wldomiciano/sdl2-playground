@@ -12,7 +12,7 @@ SDL_Texture* load_texture_from_file(const char* file) {
   return tex;
 }
 
-float getTicks() {
+float getTicks(void) {
   return SDL_GetTicks() / 1000.0;
 }
 
@@ -40,26 +40,26 @@ void create_game(Uint32 width, Uint32 height) {
   isRunning = SDL_TRUE;
 }
 
-void destroy_game() {
+void destroy_game(void) {
   SDL_DestroyRenderer(renderer);
   SDL_DestroyWindow(window);
   SDL_Quit();
 }
 
-SDL_bool is_running() {
+SDL_bool is_running(void) {
   return isRunning;
 }
 
-void render_clear() {
+void render_clear(void) {
   SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
   SDL_RenderClear(renderer);
 }
 
-void render_present() {
+void render_present(void) {
   SDL_RenderPresent(renderer);
 }
 
-void handle_input() {
+void handle_input(void) {
   while (SDL_PollEvent(&event)) {
     if (event.type == SDL_QUIT || (event.type == SDL_KEYDOWN && event.key.keysym.sym == SDLK_ESCAPE))
       isRunning = SDL_FALSE;

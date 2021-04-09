@@ -1,7 +1,7 @@
 #include "player.h"
 #include "tinyframework.h"
 
-int main() {
+int main(void) {
   initializeAllWithContext(0, 0, "Hello", 400, 400, SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 0, SDL_RENDERER_PRESENTVSYNC);
 
   player_create();

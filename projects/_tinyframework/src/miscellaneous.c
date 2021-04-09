@@ -7,7 +7,7 @@
 #include "context.h"
 #include "initialization.h"
 
-float getTicks() {
+float getTicks(void) {
   return SDL_GetTicks() / 1000.0;
 }
 
