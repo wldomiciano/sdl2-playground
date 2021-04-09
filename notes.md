@@ -25,7 +25,7 @@ cmake -G "MinGW Makefiles" -S . -B build -DVCPKG_TARGET_TRIPLET=x64-mingw-static
 # Run with Clang in Ubuntu
 
 ```sh
-cmake -S . -B build -DCMAKE_CXX_COMPILER=clang -DCMAKE_C_COMPILER=clang
+cmake -S . -B build -DCMAKE_CXX_COMPILER=clang++ -DCMAKE_C_COMPILER=clang
 ```
 
 # TODO
