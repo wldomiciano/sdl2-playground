@@ -13,5 +13,5 @@ target_link_libraries(
     PRIVATE 
       $<$<C_COMPILER_ID:Clang>:stdc++>
       $<$<BOOL:${MINGW}>:mingw32>
-      tinyframework
+      SDL2::SDL2main SDL2::SDL2-static SDL2::SDL2_ttf SDL2::SDL2_image
 )
