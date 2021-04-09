@@ -1,13 +1,15 @@
 #include "enimy.h"
 
+#include <SDL.h>
+
 #include "tinyframework.h"
 
-Enimy               enimies[MAX_ENIMIES];
-static Context*     context;
-static SDL_Texture* texture;
-static SDL_FRect*   playerFrame;
+Enimy                   enimies[MAX_ENIMIES];
+static Context*         context;
+static SDL_Texture*     texture;
+static const SDL_FRect* playerFrame;
 
-Uint32 spawn(Uint32 interval, void* param) {
+Uint32 spawn(Uint32 interval, void* const param) {
   SDL_Log("spawn");
 
   (void) param;
@@ -29,7 +31,7 @@ Uint32 spawn(Uint32 interval, void* param) {
   return interval;
 }
 
-void enimy_init(SDL_FRect* player) {
+void enimy_init(const SDL_FRect* const player) {
   context = getDefaultContext();
 
   playerFrame = player;
@@ -50,10 +52,10 @@ void enimy_init(SDL_FRect* player) {
   SDL_AddTimer(3000, spawn, NULL);
 }
 
-void enimy_create() {
+void enimy_create(void) {
 }
 
-void enimy_update() {
+void enimy_update(void) {
   for (int i = 0; i < MAX_ENIMIES; i++) {
     if (enimies[i].active) {
       const SDL_FPoint delta = {

@@ -14,8 +14,8 @@ typedef struct {
 
 extern Enimy enimies[MAX_ENIMIES];
 
-void enimy_create();
-void enimy_init(SDL_FRect* player);
-void enimy_update();
+void enimy_create(void);
+void enimy_init(const SDL_FRect* const player);
+void enimy_update(void);
 
 #endif
