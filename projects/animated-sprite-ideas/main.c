@@ -81,8 +81,8 @@ static void create(void) {
 }
 
 static void update(void) {
-  rotate(p1, 1, 320, 240);
-  rotate(p2, 1, 320, 240);
+  rotate(p1, 1, 200, 200);
+  rotate(p2, 1, 200, 200);
 
   float minX = p1[0].x;
   float minY = p1[0].y;
