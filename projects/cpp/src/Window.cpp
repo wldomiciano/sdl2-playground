@@ -3,7 +3,7 @@
 #include <SDL.h>
 
 static int closeEventWatch(void* const userdata, SDL_Event* const event) {
-  Window* const window = (Window*) userdata;
+  Window* const window = static_cast<Window*>(userdata);
 
   if (event->type == SDL_WINDOWEVENT && event->window.event == SDL_WINDOWEVENT_CLOSE && event->window.windowID == window->id) {
     window->close();
