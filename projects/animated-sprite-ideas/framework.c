@@ -161,6 +161,16 @@ int main2(int argc, char** argv) {
 int main(int argc, char** argv) {
   initializeAllWithContext(0, 0, "Hello", 400, 400, SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 0, SDL_RENDERER_PRESENTVSYNC);
 
+  if (wasQuitNotRequested()) {
+    create();
+
+    controller = SDL_JoystickOpen(0);
+
+    if (controller == NULL) {
+      LOG("Joystick open error");
+    }
+  }
+
   const float DT       = 1 / 60.0;
   float       previous = getTicks();
   float       lag      = 0;
@@ -174,14 +184,17 @@ int main(int argc, char** argv) {
 
     handleEvents();
 
+    clearRender(NULL, 0, 0, 0, 255);
+
     while (lag >= DT) {
+      update();
       lag -= DT;
     }
 
-    clearRender(NULL, 0, 0, 0, 255);
-
     presentRender(NULL);
   }
+
+  destroy();
 
   return 0;
 }
