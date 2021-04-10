@@ -6,7 +6,7 @@
 
 #include "context.h"
 
-float getTicks(void);
+double getTicks(void);
 
 void presentRender(Context* ctx);
 

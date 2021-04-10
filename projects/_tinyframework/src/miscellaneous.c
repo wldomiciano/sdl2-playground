@@ -7,7 +7,7 @@
 #include "context.h"
 #include "initialization.h"
 
-float getTicks(void) {
+double getTicks(void) {
   return SDL_GetTicks() / 1000.0;
 }
 
@@ -23,10 +23,10 @@ void presentRender(Context* ctx) {
 }
 
 char* makePath(const char* path) {
-  const char* basePath = getAppBasePath();
+  const char*  basePath       = getAppBasePath();
   const size_t basePathLength = getAppBasePathLength();
-  const size_t pathLength = SDL_strlen(path);
-  char* result = SDL_calloc(basePathLength + pathLength, sizeof(char));
+  const size_t pathLength     = SDL_strlen(path);
+  char*        result         = SDL_calloc(basePathLength + pathLength, sizeof(char));
 
   SDL_strlcpy(result, basePath, basePathLength);
 
@@ -36,14 +36,14 @@ char* makePath(const char* path) {
 }
 
 TTF_Font* openFont(const char* const filename, const Uint16 size) {
-  char* path = makePath(filename);
+  char*           path = makePath(filename);
   TTF_Font* const font = TTF_OpenFont(path, size);
   SDL_free(path);
   return font;
 }
 
 SDL_Texture* loadTexture(SDL_Renderer* const renderer, const char* const filename) {
-  char* path = makePath(filename);
+  char*              path    = makePath(filename);
   SDL_Texture* const texture = IMG_LoadTexture(renderer, path);
   SDL_free(path);
   return texture;

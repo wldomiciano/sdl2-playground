@@ -7,17 +7,16 @@
 #include "miscellaneous.h"
 
 struct Sprite {
-  SDL_Renderer* renderer;
-  SDL_Texture*  texture;
-  SDL_Rect      srcrect;
-
-  float w, h;
-  vec2  pos;
-  vec2  pivot;
-  vec2  origin;
-
+  SDL_Renderer*    renderer;
+  SDL_Texture*     texture;
   double           angle;
+  vec2             pos;
+  vec2             pivot;
+  vec2             origin;
   SDL_FPoint       scale;
+  float            w;
+  float            h;
+  SDL_Rect         srcrect;
   SDL_RendererFlip flip;
 };
 
@@ -51,8 +50,8 @@ Sprite* createSprite(Context* ctx, const char* const filename, const SDL_Rect* c
     .origin   = {0, 0},
     .srcrect  = rect ? *rect : (SDL_Rect){0, 0, w, h},
     .pos      = {0, 0},
-    .w        = w,
-    .h        = h,
+    .w        = (float) w,
+    .h        = (float) h,
   };
 
   const size_t size = sizeof(temp);
@@ -105,7 +104,7 @@ void setSpriteGlogalPivot(Sprite* const sprite, const vec2 v) {
 // GETTERS
 
 float getSpriteAngle(Sprite* const sprite) {
-  return sprite->angle;
+  return (float) sprite->angle;
 }
 
 vec2 getSpritePivot(Sprite* const sprite) {

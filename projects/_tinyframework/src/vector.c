@@ -3,7 +3,7 @@
 #include <SDL.h>
 #include <math.h>
 
-static const float PI = M_PI;
+static const float PI = (float) M_PI;
 
 float rad2deg(const float rad) {
   return rad * (180 / PI);

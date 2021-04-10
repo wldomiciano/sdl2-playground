@@ -10,7 +10,7 @@ static bool shouldQuit = false;
 vec2 getMousePosition(void) {
   int x, y;
   SDL_GetMouseState(&x, &y);
-  return VEC2(x, y);
+  return VEC2((float) x, (float) y);
 }
 
 bool wasQuitNotRequested(void) {
