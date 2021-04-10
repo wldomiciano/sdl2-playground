@@ -7,7 +7,7 @@ void print(SDL_FPoint* p) {
   }
 }
 
-int main(int argc, char** argv) {
+int main(__attribute__((unused)) int argc, __attribute__((unused)) char** argv) {
   init();
 
   Rect* a = create_rect(200, 200, 50, 50, 0x0000FFFF, 0xFF00FFFF);

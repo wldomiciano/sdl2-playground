@@ -91,7 +91,7 @@ void matrix(void) {
   }
 }
 
-int main(int argc, char** argv) {
+int main(__attribute__((unused)) int argc, __attribute__((unused)) char** argv) {
   init();
 
   SDL_SetRenderDrawBlendMode(renderer, SDL_BLENDMODE_BLEND);

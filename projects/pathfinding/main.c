@@ -74,7 +74,7 @@ SDL_bool hasInArray(int* array, int position) {
   return SDL_FALSE;
 }
 
-int main(int argc, char** argv) {
+int main(__attribute__((unused)) int argc, __attribute__((unused)) char** argv) {
   create_game(GAME_WIDTH, GAME_HEIGHT);
 
   SDL_Rect cat             = {0, 1, 80, 80};

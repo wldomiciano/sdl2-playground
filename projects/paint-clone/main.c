@@ -18,7 +18,7 @@ void draw(int radius, int x, int y) {
   }
 }
 
-int main(int argc, char** argv) {
+int main(__attribute__((unused)) int argc, __attribute__((unused)) char** argv) {
   create_game(800, 800);
   int      red    = 255;
   float    radius = 10;

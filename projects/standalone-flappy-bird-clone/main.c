@@ -15,7 +15,7 @@ int getRandom(int max) {
   return -(rand() % max);
 }
 
-int main(int argc, char** argv) {
+int main(__attribute__((unused)) int argc, __attribute__((unused)) char** argv) {
   SDL_Window* const   window    = SDL_CreateWindow("Test", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, WINDOW_WIDTH, WINDOW_HEIGHT, 0);
   SDL_Renderer* const renderer  = SDL_CreateRenderer(window, -1, SDL_RENDERER_PRESENTVSYNC);
   SDL_bool            isRunning = SDL_TRUE;
