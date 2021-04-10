@@ -3,6 +3,8 @@
 #include <SDL.h>
 #include <SDL_ttf.h>
 
+#include "tinyframework.h"
+
 #define MAX_LENGTH 1024
 
 static SDL_Window* window;
@@ -12,8 +14,8 @@ static SDL_Joystick* controller;
 static TTF_Font*     font;
 static SDL_bool      isRunning    = SDL_FALSE;
 static Uint32        sdlInitFlags = SDL_INIT_EVERYTHING;
-static Uint32        windowWidth  = 640;
-static Uint32        windowHeight = 480;
+static int           windowWidth  = 640;
+static int           windowHeight = 480;
 static Uint32        windowFlags  = 0;
 // static Uint32 rendererFlags = SDL_RENDERER_PRESENTVSYNC;
 static Uint8 customKeyStates[SDL_NUM_SCANCODES] = {0};
@@ -112,7 +114,7 @@ static void input_handle(void) {
   }
 }
 
-int main(int argc, char** argv) {
+int main2(int argc, char** argv) {
   // SDL_SetHint(SDL_HINT_RENDER_VSYNC, "1");
   isRunning = sdl_init() && window_create() && ttf_init();
 
@@ -152,6 +154,34 @@ int main(int argc, char** argv) {
   destroy();
 
   sdl_quit();
+
+  return 0;
+}
+
+int main(int argc, char** argv) {
+  initializeAllWithContext(0, 0, "Hello", 400, 400, SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 0, SDL_RENDERER_PRESENTVSYNC);
+
+  const float DT       = 1 / 60.0;
+  float       previous = getTicks();
+  float       lag      = 0;
+
+  while (wasQuitNotRequested()) {
+    const float current = getTicks();
+    const float delta   = current - previous;
+
+    lag += delta;
+    previous = current;
+
+    handleEvents();
+
+    while (lag >= DT) {
+      lag -= DT;
+    }
+
+    clearRender(NULL, 0, 0, 0, 255);
+
+    presentRender(NULL);
+  }
 
   return 0;
 }

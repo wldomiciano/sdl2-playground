@@ -15,7 +15,7 @@ typedef struct {
 } Frame;
 
 typedef struct {
-  int    duration;
+  Uint32 duration;
   Uint8  count;    // quantidade de frames
   Uint8  current;  // frame atual
   Frame* frames;   // array de frames
@@ -119,13 +119,13 @@ void sprite_update_colliders(Sprite* const sprite) {
 /**
  *
  */
-void sprite_play_animation(Sprite* const sprite, const Uint16 animationIndex) {
+void sprite_play_animation(Sprite* const sprite, const Uint8 animationIndex) {
   Animator* const animator = &sprite->animator;
 
   if (animationIndex < animator->count) {
     Animation* const anim = &animator->animations[animationIndex];
 
-    int currentFrameIndex = 0;
+    Uint8 currentFrameIndex = 0;
 
     if (anim->duration > 0) {
       currentFrameIndex = (SDL_GetTicks() / anim->duration) % anim->count;
@@ -160,7 +160,7 @@ void sprite_add_collider(Sprite* const sprite, const Uint16 animationIndex, cons
   collider->points[3] = p4;
 }
 
-Sprite* sprite_create(const char* const filename, const Uint16 animationsCount) {
+Sprite* sprite_create(const char* const filename, const Uint8 animationsCount) {
   Sprite* const sprite = SDL_calloc(1, sizeof(*sprite));
   sprite->texture      = texture_create_from_file(filename);
   sprite->flip         = SDL_FLIP_NONE;
@@ -195,7 +195,7 @@ void sprite_destroy(Sprite* const sprite) {
   SDL_free(sprite);
 }
 
-void sprite_add_animation(const Sprite* const sprite, const Uint16 animationIndex, const Uint16 framesCount, const Uint16 duration) {
+void sprite_add_animation(const Sprite* const sprite, const Uint16 animationIndex, const Uint8 framesCount, const Uint16 duration) {
   if (sprite && sprite->animator.animations) {
     if (animationIndex < sprite->animator.count) {
       sprite->animator.animations[animationIndex].count    = framesCount;
@@ -206,7 +206,7 @@ void sprite_add_animation(const Sprite* const sprite, const Uint16 animationInde
   }
 }
 
-void sprite_add_frame(const Sprite* const sprite, const Uint16 animationIndex, const Uint16 frameIndex, const Uint16 collidersCount, const Uint32 x, const Uint32 y, const Uint32 w, const Uint32 h) {
+void sprite_add_frame(const Sprite* const sprite, const Uint16 animationIndex, const Uint16 frameIndex, const Uint8 collidersCount, const int x, const int y, const int w, const int h) {
   Frame* const frame = &sprite->animator.animations[animationIndex].frames[frameIndex];
   frame->frame       = (SDL_Rect){x, y, w, h};
   frame->count       = collidersCount;

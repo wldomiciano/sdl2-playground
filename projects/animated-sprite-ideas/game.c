@@ -1,7 +1,6 @@
 #include "framework.h"
 #include "sprite.h"
 
-static SDL_FRect  rect     = {0, 0, 50, 50};
 static float      velocity = 1;
 static SDL_FPoint p1[5]    = {{270, 0}, {370, 0}, {370, 100}, {270, 100}, {270, 0}};
 static SDL_FPoint p2[5]    = {{270, 100}, {370, 100}, {370, 200}, {270, 200}, {270, 100}};
@@ -104,8 +103,8 @@ void update(void) {
       maxY = p1[i].y;
     }
   }
-  const float centerX = (maxX - minX) * 0.5 + minX;
-  const float centerY = (maxY - minY) * 0.5 + minY;
+  const float centerX = (maxX - minX) * 0.5f + minX;
+  const float centerY = (maxY - minY) * 0.5f + minY;
   rotate(p1, 1, centerX, centerY);
 
   int mouseX, mouseY;
