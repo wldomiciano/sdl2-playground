@@ -1,8 +1,6 @@
 #include "sprite.h"
 
-#include <SDL.h>
-
-#include "framework.h"
+#include "tinyframework.h"
 
 typedef struct {
   SDL_FPoint points[4];
@@ -28,9 +26,8 @@ typedef struct {
 } Animator;
 
 struct Sprite {
-  SDL_Texture* texture;
-  Animator     animator;
-
+  SDL_Texture*     texture;
+  Animator         animator;
   float            x;
   float            y;
   double           angle;
@@ -162,7 +159,7 @@ void sprite_add_collider(Sprite* const sprite, const Uint16 animationIndex, cons
 
 Sprite* sprite_create(const char* const filename, const Uint8 animationsCount) {
   Sprite* const sprite = SDL_calloc(1, sizeof(*sprite));
-  sprite->texture      = texture_create_from_file(filename);
+  sprite->texture      = loadTexture(getDefaultContext()->renderer, filename);
   sprite->flip         = SDL_FLIP_NONE;
   sprite->angle        = 0;
   sprite->pivot        = (SDL_FPoint){0.5, 0.5};
@@ -227,8 +224,10 @@ void sprite_render(Sprite* const sprite) {
   const SDL_FPoint size  = sprite_get_size(sprite);
   const SDL_FRect  dest  = {pos.x, pos.y, size.x, size.y};
 
+  SDL_Renderer* const renderer = getDefaultContext()->renderer;
+
   if (SDL_RenderCopyExF(renderer, sprite->texture, &frame->frame, &dest, sprite->angle, &sprite->center, sprite->flip) != 0) {
-    LOG("Error in render copy");
+    SDL_Log("Error in render copy: %s", SDL_GetError());
   }
 
   // sprite_update_colliders(sprite);

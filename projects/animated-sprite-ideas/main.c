@@ -1,5 +1,5 @@
-#include "framework.h"
 #include "sprite.h"
+#include "tinyframework.h"
 
 static float      velocity = 1;
 static SDL_FPoint p1[5]    = {{270, 0}, {370, 0}, {370, 100}, {270, 100}, {270, 0}};
@@ -20,9 +20,8 @@ static void rotate(SDL_FPoint* const p, const float deg, const float centerX, co
   }
 }
 
-void create(void) {
-  // link = sprite_create("assets/images/link.bmp", 1, 0, 0, 102, 108);
-  link = sprite_create("assets/images/link.bmp", 5);
+static void create(void) {
+  link = sprite_create("/assets/images/link.bmp", 5);
 
   sprite_add_animation(link, 0, 1, 100);
   sprite_add_frame(link, 0, 0, 1, 0, 0, 102, 108);
@@ -81,7 +80,7 @@ void create(void) {
   sprite_set_scale(link, 0.5, 0.5);
 }
 
-void update(void) {
+static void update(void) {
   rotate(p1, 1, 320, 240);
   rotate(p2, 1, 320, 240);
 
@@ -103,14 +102,18 @@ void update(void) {
       maxY = p1[i].y;
     }
   }
+
   const float centerX = (maxX - minX) * 0.5f + minX;
   const float centerY = (maxY - minY) * 0.5f + minY;
+
   rotate(p1, 1, centerX, centerY);
 
-  int mouseX, mouseY;
-  SDL_GetMouseState(&mouseX, &mouseY);
+  SDL_Renderer* const renderer = getDefaultContext()->renderer;
+
+  const vec2 mousePos = getMousePosition();
+
   SDL_SetRenderDrawColor(renderer, 0, 255, 255, 255);
-  SDL_RenderDrawLineF(renderer, centerX, centerY, mouseX, mouseY);
+  SDL_RenderDrawLineF(renderer, centerX, centerY, mousePos.x, mousePos.y);
 
   SDL_SetRenderDrawColor(renderer, 0, 0, 255, 255);
   SDL_RenderDrawLineF(renderer, minX, minY, maxX, maxY);
@@ -141,16 +144,16 @@ void update(void) {
   //   sprite_play_animation(link, 0);
   // }
 
-  if (key_is_pressed(SDL_SCANCODE_S)) {
+  if (isKeyPressed(SDL_SCANCODE_S)) {
     sprite_move(link, 0, velocity);
     sprite_play_animation(link, 1);
-  } else if (key_is_pressed(SDL_SCANCODE_A)) {
+  } else if (isKeyPressed(SDL_SCANCODE_A)) {
     sprite_move(link, -velocity, 0);
     sprite_play_animation(link, 2);
-  } else if (key_is_pressed(SDL_SCANCODE_W)) {
+  } else if (isKeyPressed(SDL_SCANCODE_W)) {
     sprite_move(link, 0, -velocity);
     sprite_play_animation(link, 3);
-  } else if (key_is_pressed(SDL_SCANCODE_D)) {
+  } else if (isKeyPressed(SDL_SCANCODE_D)) {
     sprite_move(link, velocity, 0);
     sprite_play_animation(link, 4);
   } else {
@@ -158,11 +161,41 @@ void update(void) {
   }
 
   sprite_render(link);
-
-  // SDL_SetRenderDrawColor(renderer, 255, 0, 0, 255);
-  // SDL_RenderFillRectF(renderer, &rect);
 }
 
-void destroy(void) {
+static void destroy(void) {
   sprite_destroy(link);
+}
+
+int main(int argc, char** argv) {
+  initializeAllWithContext(0, 0, "Hello", 400, 400, SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 0, SDL_RENDERER_PRESENTVSYNC);
+
+  create();
+
+  const float DT       = 1 / 60.0;
+  float       previous = getTicks();
+  float       lag      = 0;
+
+  while (wasQuitNotRequested()) {
+    const float current = getTicks();
+    const float delta   = current - previous;
+
+    lag += delta;
+    previous = current;
+
+    handleEvents();
+
+    clearRender(NULL, 0, 0, 0, 255);
+
+    while (lag >= DT) {
+      update();
+      lag -= DT;
+    }
+
+    presentRender(NULL);
+  }
+
+  destroy();
+
+  return 0;
 }
