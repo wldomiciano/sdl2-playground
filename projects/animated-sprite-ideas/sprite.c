@@ -101,17 +101,17 @@ void sprite_move(Sprite* const sprite, const float x, const float y) {
   }
 }
 
-void sprite_update_colliders(Sprite* const sprite) {
-  Animation* const animation = &sprite->animator.animations[sprite->animator.current];
-  Frame* const     frame     = &animation->frames[animation->current];
+// static void sprite_update_colliders(Sprite* const sprite) {
+//   Animation* const animation = &sprite->animator.animations[sprite->animator.current];
+//   Frame* const     frame     = &animation->frames[animation->current];
 
-  for (int i = 0; i < frame->count; i++) {
-    for (int j = 0; j < 4; j++) {
-      frame->colliders[i].points[j].x += sprite->x;
-      frame->colliders[i].points[j].y += sprite->y;
-    }
-  }
-}
+//   for (int i = 0; i < frame->count; i++) {
+//     for (int j = 0; j < 4; j++) {
+//       frame->colliders[i].points[j].x += sprite->x;
+//       frame->colliders[i].points[j].y += sprite->y;
+//     }
+//   }
+// }
 
 /**
  *
@@ -137,8 +137,8 @@ SDL_FPoint sprite_get_size(const Sprite* const sprite) {
   const Animation* const anim  = &sprite->animator.animations[sprite->animator.current];
   const SDL_Rect         frame = anim->frames[anim->current].frame;
 
-  const float w = frame.w * sprite->scale.x;
-  const float h = frame.h * sprite->scale.y;
+  const float w = (float) frame.w * sprite->scale.x;
+  const float h = (float) frame.h * sprite->scale.y;
 
   return (SDL_FPoint){w, h};
 }

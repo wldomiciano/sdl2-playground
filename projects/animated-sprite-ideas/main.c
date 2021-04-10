@@ -172,13 +172,13 @@ int main(__attribute__((unused)) int argc, __attribute__((unused)) char** argv) 
 
   create();
 
-  const float DT       = 1 / 60.0;
-  float       previous = getTicks();
-  float       lag      = 0;
+  const double DT       = 1 / 60.0;
+  double       previous = getTicks();
+  double       lag      = 0;
 
   while (wasQuitNotRequested()) {
-    const float current = getTicks();
-    const float delta   = current - previous;
+    const double current = getTicks();
+    const double delta   = current - previous;
 
     lag += delta;
     previous = current;
