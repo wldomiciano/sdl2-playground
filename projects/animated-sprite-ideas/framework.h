@@ -12,11 +12,11 @@ void create(void);
 void update(void);
 void destroy(void);
 
-SDL_bool button_is_pressed(int button);
+SDL_bool button_is_pressed(const int button);
 
-SDL_Texture* texture_create_from_file(const char* filename);
+SDL_Texture* texture_create_from_file(const char* const filename);
 
-SDL_bool key_is_pressed(SDL_Scancode code);
-SDL_bool key_was_pressed(SDL_Scancode code);
+SDL_bool key_is_pressed(const SDL_Scancode code);
+SDL_bool key_was_pressed(const SDL_Scancode code);
 
 #endif  // !FRAMEWORK_H

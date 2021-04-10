@@ -18,27 +18,27 @@ static Uint32        windowFlags  = 0;
 // static Uint32 rendererFlags = SDL_RENDERER_PRESENTVSYNC;
 static Uint8 customKeyStates[SDL_NUM_SCANCODES] = {0};
 
-SDL_bool key_is_pressed(SDL_Scancode code) {
+SDL_bool key_is_pressed(const SDL_Scancode code) {
   return SDL_GetKeyboardState(NULL)[code];
 }
 
-SDL_bool key_was_pressed(SDL_Scancode code) {
+SDL_bool key_was_pressed(const SDL_Scancode code) {
   return customKeyStates[code];
 }
 
-SDL_bool button_is_pressed(int button) {
+SDL_bool button_is_pressed(const int button) {
   return SDL_JoystickGetButton(controller, button);
 }
 
-SDL_Texture* texture_create_from_file(const char* filename) {
-  SDL_Surface* surface = SDL_LoadBMP(filename);
+SDL_Texture* texture_create_from_file(const char* const filename) {
+  SDL_Surface* const surface = SDL_LoadBMP(filename);
 
   if (!surface) {
     LOG("Error on surface creation");
     return NULL;
   }
 
-  SDL_Texture* texture = SDL_CreateTextureFromSurface(renderer, surface);
+  SDL_Texture* const texture = SDL_CreateTextureFromSurface(renderer, surface);
   SDL_FreeSurface(surface);
 
   if (!texture) {
@@ -86,8 +86,7 @@ static void sdl_quit(void) {
 }
 
 static SDL_bool window_create(void) {
-  if (SDL_CreateWindowAndRenderer(windowWidth, windowHeight, windowFlags,
-                                  &window, &renderer) != 0) {
+  if (SDL_CreateWindowAndRenderer(windowWidth, windowHeight, windowFlags, &window, &renderer) != 0) {
     LOG("Window and renderer creation failure");
     return SDL_FALSE;
   }
@@ -99,6 +98,7 @@ static void input_handle(void) {
   SDL_memset(customKeyStates, 0, SDL_NUM_SCANCODES);
 
   SDL_Event event;
+
   while (SDL_PollEvent(&event)) {
     if (event.type == SDL_QUIT) {
       isRunning = SDL_FALSE;
@@ -131,7 +131,7 @@ int main(int argc, char** argv) {
   Uint32      previeousTicks = SDL_GetTicks();
 
   while (isRunning) {
-    Uint32 currentTicks = SDL_GetTicks();
+    const Uint32 currentTicks = SDL_GetTicks();
     delta += currentTicks - previeousTicks;
     previeousTicks = currentTicks;
 

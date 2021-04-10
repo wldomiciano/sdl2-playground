@@ -7,7 +7,7 @@ static SDL_FPoint p1[5]    = {{270, 0}, {370, 0}, {370, 100}, {270, 100}, {270, 
 static SDL_FPoint p2[5]    = {{270, 100}, {370, 100}, {370, 200}, {270, 200}, {270, 100}};
 static Sprite*    link;
 
-void rotate(SDL_FPoint* p, float deg, float centerX, float centerY) {
+static void rotate(SDL_FPoint* const p, const float deg, const float centerX, const float centerY) {
   const float rad = (deg * (float) M_PI) / 180;
   const float cos = SDL_cosf(rad);
   const float sin = SDL_sinf(rad);
