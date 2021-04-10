@@ -46,8 +46,8 @@ static void update(void) {
     if (ready) moveSprite(bullet, VEC2(0, shipSpeed));
   }
 
-  const vec2  delta = sub(getMousePosition(), getSpritePosition(ship));
-  const float rot   = rotation(delta) + /* fix sprite rotation */ 90;
+  const vec2   delta = sub(getMousePosition(), getSpritePosition(ship));
+  const double rot   = (double) rotation(delta) + /* fix sprite rotation */ 90;
   setSpriteRotation(ship, rot);
 
   if (ready) {
@@ -60,9 +60,9 @@ static void update(void) {
 
   const vec2 pos = getSpritePosition(bullet);
   if (pos.x > 450 || pos.x < -50 || pos.y > 450 || pos.y < -50) {
-    const vec2 pos = getSpritePosition(ship);
-    setSpritePosition(bullet, pos);
-    setSpriteGlogalPivot(bullet, pos);
+    const vec2 pos2 = getSpritePosition(ship);
+    setSpritePosition(bullet, pos2);
+    setSpriteGlogalPivot(bullet, pos2);
     ready = SDL_TRUE;
   }
 }

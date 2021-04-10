@@ -1,11 +1,12 @@
 #include <SDL.h>
+#include <float.h>
 
 #include "tinyframework.h"
 
 int main(__attribute__((unused)) int argc, __attribute__((unused)) char** argv) {
   initializeAllWithContext(0, 0, "Hello", 400, 400, SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 0, SDL_RENDERER_PRESENTVSYNC);
 
-  Sprite* const ship = createSprite(NULL, "/assets/images/image.bmp", NULL);
+  Sprite* const ship   = createSprite(NULL, "/assets/images/image.bmp", NULL);
   Sprite* const bullet = createSprite(NULL, "/assets/images/bullet.bmp", NULL);
 
   setSpriteOrigin(bullet, VEC2(5, 20));
@@ -33,7 +34,9 @@ int main(__attribute__((unused)) int argc, __attribute__((unused)) char** argv) 
       rotateSprite(ship, angleSpeed);
       rotateSprite(bullet, angleSpeed);
 
-      if (getSpriteAngle(ship) == 360) setSpriteRotation(ship, 0);
+      if (SDL_fabsf(getSpriteAngle(ship) - 360.f) < FLT_EPSILON) {
+        setSpriteRotation(ship, 0);
+      }
 
       time = SDL_GetTicks();
     } else if (isKeyPressed(SDL_SCANCODE_LEFT) && SDL_GetTicks() > time + 200) {
@@ -41,15 +44,15 @@ int main(__attribute__((unused)) int argc, __attribute__((unused)) char** argv) 
       rotateSprite(bullet, -angleSpeed);
 
       const float angle = getSpriteAngle(ship);
-      if (angle < 0) setSpriteRotation(ship, 360 + angle);
+      if (angle < 0) setSpriteRotation(ship, (double) (360 + angle));
 
       time = SDL_GetTicks();
     }
 
     if (wasKeyJustPressed(SDL_SCANCODE_UP)) {
-      const float rad = deg2rad(getSpriteAngle(ship));
-      const vec2 direction = rad2vec(rad);
-      velocity = mul(direction, speed);
+      const float rad       = deg2rad(getSpriteAngle(ship));
+      const vec2  direction = rad2vec(rad);
+      velocity              = mul(direction, speed);
     } else if (isKeyPressed(SDL_SCANCODE_DOWN)) {
       setSpritePosition(bullet, VEC2(200, 120));
       velocity = VEC2(0, 0);

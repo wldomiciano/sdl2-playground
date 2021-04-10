@@ -9,13 +9,13 @@ int main(__attribute__((unused)) int argc, __attribute__((unused)) char** argv) 
   setSpriteGlogalPivot(ship, VEC2(25, 25));
   setSpritePosition(ship, VEC2(200, 200));
 
-  const float easingAmount = 0.03;
+  const float easingAmount = 0.03f;
 
   while (wasQuitNotRequested()) {
     handleEvents();
 
     const vec2 delta = sub(getMousePosition(), getSpritePosition(ship));
-    setSpriteRotation(ship, rotation(delta) + 90);
+    setSpriteRotation(ship, (double) rotation(delta) + 90);
 
     if (len(delta) > 1) {
       const vec2 temp = mul(delta, easingAmount);

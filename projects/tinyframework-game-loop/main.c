@@ -3,25 +3,24 @@
 int main(__attribute__((unused)) int argc, __attribute__((unused)) char** argv) {
   initializeAllWithContext(0, 0, "Hello", 400, 400, SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 0, SDL_RENDERER_PRESENTVSYNC);
 
-  Sprite* const ship = createSprite(NULL, "/assets/images/image.bmp", NULL);
-  float velocity = 900;
+  Sprite* const ship     = createSprite(NULL, "/assets/images/image.bmp", NULL);
+  float         velocity = 900;
 
-  const float DT = 1 / 60.0;
-  float previous = getTicks();
-  float current = 0;
-  float delta = 0;
-  float lag = 0;
+  const double DT       = 1 / 60.0;
+  double       previous = getTicks();
+  double       lag      = 0;
 
   while (wasQuitNotRequested()) {
-    current = getTicks();
-    delta = current - previous;
+    const double current = getTicks();
+    const double delta   = current - previous;
+
     lag += delta;
     previous = current;
 
     handleEvents();
 
     while (lag >= DT) {
-      const vec2 pos = moveSprite(ship, VEC2(velocity * DT, 0));
+      const vec2 pos = moveSprite(ship, VEC2(velocity * (float) DT, 0));
       if (pos.x + 50 >= 500 || pos.x <= 0) velocity = -velocity;
       lag -= DT;
     }

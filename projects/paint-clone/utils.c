@@ -1,9 +1,9 @@
 #include "utils.h"
 
-SDL_Window*     window;
-SDL_Renderer*   renderer;
-SDL_Event       event;
-static SDL_bool isRunning;
+static SDL_Window* window;
+SDL_Renderer*      renderer;
+static SDL_Event   event;
+static SDL_bool    isRunning;
 
 SDL_Texture* load_texture_from_file(const char* file) {
   SDL_Surface* temp = SDL_LoadBMP(file);
@@ -12,7 +12,7 @@ SDL_Texture* load_texture_from_file(const char* file) {
   return tex;
 }
 
-float getTicks(void) {
+double getTicks(void) {
   return SDL_GetTicks() / 1000.0;
 }
 
@@ -21,20 +21,20 @@ void draw_rect(const SDL_Rect* rect) {
   SDL_RenderFillRect(renderer, rect);
 }
 
-void set_viewport_fit(Uint32 width, Uint32 height) {
+void set_viewport_fit(int width, int height) {
   const SDL_Rect rect = {0, 0, width, height};
   int            windowWidth;
   int            windowHeight;
 
   SDL_GetWindowSize(window, &windowWidth, &windowHeight);
 
-  float scale = (float) windowWidth / width;
+  float scale = (float) (windowWidth / width);
 
   SDL_RenderSetScale(renderer, scale, scale);
   SDL_RenderSetViewport(renderer, &rect);
 }
 
-void create_game(Uint32 width, Uint32 height) {
+void create_game(int width, int height) {
   window    = SDL_CreateWindow("Test", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, width, height, 0);
   renderer  = SDL_CreateRenderer(window, -1, SDL_RENDERER_PRESENTVSYNC);
   isRunning = SDL_TRUE;

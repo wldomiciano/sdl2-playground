@@ -15,7 +15,7 @@ typedef struct {
 
 static SDL_Renderer* renderer;
 
-static void create(Scene* const scene) {
+static void create(__attribute__((unused)) Scene* const scene) {
   SDL_Log("creating Scene 1");
   renderer = getDefaultContext()->renderer;
 }
@@ -37,7 +37,7 @@ static void draw(Scene* const scene) {
   SDL_RenderFillRect(renderer, &s->rect);
 }
 
-static void destroy(Scene* const scene) {
+static void destroy(__attribute__((unused)) Scene* const scene) {
   SDL_Log("destroying Scene 1");
 }
 

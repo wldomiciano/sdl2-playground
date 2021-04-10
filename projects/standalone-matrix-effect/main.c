@@ -2,20 +2,20 @@
 #include <SDL_ttf.h>
 
 #define MAX_LENGTH 1024
-#define FONT_SIZE 24
+#define FONT_SIZE  24
 
-TTF_Font* font;
-SDL_Window* window = NULL;
-SDL_Renderer* renderer = NULL;
-SDL_bool isRunning = SDL_FALSE;
+static TTF_Font*     font;
+static SDL_Window*   window    = NULL;
+static SDL_Renderer* renderer  = NULL;
+static SDL_bool      isRunning = SDL_FALSE;
 
-const int width = 400;
-const int height = 400;
-const float colWidth = FONT_SIZE;
-int cols = 0;
-int* ypos = NULL;
+static const int   width    = 400;
+static const int   height   = 400;
+static const float colWidth = FONT_SIZE;
+static int         cols     = 0;
+static int*        ypos     = NULL;
 
-void drawText(int x, int y, const char* fmt, ...) {
+static void drawText(int x, int y, const char* fmt, ...) {
   char buffer[MAX_LENGTH] = {0};
 
   va_list ap;
@@ -23,9 +23,9 @@ void drawText(int x, int y, const char* fmt, ...) {
   SDL_vsnprintf(buffer, MAX_LENGTH, fmt, ap);
   va_end(ap);
 
-  SDL_Surface* text = TTF_RenderText_Solid(font, buffer, (SDL_Color){0, 255, 0, SDL_ALPHA_OPAQUE});
+  SDL_Surface* text        = TTF_RenderText_Solid(font, buffer, (SDL_Color){0, 255, 0, SDL_ALPHA_OPAQUE});
   SDL_Texture* textureText = SDL_CreateTextureFromSurface(renderer, text);
-  SDL_Rect dest = {x, y, 0, 0};
+  SDL_Rect     dest        = {x, y, 0, 0};
 
   SDL_QueryTexture(textureText, NULL, NULL, &dest.w, &dest.h);
   SDL_FreeSurface(text);
@@ -33,7 +33,7 @@ void drawText(int x, int y, const char* fmt, ...) {
   SDL_DestroyTexture(textureText);
 }
 
-void init(void) {
+static void init(void) {
   if (SDL_Init(SDL_INIT_VIDEO) == 0) {
     if (TTF_Init() == 0) {
       window = SDL_CreateWindow("Matrix", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, width, height, 0);
@@ -58,7 +58,7 @@ void init(void) {
     SDL_Log("SDL init error: %s\n", SDL_GetError());
 }
 
-void quit(void) {
+static void quit(void) {
   SDL_free(ypos);
   TTF_CloseFont(font);
   SDL_DestroyRenderer(renderer);
@@ -67,7 +67,7 @@ void quit(void) {
   SDL_Quit();
 }
 
-void events(void) {
+static void events(void) {
   SDL_Event event;
 
   while (SDL_PollEvent(&event)) {
@@ -77,10 +77,10 @@ void events(void) {
   }
 }
 
-void matrix(void) {
+static void matrix(void) {
   for (int i = 0; i < cols; i++) {
     const char text = rand() % 128;
-    const int x = i * colWidth;
+    const int  x    = (int) (i * colWidth);
 
     drawText(x, ypos[i], "%c", text);
 
@@ -96,8 +96,8 @@ int main(__attribute__((unused)) int argc, __attribute__((unused)) char** argv) 
 
   SDL_SetRenderDrawBlendMode(renderer, SDL_BLENDMODE_BLEND);
 
-  cols = SDL_floor(width / colWidth) + 1;
-  ypos = SDL_calloc(cols, sizeof(int));
+  cols          = (int) SDL_floor(width / colWidth) + 1;
+  ypos          = SDL_calloc((size_t) cols, sizeof(*ypos));
   SDL_Rect rect = {0, 0, width, height};
 
   while (isRunning) {
