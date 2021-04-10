@@ -43,31 +43,33 @@ void present(void) {
 Rect* create_rect(float x, float y, float w, float h, Uint32 fill,
                   Uint32 border) {
   SDL_FRect    rect    = {x, y, w, h};
-  SDL_Texture* texture = SDL_CreateTexture(renderer, SDL_PIXELFORMAT_RGB888, SDL_TEXTUREACCESS_TARGET, rect.w, rect.h);
+  SDL_Texture* texture = SDL_CreateTexture(renderer, SDL_PIXELFORMAT_RGB888, SDL_TEXTUREACCESS_TARGET, (int) rect.w, (int) rect.h);
 
   SDL_SetRenderTarget(renderer, texture);
   SDL_SetTextureBlendMode(texture, SDL_BLENDMODE_ADD);
 
   if (fill > 0) {
-    const int r = (fill >> 24) & 0xFF;
-    const int g = (fill >> 16) & 0xFF;
-    const int b = (fill >> 8) & 0xFF;
-    const int a = fill & 0xFF;
+    const Uint8 r = (fill >> 24) & 0xFF;
+    const Uint8 g = (fill >> 16) & 0xFF;
+    const Uint8 b = (fill >> 8) & 0xFF;
+    const Uint8 a = fill & 0xFF;
     SDL_SetRenderDrawColor(renderer, r, g, b, a);
     SDL_RenderFillRect(renderer, NULL);
   }
 
   if (border > 0) {
-    SDL_FPoint points[8] = {{0, 0},
-                            {rect.w - 1, 0},
-                            {rect.w - 1, rect.h - 1},
-                            {0, rect.h - 1},
-                            {0, 0}};
+    SDL_FPoint points[8] = {
+      {0, 0},
+      {rect.w - 1, 0},
+      {rect.w - 1, rect.h - 1},
+      {0, rect.h - 1},
+      {0, 0},
+    };
 
-    const int r = (border >> 24) & 0xFF;
-    const int g = (border >> 16) & 0xFF;
-    const int b = (border >> 8) & 0xFF;
-    const int a = border & 0xFF;
+    const Uint8 r = (border >> 24) & 0xFF;
+    const Uint8 g = (border >> 16) & 0xFF;
+    const Uint8 b = (border >> 8) & 0xFF;
+    const Uint8 a = border & 0xFF;
 
     SDL_SetRenderDrawColor(renderer, r, g, b, a);
     SDL_RenderDrawLinesF(renderer, points, 5);
@@ -77,7 +79,7 @@ Rect* create_rect(float x, float y, float w, float h, Uint32 fill,
 
   Rect* myRect    = SDL_malloc(sizeof(*myRect));
   myRect->angle   = 0;
-  myRect->center  = (SDL_FPoint){rect.w * 0.5, rect.h * 0.5};
+  myRect->center  = (SDL_FPoint){rect.w * 0.5f, rect.h * 0.5f};
   myRect->dest    = rect;
   myRect->flip    = SDL_FLIP_NONE;
   myRect->texture = texture;
@@ -93,10 +95,10 @@ typedef struct {
   SDL_FPoint points[5];
 } Vertices;
 
-Vertices rect_get_vertices(const SDL_FRect* rect, double angle) {
+static Vertices rect_get_vertices(const SDL_FRect* rect, double angle) {
   const float startX = rect->x;
   const float startY = rect->y;
-  const float rad    = (angle * M_PI) / 180;
+  const float rad    = (float) ((angle * M_PI) / 180);
   const float cos    = SDL_cosf(rad);
   const float sin    = SDL_sinf(rad);
   const float w      = rect->w - 1;
@@ -109,8 +111,8 @@ Vertices rect_get_vertices(const SDL_FRect* rect, double angle) {
   Vertices         vertices = {{UL, UR, LR, LL, UL}};
 
   for (int i = 0; i < 5; i++) {
-    const float cx = (startX + w * 0.5);
-    const float cy = (startY + w * 0.5);
+    const float cx = (startX + w * 0.5f);
+    const float cy = (startY + w * 0.5f);
     const float x  = vertices.points[i].x - cx;
     const float y  = vertices.points[i].y - cy;
 
@@ -120,7 +122,7 @@ Vertices rect_get_vertices(const SDL_FRect* rect, double angle) {
   return vertices;
 }
 
-Vertices rect_get_normals(const Vertices* vert) {
+static Vertices rect_get_normals(const Vertices* vert) {
   Vertices normals = {0};
 
   for (int i = 0; i < 5; i++) {
@@ -138,7 +140,7 @@ Vertices rect_get_normals(const Vertices* vert) {
   return normals;
 }
 
-SDL_FPoint projection(const SDL_FPoint axis, const Vertices* vert) {
+static SDL_FPoint projection(const SDL_FPoint axis, const Vertices* vert) {
   // dot product
   float min = axis.x * vert->points[0].x + axis.y * vert->points[0].y;
   float max = min;
@@ -155,7 +157,7 @@ SDL_FPoint projection(const SDL_FPoint axis, const Vertices* vert) {
   return (SDL_FPoint){min, max};
 }
 
-SDL_bool checkOverlap(const SDL_FPoint* a, const SDL_FPoint* b) {
+static SDL_bool checkOverlap(const SDL_FPoint* a, const SDL_FPoint* b) {
   return a->y > b->x || a->x > b->y;
 }
 
@@ -180,7 +182,8 @@ SDL_bool checkCollision(SDL_FRect* a, double angleA, const SDL_FRect* b,
     if (!checkOverlap(&p1, &p2)) {
       return SDL_FALSE;
     } else {
-      float o;
+      float o = FLT_MAX;
+
       if (p1.y > p2.x) {
         o = p1.y - p2.x;
       }
@@ -199,7 +202,8 @@ SDL_bool checkCollision(SDL_FRect* a, double angleA, const SDL_FRect* b,
     if (!checkOverlap(&p1, &p2)) {
       return SDL_FALSE;
     } else {
-      float o;
+      float o = FLT_MAX;
+
       if (p1.y > p2.x) {
         o = p1.y - p2.x;
       }

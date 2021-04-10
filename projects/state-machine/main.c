@@ -5,11 +5,11 @@ Scene* constructScene1(void);
 Scene* constructScene2(void);
 Scene* constructScene3(void);
 
-static void create(void) {
+__attribute__((unused)) static void create(void) {
   SceneManagerPushScene(constructScene1());
 }
 
-static void update(void) {
+__attribute__((unused)) static void update(void) {
   // if (wasKeyJustPressed(SDL_SCANCODE_A)) {
   //   SceneManagerPushScene(constructScene1());
   // } else if (wasKeyJustPressed(SDL_SCANCODE_S)) {
@@ -21,11 +21,11 @@ static void update(void) {
   SceneManagerUpdate();
 }
 
-static void draw(void) {
+__attribute__((unused)) static void draw(void) {
   SceneManagerDraw();
 }
 
-static void destroy(void) {
+__attribute__((unused)) static void destroy(void) {
   SceneManagerDestroy();
 }
 

@@ -1,6 +1,6 @@
 #include <SDL.h>
 
-void drawCircle(SDL_Renderer* const renderer, int xc, int yc, int x, int y) {
+static void drawCircle(SDL_Renderer* const renderer, int xc, int yc, int x, int y) {
   SDL_RenderDrawPoint(renderer, xc + x, yc + y);
   SDL_RenderDrawPoint(renderer, xc - x, yc + y);
 
@@ -14,14 +14,14 @@ void drawCircle(SDL_Renderer* const renderer, int xc, int yc, int x, int y) {
   SDL_RenderDrawPoint(renderer, xc - y, yc - x);
 }
 
-void fillCircle(SDL_Renderer* const renderer, int xc, int yc, int x, int y) {
+static void fillCircle(SDL_Renderer* const renderer, int xc, int yc, int x, int y) {
   SDL_RenderDrawLine(renderer, xc + x, yc + y, xc - x, yc + y);
   SDL_RenderDrawLine(renderer, xc + x, yc - y, xc - x, yc - y);
   SDL_RenderDrawLine(renderer, xc + y, yc + x, xc - y, yc + x);
   SDL_RenderDrawLine(renderer, xc + y, yc - x, xc - y, yc - x);
 }
 
-void drawCircleBres(SDL_Renderer* const renderer, int xc, int yc, int r) {
+static void drawCircleBres(SDL_Renderer* const renderer, int xc, int yc, int r) {
   int x = 0, y = r;
   int d = 3 - 2 * r;
   drawCircle(renderer, xc, yc, x, y);
@@ -37,7 +37,7 @@ void drawCircleBres(SDL_Renderer* const renderer, int xc, int yc, int r) {
   }
 }
 
-void fillCircleBres(SDL_Renderer* const renderer, int xc, int yc, int r) {
+static void fillCircleBres(SDL_Renderer* const renderer, int xc, int yc, int r) {
   int x = 0, y = r;
   int d = 3 - 2 * r;
   fillCircle(renderer, xc, yc, x, y);
@@ -54,7 +54,7 @@ void fillCircleBres(SDL_Renderer* const renderer, int xc, int yc, int r) {
 }
 
 int main(__attribute__((unused)) int argc, __attribute__((unused)) char** argv) {
-  SDL_Window* window = SDL_CreateWindow("test", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 300, 300, 0);
+  SDL_Window*   window   = SDL_CreateWindow("test", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 300, 300, 0);
   SDL_Renderer* renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_PRESENTVSYNC);
 
   while (!SDL_QuitRequested()) {

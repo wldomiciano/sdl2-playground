@@ -5,7 +5,7 @@
 #define MAP_COLS    10
 #define MAP_ROWS    10
 
-void draw_map(int* map) {
+static void draw_map(int* map) {
   SDL_Rect cell    = {0, 0, GAME_WIDTH / MAP_COLS, GAME_HEIGHT / MAP_ROWS};
   int      mapSize = MAP_COLS * MAP_ROWS;
 
@@ -35,7 +35,7 @@ void draw_map(int* map) {
   }
 }
 
-void draw_grid(int cols, int rows) {
+static void draw_grid(int cols, int rows) {
   int colWidth  = GAME_WIDTH / cols;
   int rowHeight = GAME_HEIGHT / rows;
 
@@ -61,12 +61,13 @@ typedef struct Node {
   int block;
 } Node;
 
-int xyToInt(int x, int y) {
+static int xyToInt(int x, int y) {
   return y * MAP_COLS + x;
 }
 
-int      closedListIndex = 0;
-SDL_bool hasInArray(int* array, int position) {
+static int closedListIndex = 0;
+
+static SDL_bool hasInArray(int* array, int position) {
   for (int i = 0; i < closedListIndex; i++) {
     if (array[i] == position) return SDL_TRUE;
   }

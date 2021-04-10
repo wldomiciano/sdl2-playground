@@ -1,9 +1,9 @@
 #include "framework.h"
 
-void print(SDL_FPoint* p) {
+static void print(SDL_FPoint* p) {
   for (int i = 0; i < 4; i++) {
     const float len = SDL_sqrtf(p[i].x * p[i].x + p[i].y * p[i].y);
-    SDL_Log("%3.2f, %3.2f (%3.2f)", p[i].x, p[i].y, len);
+    SDL_Log("%3.2f, %3.2f (%3.2f)", (double) p[i].x, (double) p[i].y, (double) len);
   }
 }
 
@@ -27,13 +27,13 @@ int main(__attribute__((unused)) int argc, __attribute__((unused)) char** argv) 
 
   print(points2);
 
-  const float rad = (45 * M_PI) / 180;
+  const float rad = (float) ((45 * M_PI) / 180);
   const float cos = SDL_cosf(rad);
   const float sin = SDL_sinf(rad);
 
   for (int i = 0; i < 5; i++) {
-    const float cx = (c + w * 0.5);
-    const float cy = (d + w * 0.5);
+    const float cx = (c + w * 0.5f);
+    const float cy = (d + w * 0.5f);
     const float x  = points2[i].x - cx;
     const float y  = points2[i].y - cy;
 

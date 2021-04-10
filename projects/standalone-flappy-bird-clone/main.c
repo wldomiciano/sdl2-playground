@@ -10,7 +10,7 @@ struct Pipes {
   SDL_Rect bot;
 };
 
-int getRandom(int max) {
+static int getRandom(int max) {
   srand(SDL_GetTicks());
   return -(rand() % max);
 }
@@ -29,7 +29,7 @@ int main(__attribute__((unused)) int argc, __attribute__((unused)) char** argv) 
   const int    PIPES_GAP      = PIPE_WIDTH * 2;
   const int    PIPE_HEIGHT    = PIPE_WIDTH * 7 - PIPES_GAP;
   const int    PIPES_VELOCITY = 5;
-  const int    PIPES_INTERVAL = PIPE_WIDTH * 2.5;
+  const int    PIPES_INTERVAL = PIPE_WIDTH * 2;
   const int    PIPES_SPAWN    = (PIPE_WIDTH + PIPES_INTERVAL) * 3;
   struct Pipes pipes[PIPES_COUNT];
 

@@ -37,7 +37,7 @@ typedef struct AnimatedSprite {
   Animation* animations;
 } AnimatedSprite;
 
-SDL_Texture* createTexture(SDL_Renderer* const renderer, const char* file) {
+static SDL_Texture* createTexture(SDL_Renderer* const renderer, const char* file) {
   SDL_Surface* surface = SDL_LoadBMP(file);
 
   if (surface) {
@@ -51,7 +51,7 @@ SDL_Texture* createTexture(SDL_Renderer* const renderer, const char* file) {
   return NULL;
 }
 
-SpriteSheet* createSpriteSheet(SDL_Renderer* const renderer, const char* file, int cols, int rows, int count) {
+static SpriteSheet* createSpriteSheet(SDL_Renderer* const renderer, const char* file, int cols, int rows, int count) {
   SDL_Texture* texture = createTexture(renderer, file);
 
   if (texture) {
@@ -64,8 +64,8 @@ SpriteSheet* createSpriteSheet(SDL_Renderer* const renderer, const char* file, i
 
     if (sheet) {
       sheet->texture = texture;
-      sheet->sprites = SDL_malloc(sizeof(*sheet->sprites) * count);
-      sheet->count   = count;
+      sheet->sprites = SDL_malloc((size_t)(sizeof(*sheet->sprites) * (size_t) count));
+      sheet->count   = (Uint32) count;
 
       for (int i = 0, x = 0, y = 0; i < count; i++) {
         sheet->sprites[i].w = spriteWidth;
@@ -89,7 +89,7 @@ SpriteSheet* createSpriteSheet(SDL_Renderer* const renderer, const char* file, i
   return NULL;
 }
 
-Sprite* createSprite(SpriteSheet* sheet, int frame) {
+static Sprite* createSprite(SpriteSheet* sheet, int frame) {
   Sprite* sprite = malloc(sizeof(*sprite));
 
   if (sprite) {
@@ -101,12 +101,12 @@ Sprite* createSprite(SpriteSheet* sheet, int frame) {
   return NULL;
 }
 
-AnimatedSprite* createAnimatedSprite(SpriteSheet* sheet, int frame, int count) {
+static AnimatedSprite* createAnimatedSprite(SpriteSheet* sheet, int frame, int count) {
   AnimatedSprite* sprite = SDL_malloc(sizeof(*sprite));
 
   if (sprite) {
     sprite->sprite        = createSprite(sheet, frame);
-    sprite->animations    = SDL_malloc(sizeof(*sprite->animations) * count);
+    sprite->animations    = SDL_malloc((size_t)(sizeof(*sprite->animations) * (size_t) count));
     sprite->lastAnimation = -1;
     return sprite;
   }
@@ -114,11 +114,11 @@ AnimatedSprite* createAnimatedSprite(SpriteSheet* sheet, int frame, int count) {
   return NULL;
 }
 
-void addAnimation(AnimatedSprite* sprite, int index, int frames, float speed, ...) {
+static void addAnimation(AnimatedSprite* sprite, int index, int frames, double speed, ...) {
   sprite->animations[index].count   = frames;
-  sprite->animations[index].speed   = speed;
+  sprite->animations[index].speed   = (float) speed;
   sprite->animations[index].current = 0;
-  sprite->animations[index].frames  = SDL_malloc(sizeof(*sprite->animations[index].frames) * frames);
+  sprite->animations[index].frames  = SDL_malloc(sizeof(*sprite->animations[index].frames) * (size_t) frames);
 
   va_list args;
   va_start(args, speed);
@@ -130,17 +130,17 @@ void addAnimation(AnimatedSprite* sprite, int index, int frames, float speed, ..
   va_end(args);
 }
 
-void playAnimation(AnimatedSprite* sprite, int index) {
+static void playAnimation(AnimatedSprite* sprite, int index) {
   if (sprite->lastAnimation != index) {
     sprite->lastAnimation             = index;
     sprite->animations[index].current = 0;
   }
 
   int c                 = sprite->animations[index].count;
-  sprite->sprite->frame = sprite->sprite->sheet->sprites[sprite->animations[index].frames[(int) (sprite->animations[index].current * sprite->animations[index].speed)]];
+  sprite->sprite->frame = sprite->sprite->sheet->sprites[sprite->animations[index].frames[(int) ((float) sprite->animations[index].current * sprite->animations[index].speed)]];
   sprite->animations[index].current++;
 
-  if ((int) (sprite->animations[index].current * sprite->animations[index].speed) == c)
+  if ((int) ((float) sprite->animations[index].current * sprite->animations[index].speed) == c)
     sprite->animations[index].current = 0;
 }
 

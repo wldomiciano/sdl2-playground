@@ -79,8 +79,8 @@ static void events(void) {
 
 static void matrix(void) {
   for (int i = 0; i < cols; i++) {
-    const char text = rand() % 128;
-    const int  x    = (int) (i * colWidth);
+    const char text = (char) (rand() % 128);
+    const int  x    = (int) ((float) i * colWidth);
 
     drawText(x, ypos[i], "%c", text);
 
@@ -96,7 +96,7 @@ int main(__attribute__((unused)) int argc, __attribute__((unused)) char** argv) 
 
   SDL_SetRenderDrawBlendMode(renderer, SDL_BLENDMODE_BLEND);
 
-  cols          = (int) SDL_floor(width / colWidth) + 1;
+  cols          = (int) (SDL_floorf(width / colWidth) + 1);
   ypos          = SDL_calloc((size_t) cols, sizeof(*ypos));
   SDL_Rect rect = {0, 0, width, height};
 
