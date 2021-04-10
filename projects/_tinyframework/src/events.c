@@ -26,7 +26,7 @@ bool wasKeyJustPressed(const SDL_Scancode scancode) {
 }
 
 bool isKeyPressed(const SDL_Scancode scancode) {
-  return keys[scancode] > 1;
+  return SDL_GetKeyboardState(NULL)[scancode];
 }
 
 bool isKeyReleased(const SDL_Scancode scancode) {
