@@ -220,14 +220,12 @@ void sprite_add_frame(const Sprite* const sprite, const Uint16 animationIndex, c
 /**
  *
  */
-void sprite_render(Sprite* sprite) {
-  Animation* anim  = &sprite->animator.animations[sprite->animator.current];
-  Frame*     frame = &anim->frames[anim->current];
-
-  SDL_FPoint pos  = sprite_get_position(sprite);
-  SDL_FPoint size = sprite_get_size(sprite);
-
-  SDL_FRect dest = {pos.x, pos.y, size.x, size.y};
+void sprite_render(Sprite* const sprite) {
+  Animation* const anim  = &sprite->animator.animations[sprite->animator.current];
+  Frame* const     frame = &anim->frames[anim->current];
+  const SDL_FPoint pos   = sprite_get_position(sprite);
+  const SDL_FPoint size  = sprite_get_size(sprite);
+  const SDL_FRect  dest  = {pos.x, pos.y, size.x, size.y};
 
   if (SDL_RenderCopyExF(renderer, sprite->texture, &frame->frame, &dest, sprite->angle, &sprite->center, sprite->flip) != 0) {
     LOG("Error in render copy");
@@ -236,7 +234,7 @@ void sprite_render(Sprite* sprite) {
   // sprite_update_colliders(sprite);
 
   for (int i = 0; i < frame->count; i++) {
-    SDL_FPoint* p = frame->colliders[i].points;
+    const SDL_FPoint* const p = frame->colliders[i].points;
     SDL_RenderDrawLineF(renderer, p[0].x, p[0].y, p[1].x, p[1].y);
     SDL_RenderDrawLineF(renderer, p[1].x, p[1].y, p[2].x, p[2].y);
     SDL_RenderDrawLineF(renderer, p[2].x, p[2].y, p[3].x, p[3].y);
