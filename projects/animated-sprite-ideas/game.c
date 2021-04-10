@@ -1,16 +1,14 @@
 #include "framework.h"
 #include "sprite.h"
 
-SDL_FRect rect     = {0, 0, 50, 50};
-float     velocity = 1;
-
-SDL_FPoint p1[5] = {{270, 0}, {370, 0}, {370, 100}, {270, 100}, {270, 0}};
-SDL_FPoint p2[5] = {{270, 100}, {370, 100}, {370, 200}, {270, 200}, {270, 100}};
-
-Sprite* link;
+static SDL_FRect  rect     = {0, 0, 50, 50};
+static float      velocity = 1;
+static SDL_FPoint p1[5]    = {{270, 0}, {370, 0}, {370, 100}, {270, 100}, {270, 0}};
+static SDL_FPoint p2[5]    = {{270, 100}, {370, 100}, {370, 200}, {270, 200}, {270, 100}};
+static Sprite*    link;
 
 void rotate(SDL_FPoint* p, float deg, float centerX, float centerY) {
-  const float rad = (deg * M_PI) / 180;
+  const float rad = (deg * (float) M_PI) / 180;
   const float cos = SDL_cosf(rad);
   const float sin = SDL_sinf(rad);
 
@@ -92,6 +90,7 @@ void update(void) {
   float minY = p1[0].y;
   float maxX = p1[0].x;
   float maxY = p1[0].y;
+
   for (int i = 1; i < 4; i++) {
     if (p1[i].x < minX) {
       minX = p1[i].x;
@@ -142,6 +141,7 @@ void update(void) {
   // } else {
   //   sprite_play_animation(link, 0);
   // }
+
   if (key_is_pressed(SDL_SCANCODE_S)) {
     sprite_move(link, 0, velocity);
     sprite_play_animation(link, 1);

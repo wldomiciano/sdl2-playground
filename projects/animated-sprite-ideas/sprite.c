@@ -1,41 +1,42 @@
+#include "sprite.h"
+
 #include <SDL.h>
 
 #include "framework.h"
-#include "sprite.h"
 
 typedef struct {
   SDL_FPoint points[4];
 } Collider;
 
 typedef struct {
-  SDL_Rect frame;
-  Uint8 count;  // quantidade de colliders
+  SDL_Rect  frame;
+  Uint8     count;  // quantidade de colliders
   Collider* colliders;
 } Frame;
 
 typedef struct {
-  int duration;
-  Uint8 count;    // quantidade de frames
-  Uint8 current;  // frame atual
-  Frame* frames;  // array de frames
+  int    duration;
+  Uint8  count;    // quantidade de frames
+  Uint8  current;  // frame atual
+  Frame* frames;   // array de frames
 } Animation;
 
 typedef struct {
-  Uint8 count;            // quantidade total de animações
-  Uint8 current;          // animação sendo executada no momento
+  Uint8      count;       // quantidade total de animações
+  Uint8      current;     // animação sendo executada no momento
   Animation* animations;  // array de animações
 } Animator;
 
 struct Sprite {
   SDL_Texture* texture;
-  Animator animator;
+  Animator     animator;
 
-  float x;
-  float y;
-  double angle;
-  SDL_FPoint center;  // centro de renderização
-  SDL_FPoint pivot;   // centro de rotação
-  SDL_FPoint scale;
+  float            x;
+  float            y;
+  double           angle;
+  SDL_FPoint       center;  // centro de renderização
+  SDL_FPoint       pivot;   // centro de rotação
+  SDL_FPoint       scale;
   SDL_RendererFlip flip;
 };
 
@@ -105,7 +106,7 @@ void sprite_move(Sprite* sprite, float x, float y) {
 
 void sprite_update_colliders(Sprite* sprite) {
   Animation* animation = &sprite->animator.animations[sprite->animator.current];
-  Frame* frame = &animation->frames[animation->current];
+  Frame*     frame     = &animation->frames[animation->current];
 
   for (int i = 0; i < frame->count; i++) {
     for (int j = 0; j < 4; j++) {
@@ -131,25 +132,21 @@ void sprite_play_animation(Sprite* sprite, Uint16 animationIndex) {
     }
 
     animator->current = animationIndex;
-    anim->current = currentFrameIndex;
+    anim->current     = currentFrameIndex;
   }
 }
 
 SDL_FPoint sprite_get_size(Sprite* sprite) {
-  Animation* anim = &sprite->animator.animations[sprite->animator.current];
-  SDL_Rect frame = anim->frames[anim->current].frame;
+  Animation* anim  = &sprite->animator.animations[sprite->animator.current];
+  SDL_Rect   frame = anim->frames[anim->current].frame;
 
   float w = frame.w * sprite->scale.x;
   float h = frame.h * sprite->scale.y;
   return (SDL_FPoint){w, h};
 }
 
-void sprite_add_collider(Sprite* sprite, Uint16 animationIndex,
-                         Uint16 frameIndex, Uint16 colliderIndex, float x,
-                         float y, float w, float h) {
-  Collider* collider = &sprite->animator.animations[animationIndex]
-                            .frames[frameIndex]
-                            .colliders[colliderIndex];
+void sprite_add_collider(Sprite* sprite, Uint16 animationIndex, Uint16 frameIndex, Uint16 colliderIndex, float x, float y, float w, float h) {
+  Collider* collider = &sprite->animator.animations[animationIndex].frames[frameIndex].colliders[colliderIndex];
 
   SDL_FPoint pos = sprite_get_position(sprite);
 
@@ -168,18 +165,16 @@ Sprite* sprite_create(const char* filename, Uint16 animationsCount) {
   Sprite* sprite = SDL_calloc(1, sizeof(*sprite));
 
   sprite->texture = texture_create_from_file(filename);
-  sprite->flip = SDL_FLIP_NONE;
-  sprite->angle = 0;
-  sprite->pivot = (SDL_FPoint){0.5, 0.5};
-  sprite->center = (SDL_FPoint){0, 0};
-  sprite->scale = (SDL_FPoint){1, 1};
+  sprite->flip    = SDL_FLIP_NONE;
+  sprite->angle   = 0;
+  sprite->pivot   = (SDL_FPoint){0.5, 0.5};
+  sprite->center  = (SDL_FPoint){0, 0};
+  sprite->scale   = (SDL_FPoint){1, 1};
 
   if (sprite) {
-    sprite->animator.count = animationsCount;
-    sprite->animator.current = 0;
-
-    sprite->animator.animations =
-        SDL_calloc(animationsCount, sizeof(*sprite->animator.animations));
+    sprite->animator.count      = animationsCount;
+    sprite->animator.current    = 0;
+    sprite->animator.animations = SDL_calloc(animationsCount, sizeof(*sprite->animator.animations));
   }
 
   return sprite;
@@ -202,29 +197,23 @@ void sprite_destroy(Sprite* sprite) {
   SDL_free(sprite);
 }
 
-void sprite_add_animation(Sprite* sprite, Uint16 animationIndex,
-                          Uint16 framesCount, Uint16 duration) {
+void sprite_add_animation(Sprite* sprite, Uint16 animationIndex, Uint16 framesCount, Uint16 duration) {
   if (sprite && sprite->animator.animations) {
     if (animationIndex < sprite->animator.count) {
-      sprite->animator.animations[animationIndex].count = framesCount;
-      sprite->animator.animations[animationIndex].current = 0;
+      sprite->animator.animations[animationIndex].count    = framesCount;
+      sprite->animator.animations[animationIndex].current  = 0;
       sprite->animator.animations[animationIndex].duration = duration;
-      sprite->animator.animations[animationIndex].frames = SDL_calloc(
-          framesCount,
-          sizeof(*sprite->animator.animations[animationIndex].frames));
+      sprite->animator.animations[animationIndex].frames   = SDL_calloc(framesCount, sizeof(*sprite->animator.animations[animationIndex].frames));
     }
   }
 }
 
-void sprite_add_frame(Sprite* sprite, Uint16 animationIndex, Uint16 frameIndex,
-                      Uint16 collidersCount, Uint32 x, Uint32 y, Uint32 w,
-                      Uint32 h) {
-  Frame* frame =
-      &sprite->animator.animations[animationIndex].frames[frameIndex];
-
-  frame->frame = (SDL_Rect){x, y, w, h};
-  frame->count = collidersCount;
+void sprite_add_frame(Sprite* sprite, Uint16 animationIndex, Uint16 frameIndex, Uint16 collidersCount, Uint32 x, Uint32 y, Uint32 w, Uint32 h) {
+  Frame* frame     = &sprite->animator.animations[animationIndex].frames[frameIndex];
+  frame->frame     = (SDL_Rect){x, y, w, h};
+  frame->count     = collidersCount;
   frame->colliders = NULL;
+
   if (collidersCount > 0) {
     frame->colliders = SDL_calloc(collidersCount, sizeof(*frame->colliders));
   }
@@ -234,16 +223,15 @@ void sprite_add_frame(Sprite* sprite, Uint16 animationIndex, Uint16 frameIndex,
  *
  */
 void sprite_render(Sprite* sprite) {
-  Animation* anim = &sprite->animator.animations[sprite->animator.current];
-  Frame* frame = &anim->frames[anim->current];
+  Animation* anim  = &sprite->animator.animations[sprite->animator.current];
+  Frame*     frame = &anim->frames[anim->current];
 
-  SDL_FPoint pos = sprite_get_position(sprite);
+  SDL_FPoint pos  = sprite_get_position(sprite);
   SDL_FPoint size = sprite_get_size(sprite);
 
   SDL_FRect dest = {pos.x, pos.y, size.x, size.y};
 
-  if (SDL_RenderCopyExF(renderer, sprite->texture, &frame->frame, &dest,
-                        sprite->angle, &sprite->center, sprite->flip) != 0) {
+  if (SDL_RenderCopyExF(renderer, sprite->texture, &frame->frame, &dest, sprite->angle, &sprite->center, sprite->flip) != 0) {
     LOG("Error in render copy");
   }
 

@@ -152,5 +152,6 @@ int main(int argc, char** argv) {
   destroy();
 
   sdl_quit();
+
   return 0;
 }
