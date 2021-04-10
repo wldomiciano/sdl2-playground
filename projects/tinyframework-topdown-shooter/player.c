@@ -21,9 +21,9 @@ void player_create(void) {
   enimy_init(&frame);
   bullet_init();
 
-  mainTexture = SDL_CreateTexture(context->renderer, SDL_PIXELFORMAT_RGBA8888, SDL_TEXTUREACCESS_TARGET, frame.w, frame.h);
+  mainTexture = SDL_CreateTexture(context->renderer, SDL_PIXELFORMAT_RGBA8888, SDL_TEXTUREACCESS_TARGET, (int) frame.w, (int) frame.h);
 
-  armtexture = SDL_CreateTexture(context->renderer, SDL_PIXELFORMAT_RGBA8888, SDL_TEXTUREACCESS_TARGET, arm.w, arm.h);
+  armtexture = SDL_CreateTexture(context->renderer, SDL_PIXELFORMAT_RGBA8888, SDL_TEXTUREACCESS_TARGET, (int) arm.w, (int) arm.h);
 
   SDL_SetRenderTarget(context->renderer, mainTexture);
   SDL_SetRenderDrawColor(context->renderer, 0, 255, 0, 255);
@@ -37,14 +37,10 @@ void player_create(void) {
 }
 
 void player_update(void) {
-  int x, y;
-
-  Uint32 fire = SDL_GetMouseState(&x, &y) & SDL_BUTTON(SDL_BUTTON_LEFT);
-
-  SDL_FPoint  delta = {(frame.x + frame.w * 0.5) - x,
-                      (frame.y + frame.h * 0.5) - y};
-  const float rad   = SDL_atan2f(delta.x, delta.y);
-  const float deg   = -(rad * 180) / M_PI;
+  const vec2       mousePos = getMousePosition();
+  const SDL_FPoint delta    = {(frame.x + frame.w * 0.5f) - mousePos.x, (frame.y + frame.h * 0.5f) - mousePos.y};
+  const float      rad      = SDL_atan2f(delta.x, delta.y);
+  const float      deg      = -(rad * 180) / (float) M_PI;
 
   if (keys[SDL_SCANCODE_W]) {
     frame.y += -VELOCITY;
@@ -58,17 +54,16 @@ void player_update(void) {
     frame.x += -VELOCITY;
   }
 
-  arm.x = frame.x + frame.w * 0.5 - arm.w * 0.5;
-  arm.y = frame.y + frame.h * 0.5 - arm.h;
+  arm.x = frame.x + frame.w * 0.5f - arm.w * 0.5f;
+  arm.y = frame.y + frame.h * 0.5f - arm.h;
 
-  if (fire) {
+  if (SDL_GetMouseState(NULL, NULL) & SDL_BUTTON(SDL_BUTTON_LEFT)) {
     bullet_create(frame, rad, deg);
   }
 
   SDL_RenderCopyF(context->renderer, mainTexture, NULL, &frame);
 
-  SDL_RenderCopyExF(context->renderer, armtexture, NULL, &arm, deg,
-                    &(SDL_FPoint){arm.w * 0.5, arm.h}, SDL_FLIP_NONE);
+  SDL_RenderCopyExF(context->renderer, armtexture, NULL, &arm, (double) deg, &(SDL_FPoint){arm.w * 0.5f, arm.h}, SDL_FLIP_NONE);
 
   bullet_update();
   enimy_update();

@@ -21,7 +21,7 @@ static Context*     context;
 void bullet_init(void) {
   context = getDefaultContext();
 
-  texture = SDL_CreateTexture(context->renderer, SDL_PIXELFORMAT_RGBA8888, SDL_TEXTUREACCESS_TARGET, rect.w, rect.w);
+  texture = SDL_CreateTexture(context->renderer, SDL_PIXELFORMAT_RGBA8888, SDL_TEXTUREACCESS_TARGET, (int) rect.w, (int) rect.w);
 
   SDL_SetRenderTarget(context->renderer, texture);
   SDL_SetRenderDrawColor(context->renderer, 255, 0, 0, SDL_ALPHA_OPAQUE);
@@ -77,12 +77,12 @@ void bullet_create(SDL_FRect player, float playerRotationRad, float playerRotati
 
     if (active < 0) return;
 
-    rect.x = player.x * 0.5 + rect.w * 0.5;
-    rect.y = player.y * 0.5 + rect.h * 0.5;
+    rect.x = player.x * 0.5f + rect.w * 0.5f;
+    rect.y = player.y * 0.5f + rect.h * 0.5f;
 
     bullets[active].active      = SDL_TRUE;
-    bullets[active].frame.x     = player.x + 15 - rect.w * 0.5;
-    bullets[active].frame.y     = player.y + 15 - rect.h * 0.5;
+    bullets[active].frame.x     = player.x + 15 - rect.w * 0.5f;
+    bullets[active].frame.y     = player.y + 15 - rect.h * 0.5f;
     bullets[active].rotationDeg = playerRotationDeg;
     bullets[active].rotationRad = playerRotationRad;
   }
