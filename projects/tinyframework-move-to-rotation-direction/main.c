@@ -29,9 +29,9 @@ int main(__attribute__((unused)) int argc, __attribute__((unused)) char** argv) 
     }
 
     if (isKeyPressed(SDL_SCANCODE_UP)) {
-      const float rad = deg2rad(getSpriteAngle(ship));
-      const vec2 direction = rad2vec(rad);
-      velocity = mul(direction, speed);
+      const float rad       = deg2rad(getSpriteAngle(ship));
+      const vec2  direction = rad2vec(rad);
+      velocity              = mul(direction, speed);
     } else if (isKeyPressed(SDL_SCANCODE_DOWN)) {
       setSpritePosition(ship, VEC2(200, 200));
       velocity = VEC2(0, 0);
